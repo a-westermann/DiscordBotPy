@@ -19,5 +19,15 @@ class SlashCommands(app_commands.Group):
     async def say_hello(self, interaction: discord.Interaction):
         print('saying hello')
         await interaction.response.send_message("hello")
-    # async def say_hi(context, user_name):
-    #     context.send('hi', user_name)
+
+
+
+
+
+
+# @tree.command()  # add guild id here as arg
+# async def slash_command(interaction: discord.Interaction, number: int, string: str):  # example args
+#     print('slash command')
+#     await interaction.response.send_message("hello there")
+#
+# active_client.tree.add_command(command_module)

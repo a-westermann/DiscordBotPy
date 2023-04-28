@@ -1,3 +1,4 @@
+import Commands
 import discord
 import DiscordClient
 import threading
@@ -21,7 +22,20 @@ def get_token(in_rasp_pi):
 
 active_client = create_client()
 token = get_token(on_pi)
-active_client.run(token)
+command_module = Commands.SlashCommands(active_client)
+tree = command_module.set_up(active_client)
+active_client.receive_tree(tree)
+
+@tree.command()  # add guild id here as arg
+async def slash_command(context: discord.Interaction, number: int, string: str):
+    print('slash command')
+    await context.send("hello there")
+
+active_client.tree.add_command(command_module)
+
+
+if __name__ == "__main__":
+    active_client.run(token)
 
 
 # @active_client.event

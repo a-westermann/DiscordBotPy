@@ -24,6 +24,9 @@ class SlashCommands(app_commands.Group):
 
     @app_commands.command(name="start_program", description="starts a program") # need to check if user=me
     async  def start_program(self, interaction: discord.Interaction, name: str, start: bool):
+        if interaction.user.id != 322164425002057728:
+            await interaction.response.send_message("unauthorized!")
+            return
         try:
             if start == True:
                 file_dirs = {"qbittorrent" : "C:\\Program Files\qBittorrent\qbittorrent.exe" ,

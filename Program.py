@@ -16,7 +16,8 @@ def create_client():
 
 
 def get_token(in_rasp_pi):
-     path_to_token = "H:\\Coding\Python Projects\DiscordBot\\token.txt" if in_rasp_pi == False else "token.txt"
+     path_to_token = "H:\\Coding\Python Projects\DiscordBot\\token.txt" if in_rasp_pi == False \
+         else "/home/andweste/Scripts/token.txt"
      return open(path_to_token).read()
 
 

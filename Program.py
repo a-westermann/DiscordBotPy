@@ -5,7 +5,7 @@ import threading
 import asyncio
 
 
-on_pi = False
+on_pi = True
 
 
 def create_client():

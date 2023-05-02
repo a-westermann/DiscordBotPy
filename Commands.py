@@ -63,6 +63,7 @@ class OtherCommands(app_commands.Group):
         today = str(datetime.date.today())
         used_names_file = open("/home/andweste/Scripts/used_names.txt", "r")
         last_date = str(used_names_file.readline())
+        print(last_date)
         if today == last_date:
             # if so, give bottom name from used_names file
             line = ""

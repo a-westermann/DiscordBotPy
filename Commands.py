@@ -60,6 +60,7 @@ class OtherCommands(app_commands.Group):
         last_date = str(used_names_file.readline())
         if today == last_date:
             # if so, give bottom name from used_names file
+            line = ""
             for name in used_names_file:
                 line = name
                 pass

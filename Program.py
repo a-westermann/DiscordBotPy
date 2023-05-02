@@ -7,7 +7,7 @@ import threading
 import asyncio
 
 
-on_pi = False
+on_pi = True
 
 # I just changed this to test pulling to the pi via ssh
 

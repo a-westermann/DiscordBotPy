@@ -9,7 +9,6 @@ import asyncio
 
 on_pi = True
 
-# I just changed this to test pulling to the pi via ssh
 
 def create_client():
     intents = discord.Intents.default()

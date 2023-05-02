@@ -62,7 +62,7 @@ class OtherCommands(app_commands.Group):
         #check date to see if gave one already
         today = str(datetime.date.today())
         used_names_file = open("/home/andweste/Scripts/used_names.txt", "r")
-        last_date = str(used_names_file.readline())
+        last_date = str(used_names_file.readline().rstrip())
         print(last_date)
         print(today)
         if today == last_date:
@@ -74,7 +74,7 @@ class OtherCommands(app_commands.Group):
             last_name = line
             return last_name
         #if not, pull random name from file, remove it, and add to alt file
-        else:
+        else:  # this section does not work. Random not found
             names_list_file = open("/home/andweste/Scripts/girl_names.txt", "r")
             name_list = names_list_file.readlines()
             todays_name = random.choice(names_list)

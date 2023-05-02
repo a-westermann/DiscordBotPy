@@ -49,9 +49,12 @@ class OtherCommands(app_commands.Group):
 
 
     @app_commands.command(name="baby_name", description="gives today's baby name")
-    async def baby_name(self, interaction: discord.Interaction):
-        name = self.get_todays_name()
-        await interaction.response.send_message(self.google_search(name + "girl's name origin"))
+    async def baby_name(self, interaction: discord.Interaction, name_or_blank: str):
+        if name_or_blank.len() > 0:
+            await interaction.response.send_message(self.google_search(name_or_blank + "girl's name origin"))
+        else:
+            name = self.get_todays_name()
+            await interaction.response.send_message("Name: " + name + self.google_search(name + "girl's name origin"))
 
     def get_todays_name(self):
         #check date to see if gave one already

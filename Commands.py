@@ -2,9 +2,10 @@ import discord
 from discord.ext import commands
 from discord import app_commands
 import subprocess
+from googlesearch import search
 
 
-class SlashCommands(app_commands.Group):
+class OtherCommands(app_commands.Group):
     def __init__(self, bot: discord.ext.commands.Bot):
         super().__init__()
         self.bot = bot
@@ -13,6 +14,11 @@ class SlashCommands(app_commands.Group):
     def set_up(self, client):
         self.tree = app_commands.CommandTree(client)
         return self.tree
+
+
+    def google_search(self, search_term):
+        for url in search(search_term, num_results=1):
+            return url
 
 
 # commands
@@ -40,8 +46,9 @@ class SlashCommands(app_commands.Group):
             await interaction.response.send_message("failed")
 
 
-
-# @tree.command(name="slashy", description="slash command", ) #could add guild ids here
-# async def slash_command(interaction: discord.Interaction, number: int, string: str):
-#     print('slash command')
-#     await interaction.send("hello there")
+    @app_commands.command(name="baby_name", description="gives today's baby name")
+    async def baby_name(self, interaction: discord.Interaction):
+        #check date to see if gave one already
+        #if so, give bottom name from alt file
+        #if not, pull random name from file, remove it, and add to alt file
+        await interaction.response.send_message(self.google_search("evelyn" + "girl's name origin"))

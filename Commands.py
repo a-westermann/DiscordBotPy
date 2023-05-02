@@ -74,6 +74,7 @@ class OtherCommands(app_commands.Group):
             names_list_file = open("/home/andweste/Scripts/girl_names.txt", "r")
             name_list = names_list_file.readlines()
             todays_name = random.choice(names_list)
+            print(todays_name)
             # now remove the name from list and write to the file
             name_list.remove(todays_name)
             names_list_file = open("/home/andweste/Scripts/girl_names.txt", "w") # opening in write mode clears file

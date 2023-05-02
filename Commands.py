@@ -65,6 +65,7 @@ class OtherCommands(app_commands.Group):
                 line = name
                 pass
             last_name = line
+            return last_name
         #if not, pull random name from file, remove it, and add to alt file
         else:
             names_list_file = open("/home/andweste/Scripts/girl_names.txt", "r")
@@ -78,5 +79,6 @@ class OtherCommands(app_commands.Group):
             # finally, add the new name to the bottom of the used_names file
             used_names_file = open("/home/andweste/Scripts/used_names.txt", "a") # append mode
             used_names_file.write(todays_name)
+        return todays_name
 
 

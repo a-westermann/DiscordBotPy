@@ -49,7 +49,7 @@ class OtherCommands(app_commands.Group):
 
     @app_commands.command(name="baby_name", description="gives today's baby name")
     async def baby_name(self, interaction: discord.Interaction):
-        name = get_todays_name()
+        name = self.get_todays_name()
         await interaction.response.send_message(self.google_search(name + "girl's name origin"))
 
     def get_todays_name(self):

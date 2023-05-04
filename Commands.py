@@ -51,7 +51,8 @@ class OtherCommands(app_commands.Group):
 
     @app_commands.command(name="baby_name", description="get specific baby name")
     async def baby_name(self, interaction: discord.Interaction, name: str):
-        await interaction.response.send_message(self.google_search(name))
+        search_results = self.google_search(name + " girl's name origin")
+        await interaction.response.send_message(search_results)
 
 
     @app_commands.command(name="todays_baby_name", description="gives today's baby name")

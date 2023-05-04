@@ -12,8 +12,7 @@ class Commands(app_commands.Group):
     def __init__(self, bot: discord.ext.commands.Bot):
         super().__init__()
         self.bot = bot
-        discord.ext.commands.Bot.create_group("lol")
-        discord.ext.commands.Bot.create_group("other")
+
         # bot.load_extension(bot.group)
 
 

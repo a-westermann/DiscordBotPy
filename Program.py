@@ -26,6 +26,8 @@ def get_token(in_rasp_pi):
 active_client = create_client()
 token = get_token(on_pi)
 # guilds = active_client.get_guilds(on_pi)
+discord.ext.commands.Bot.create_group("lol")
+discord.ext.commands.Bot.create_group("other")
 command_module = Commands.Commands(active_client)
 # @command_module.group(name='other', invoke_without_command=True)
 # async def other(self, interaction:discord.Interaction):

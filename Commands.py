@@ -86,8 +86,11 @@ class OtherCommands(app_commands.Group):
             for name in name_list:
                 names_list_file.write(f"{name}\n")
             # finally, add the new name to the bottom of the used_names file
-            used_names_file = open("/home/andweste/Scripts/used_names.txt", "a") # append mode
-            used_names_file.write(todays_name)
+            used_names_file = open("/home/andweste/Scripts/used_names.txt", "r") # open in read, then overwrite all
+            used_names_text = used_names_file.readlines()
+            used_names_text[0] = today()
+            used_names_file = open("/home/andweste/Scripts/used_names.txt", "w")
+            used_names_file.writelines(used_names_text)
         return todays_name
 
 

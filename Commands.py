@@ -17,6 +17,10 @@ class OtherCommands(app_commands.Group):
         self.tree = app_commands.CommandTree(client)
         return self.tree
 
+    @client.group(name='other', invoke_without_command=True)
+    async def system():
+        pass
+
 
 # General functions
     def google_search(self, search_term):
@@ -25,13 +29,13 @@ class OtherCommands(app_commands.Group):
 
 
 # commands
-    @app_commands.command(name="hello")
+    @other.command(name="hello")
     async def say_hello(self, interaction: discord.Interaction):
         print('saying hello')
         await interaction.response.send_message("hello")
 
 
-    @app_commands.command(name="start_program", description="starts a program") # need to check if user=me
+    @other.command(name="start_program", description="starts a program") # need to check if user=me
     async  def start_program(self, interaction: discord.Interaction, name: str, start: bool):
         if interaction.user.id != 322164425002057728:
             await interaction.response.send_message("unauthorized!")
@@ -49,13 +53,13 @@ class OtherCommands(app_commands.Group):
             await interaction.response.send_message("failed")
 
 
-    @app_commands.command(name="baby_name", description="get specific baby name")
+    @other.command(name="baby_name", description="get specific baby name")
     async def baby_name(self, interaction: discord.Interaction, name: str):
         search_results = self.google_search(name + " girl's name origin")
         await interaction.response.send_message(search_results)
 
 
-    @app_commands.command(name="todays_baby_name", description="gives today's baby name")
+    @other.command(name="todays_baby_name", description="gives today's baby name")
     async def todays_baby_name(self, interaction: discord.Interaction):
         name = self.get_todays_name()
         search_results = self.google_search(name + " girl's name origin")
@@ -97,5 +101,4 @@ class OtherCommands(app_commands.Group):
             used_names_file = open("/home/andweste/Scripts/used_names.txt", "a") # open in append mode to add name
             used_names_file.write(todays_name)
         return todays_name
-
 

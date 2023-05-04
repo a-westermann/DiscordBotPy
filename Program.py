@@ -2,7 +2,7 @@ import datetime
 import discord.ext
 import Commands
 import discord
-import discord.app_commands
+from discord import app_commands
 import DiscordClient
 import threading
 import asyncio

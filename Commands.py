@@ -3,37 +3,31 @@ from discord.ext import commands
 from discord import app_commands
 import discord.ext
 import subprocess
-from googlesearch import search
+import helpers
 import datetime
 import random
 
 
-class Commands(app_commands.Group):
+class Lol(app_commands.Group):
     def __init__(self, bot: discord.ext.commands.Bot):
         super().__init__()
         self.bot = bot
-        # bot.load_extension(bot.group)
 
 
-    # def set_up(self, client):
-    #     self.tree = app_commands.CommandTree(client)
-    #     return self.tree
-
-
-
-
-
-# General functions
-    def google_search(self, search_term):
-        for url in search(search_term, num_results=1):
-            return url
+# League commands
+    @app_commands.command(name="recap", description="Get a recap of your history with a champ")
+    async def recap(self, interaction: discord.Interaction):
+        await interaction.response.send_message("in development")
 
 
 
 
+class OtherCommands(app_commands.Group):
+    def __init__(self, bot: discord.ext.commands.Bot):
+        super().__init__()
+        self.bot = bot
 
 
-    # Other commands
     @app_commands.command(name="hello")
     async def say_hello(self, interaction: discord.Interaction):
         print('saying hello')
@@ -60,14 +54,14 @@ class Commands(app_commands.Group):
 
     @app_commands.command(name="baby_name", description="get specific baby name")
     async def baby_name(self, interaction: discord.Interaction, name: str):
-        search_results = self.google_search(name + " girl's name origin")
+        search_results = helpers.google_search(name + " girl's name origin", 1)
         await interaction.response.send_message(search_results)
 
 
     @app_commands.command(name="todays_baby_name", description="gives today's baby name")
     async def todays_baby_name(self, interaction: discord.Interaction):
         name = self.get_todays_name()
-        search_results = self.google_search(name + " girl's name origin")
+        search_results = helpers.google_search(name + " girl's name origin", 1)
         await interaction.response.send_message("Name: " + name + search_results)
 
     def get_todays_name(self):
@@ -108,15 +102,4 @@ class Commands(app_commands.Group):
         return todays_name
 
 
-
-class Lol(app_commands.Group):
-    def __init__(self, bot: discord.ext.commands.Bot):
-        super().__init__()
-        self.bot = bot
-        # bot.load_extension(bot.group)
-
-# League commands
-    @app_commands.command(name="lol-recap", description="Get a recap of your history with a champ")
-    async def recap(self, interaction: discord.Interaction):
-        await interaction.response.send_message("in development")
 

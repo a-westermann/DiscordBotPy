@@ -27,13 +27,10 @@ def get_token(in_rasp_pi):
 active_client = create_client()
 token = get_token(on_pi)
 # guilds = active_client.get_guilds(on_pi)
-# set up the other commands module
-command_module = Commands.Commands(active_client)
-# tree = command_module.set_up(active_client)
 tree = app_commands.CommandTree(active_client)
 active_client.receive_tree(tree)
 
-active_client.tree.add_command(command_module)
+active_client.tree.add_command(Commands.OtherCommands(active_client))
 active_client.tree.add_command(Commands.Lol(active_client))
 
 if __name__ == "__main__":

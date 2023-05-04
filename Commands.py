@@ -50,7 +50,7 @@ class OtherCommands(app_commands.Group):
 
 
     @app_commands.command(name="baby_name", description="get specific baby name")
-    async def baby_name(selfself, interaction: discord.Interaction, name: str):
+    async def baby_name(self, interaction: discord.Interaction, name: str):
         await interaction.response.send_message(self.google_search(name))
 
 

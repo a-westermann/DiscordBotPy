@@ -82,13 +82,14 @@ class OtherCommands(app_commands.Group):
             print(todays_name)
             # now remove the name from list and write to the file
             name_list.remove(todays_name)
-            names_list_file = open("/home/andweste/Scripts/girl_names.txt", "w") # opening in write mode clears file
-            for name in name_list:
-                names_list_file.write(f"{name}\n")
+            # names_list_file = open("/home/andweste/Scripts/girl_names.txt", "w") # opening in write mode clears file
+            # for name in name_list:
+            #     names_list_file.write(f"{name}\n")
             # finally, add the new name to the bottom of the used_names file
             used_names_file = open("/home/andweste/Scripts/used_names.txt", "r") # open in read, then overwrite all
             used_names_text = used_names_file.readlines()
-            used_names_text[0] = today()
+            for x in used_names_file:
+                print(x)
             used_names_file = open("/home/andweste/Scripts/used_names.txt", "w")
             used_names_file.writelines(used_names_text)
         return todays_name

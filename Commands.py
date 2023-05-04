@@ -17,6 +17,15 @@ class Commands(app_commands.Group):
         self.tree = app_commands.CommandTree(client)
         return self.tree
 
+    @client.group(name='other', invoke_without_command=True)
+    async def system():
+        pass
+
+    @client.group(name='lol', invoke_without_command=True)
+    async def system():
+        pass
+
+
 
 # General functions
     def google_search(self, search_term):
@@ -25,7 +34,7 @@ class Commands(app_commands.Group):
 
 
 # League commands
-    @app_commands.command(name="lol-recap", description="Get a recap of your history with a champ")
+    @lol.command(name="lol-recap", description="Get a recap of your history with a champ")
     @commands.group("lol")
     async def recap(self, interaction: discord.Interaction):
         await interaction.response.send_message("in development")
@@ -35,14 +44,14 @@ class Commands(app_commands.Group):
 
 
     # Other commands
-    @app_commands.command(name="hello")
+    @other.command(name="hello")
     @commands.group("other")
     async def say_hello(self, interaction: discord.Interaction):
         print('saying hello')
         await interaction.response.send_message("hello")
 
 
-    @app_commands.command(name="start_program", description="starts a program") # need to check if user=me
+    @other.command(name="start_program", description="starts a program") # need to check if user=me
     @commands.group("other")
     async  def start_program(self, interaction: discord.Interaction, name: str, start: bool):
         if interaction.user.id != 322164425002057728:
@@ -61,14 +70,14 @@ class Commands(app_commands.Group):
             await interaction.response.send_message("failed")
 
 
-    @app_commands.command(name="baby_name", description="get specific baby name")
+    @other.command(name="baby_name", description="get specific baby name")
     @commands.group("other")
     async def baby_name(self, interaction: discord.Interaction, name: str):
         search_results = self.google_search(name + " girl's name origin")
         await interaction.response.send_message(search_results)
 
 
-    @app_commands.command(name="todays_baby_name", description="gives today's baby name")
+    @other.command(name="todays_baby_name", description="gives today's baby name")
     @commands.group("other")
     async def todays_baby_name(self, interaction: discord.Interaction):
         name = self.get_todays_name()

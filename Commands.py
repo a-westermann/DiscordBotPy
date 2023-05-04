@@ -18,11 +18,11 @@ class Commands(app_commands.Group):
         return self.tree
 
     @commands.group(name='other', invoke_without_command=True)
-    async def other():
+    async def other(self):
         pass
 
     @client.group(name='lol', invoke_without_command=True)
-    async def lol():
+    async def lol(self):
         pass
 
 

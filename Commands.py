@@ -1,6 +1,7 @@
 import discord
 from discord.ext import commands
 from discord import app_commands
+import discord.ext
 import subprocess
 from googlesearch import search
 import datetime
@@ -8,9 +9,12 @@ import random
 
 
 class Commands(app_commands.Group):
-    def __init__(self, botty: discord.ext.commands.Bot):
+    def __init__(self, bot: discord.ext.commands.Bot):
         super().__init__()
         self.bot = bot
+        discord.ext.commands.Bot.create_group("lol")
+        discord.ext.commands.Bot.create_group("other")
+        # bot.load_extension(bot.group)
 
 
     def set_up(self, client):

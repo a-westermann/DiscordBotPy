@@ -4,6 +4,7 @@ from discord import app_commands
 import subprocess
 from googlesearch import search
 import datetime
+import random
 
 
 class OtherCommands(app_commands.Group):
@@ -65,7 +66,7 @@ class OtherCommands(app_commands.Group):
         last_date = str(used_names_file.readline().rstrip())
         print(last_date)
         print(today)
-        if today == last_date:
+        if today == last_date:  # this part DOES work
             # if so, give bottom name from used_names file
             line = ""
             for name in used_names_file:

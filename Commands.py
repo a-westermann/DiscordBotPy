@@ -12,7 +12,6 @@ class Commands(app_commands.Group):
     def __init__(self, bot: discord.ext.commands.Bot):
         super().__init__()
         self.bot = bot
-
         # bot.load_extension(bot.group)
 
 

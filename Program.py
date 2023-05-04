@@ -34,12 +34,12 @@ command_module = Commands.Commands(active_client)
 tree = command_module.set_up(active_client)
 active_client.receive_tree(tree)
 
-@command_module.bot.group(name='other', invoke_without_command=True)
-async def other(self, interaction:discord.Interaction):
-    pass
-@command_module.bot.group(name='lol', invoke_without_command=True)
-async def lol(self, interaction:discord.Interaction):
-    pass
+# @command_module.group(name='other', invoke_without_command=True)
+# async def other(self, interaction:discord.Interaction):
+#     pass
+# @command_module.group(name='lol', invoke_without_command=True)
+# async def lol(self, interaction:discord.Interaction):
+#     pass
 
 
 active_client.tree.add_command(command_module)

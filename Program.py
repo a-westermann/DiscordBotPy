@@ -26,14 +26,9 @@ def get_token(in_rasp_pi):
 active_client = create_client()
 token = get_token(on_pi)
 # guilds = active_client.get_guilds(on_pi)
-command_module = Commands.Commands(active_client)
+command_module = Commands.OtherCommands(active_client)
 tree = command_module.set_up(active_client)
 active_client.receive_tree(tree)
-
-@client.group(name='other', invoke_without_command=True)
-async def system():
-    pass
-
 
 active_client.tree.add_command(command_module)
 

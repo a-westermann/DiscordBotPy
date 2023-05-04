@@ -15,9 +15,10 @@ class OtherCommands(app_commands.Group):
 
     def set_up(self, client):
         self.tree = app_commands.CommandTree(client)
+        self.client = client
         return self.tree
 
-    @client.group(name='other', invoke_without_command=True)
+    @self.client.group(name='other', invoke_without_command=True)
     async def system():
         pass
 

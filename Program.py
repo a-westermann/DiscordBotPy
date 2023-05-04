@@ -28,7 +28,7 @@ token = get_token(on_pi)
 # guilds = active_client.get_guilds(on_pi)
 command_module = Commands.OtherCommands(active_client)
 tree = command_module.set_up(active_client)
-command_module = Commands.LoL()
+command_module = Commands.LoL(active_client)
 active_client.receive_tree(tree)
 
 active_client.tree.add_command(command_module)

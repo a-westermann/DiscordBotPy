@@ -100,6 +100,6 @@ class Commands(app_commands.Group):
 
 
 # League commands
-    @app_commands.command(name="LoL- recap", description="Get a recap of your history with a champ")
+    @app_commands.command(name="lol-recap", description="Get a recap of your history with a champ")
     async def todays_baby_name(self, interaction: discord.Interaction):
         await interaction.response.send_message("in development")

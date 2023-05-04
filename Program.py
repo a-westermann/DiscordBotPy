@@ -31,6 +31,8 @@ command_module = Commands.Commands(active_client)
 
 # lol_group = discord.ext.commands.Bot.create_group("lol")
 # other_group = discord.ext.commands.Bot.create_group("other")
+tree = command_module.set_up(active_client)
+active_client.receive_tree(tree)
 
 @command_module.bot.group(name='other', invoke_without_command=True)
 async def other(self, interaction:discord.Interaction):
@@ -39,11 +41,9 @@ async def other(self, interaction:discord.Interaction):
 async def lol(self, interaction:discord.Interaction):
     pass
 
-tree = command_module.set_up(active_client)
-active_client.receive_tree(tree)
 
 active_client.tree.add_command(command_module)
-
+active_client.tree.add_command(Commands.Lol(active_client))
 
 if __name__ == "__main__":
     active_client.run(token)

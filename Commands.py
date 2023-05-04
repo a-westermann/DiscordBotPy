@@ -21,7 +21,7 @@ class Commands(app_commands.Group):
     async def other(self):
         pass
 
-    @client.group(name='lol', invoke_without_command=True)
+    @commands.group(name='lol', invoke_without_command=True)
     async def lol(self):
         pass
 

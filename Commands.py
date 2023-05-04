@@ -73,6 +73,7 @@ class OtherCommands(app_commands.Group):
                 line = name
                 pass
             last_name = line
+            print("Already got a name today. Name =" + last_name)
             return last_name
         else: # if not, pull random name from file, remove it, and add to alt file
             names_list_file = open("/home/andweste/Scripts/girl_names.txt", "r")

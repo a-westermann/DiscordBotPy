@@ -7,7 +7,7 @@ import datetime
 import random
 
 
-class OtherCommands(app_commands.Group):
+class Commands(app_commands.Group):
     def __init__(self, bot: discord.ext.commands.Bot):
         super().__init__()
         self.bot = bot
@@ -100,12 +100,7 @@ class OtherCommands(app_commands.Group):
 
 
 
-class Lol(app_commands.Group):
-    def __init__(self, bot: discord.ext.commands.Bot):
-        super().__init__()
-        self.bot = bot
-
 # League commands
-    @app_commands.command(name="recap", description="Get a recap of your history with a champ")
+    @app_commands.command(name="lol-recap", description="Get a recap of your history with a champ")
     async def recap(self, interaction: discord.Interaction):
         await interaction.response.send_message("in development")

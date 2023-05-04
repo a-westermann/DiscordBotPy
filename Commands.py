@@ -74,16 +74,15 @@ class OtherCommands(app_commands.Group):
                 pass
             last_name = line
             return last_name
-        #if not, pull random name from file, remove it, and add to alt file
-        else:
+        else: # if not, pull random name from file, remove it, and add to alt file
             names_list_file = open("/home/andweste/Scripts/girl_names.txt", "r")
             name_list = names_list_file.readlines()
-            for x in range(len(name_list)):
-                if x > 5:
+            for i in range(len(name_list)):
+                if i > 10:
                     break
-                print(name_list[x])
+                print(name_list[i])
             todays_name = random.choice(name_list)
-            print(todays_name)
+            print("today's name = " + todays_name)
             # now remove the name from list and write to the file
             name_list.remove(todays_name)
             # names_list_file = open("/home/andweste/Scripts/girl_names.txt", "w") # opening in write mode clears file

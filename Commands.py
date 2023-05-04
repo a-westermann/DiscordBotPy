@@ -15,9 +15,9 @@ class Commands(app_commands.Group):
         # bot.load_extension(bot.group)
 
 
-    def set_up(self, client):
-        self.tree = app_commands.CommandTree(client)
-        return self.tree
+    # def set_up(self, client):
+    #     self.tree = app_commands.CommandTree(client)
+    #     return self.tree
 
 
 

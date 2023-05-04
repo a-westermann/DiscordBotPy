@@ -2,6 +2,7 @@ import datetime
 import discord.ext
 import Commands
 import discord
+import discord.app_commands
 import DiscordClient
 import threading
 import asyncio
@@ -26,21 +27,11 @@ def get_token(in_rasp_pi):
 active_client = create_client()
 token = get_token(on_pi)
 # guilds = active_client.get_guilds(on_pi)
+# set up the other commands module
 command_module = Commands.Commands(active_client)
-
-
-# lol_group = discord.ext.commands.Bot.create_group("lol")
-# other_group = discord.ext.commands.Bot.create_group("other")
-tree = command_module.set_up(active_client)
+# tree = command_module.set_up(active_client)
+tree = app_commands.CommandTree(active_client)
 active_client.receive_tree(tree)
-
-# @command_module.group(name='other', invoke_without_command=True)
-# async def other(self, interaction:discord.Interaction):
-#     pass
-# @command_module.group(name='lol', invoke_without_command=True)
-# async def lol(self, interaction:discord.Interaction):
-#     pass
-
 
 active_client.tree.add_command(command_module)
 active_client.tree.add_command(Commands.Lol(active_client))

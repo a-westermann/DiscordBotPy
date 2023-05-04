@@ -30,7 +30,6 @@ command_module = Commands.Commands(active_client)
 tree = command_module.set_up(active_client)
 active_client.receive_tree(tree)
 
-command_module.bot.load_extension(command_module.lol)
 active_client.tree.add_command(command_module)
 
 

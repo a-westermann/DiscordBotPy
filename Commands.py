@@ -17,11 +17,11 @@ class Commands(app_commands.Group):
         self.tree = app_commands.CommandTree(client)
         return self.tree
 
-    @Commands.bot.group(name='other', invoke_without_command=True)
+    @bot.group()
     async def other(self, interaction:discord.Interaction):
         pass
 
-    @Commands.bot.group(name='lol', invoke_without_command=True)
+    @bot.group(name='lol', invoke_without_command=True)
     async def lol(self, interaction:discord.Interaction):
         pass
 

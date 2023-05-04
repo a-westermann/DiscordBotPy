@@ -6,22 +6,35 @@ import subprocess
 import helpers
 import datetime
 import random
+from LeagueModels import League_API
 
 
+
+# League
 class Lol(app_commands.Group):
-    def __init__(self, bot: discord.ext.commands.Bot):
+    def __init__(self, discord_bot: discord.ext.commands.Bot):
         super().__init__()
-        self.bot = bot
+        global bot
+        bot = discord_bot
 
 
-# League commands
+
+
     @app_commands.command(name="recap", description="Get a recap of your history with a champ")
     async def recap(self, interaction: discord.Interaction):
         await interaction.response.send_message("in development")
 
+    @app_commands.command(name="test")
+    async def test(self, interaction: discord.Interaction):
+        summoner = League_API.LeagueAPI.get_summoner("Vierce")
+        await interaction.response.send_message()
 
 
 
+
+
+
+# Other
 class OtherCommands(app_commands.Group):
     def __init__(self, bot: discord.ext.commands.Bot):
         super().__init__()

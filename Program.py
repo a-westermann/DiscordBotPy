@@ -6,6 +6,7 @@ from discord import app_commands
 import DiscordClient
 import threading
 import asyncio
+from LeagueModels import League_API
 
 
 on_pi = True
@@ -32,6 +33,11 @@ active_client.receive_tree(tree)
 
 active_client.tree.add_command(Commands.OtherCommands(active_client))
 active_client.tree.add_command(Commands.Lol(active_client))
+
+# set up league api
+token = open("/home/andweste/Scripts.league_token.txt").read()
+league_api = League_API.LeagueAPI(token)
+
 
 if __name__ == "__main__":
     active_client.run(token)

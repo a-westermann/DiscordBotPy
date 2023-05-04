@@ -54,14 +54,14 @@ class OtherCommands(app_commands.Group):
 
     @app_commands.command(name="baby_name", description="get specific baby name")
     async def baby_name(self, interaction: discord.Interaction, name: str):
-        search_results = helpers.google_search(name + " girl's name origin", 1)
+        search_results = helpers.google_search(search_term=name + " girl's name origin", num_results=1)
         await interaction.response.send_message(search_results)
 
 
     @app_commands.command(name="todays_baby_name", description="gives today's baby name")
     async def todays_baby_name(self, interaction: discord.Interaction):
         name = self.get_todays_name()
-        search_results = helpers.google_search(name + " girl's name origin", 1)
+        search_results = helpers.google_search(search_term= name + " girl's name origin", num_results=1)
         await interaction.response.send_message("Name: " + name + search_results)
 
     def get_todays_name(self):

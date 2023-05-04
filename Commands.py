@@ -8,11 +8,9 @@ import random
 
 
 class Commands(app_commands.Group):
-    bot
-
-    def __init__(self, bot: discord.ext.commands.Bot):
+    def __init__(self, botty: discord.ext.commands.Bot):
         super().__init__()
-        bot = bot
+        bot = botty
 
 
     def set_up(self, client):

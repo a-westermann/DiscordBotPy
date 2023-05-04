@@ -76,7 +76,7 @@ class OtherCommands(app_commands.Group):
             return last_name
         else: # if not, pull random name from file, remove it, and add to alt file
             names_list_file = open("/home/andweste/Scripts/girl_names.txt", "r")
-            name_list = names_list_file.readlines()
+            name_list = names_list_file.read().split("\n")
             for i in range(len(name_list)):
                 if i > 10:
                     break

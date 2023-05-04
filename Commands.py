@@ -8,20 +8,22 @@ import random
 
 
 class Commands(app_commands.Group):
+    bot
+
     def __init__(self, bot: discord.ext.commands.Bot):
         super().__init__()
-        self.bot = bot
+        bot = bot
 
 
     def set_up(self, client):
         self.tree = app_commands.CommandTree(client)
         return self.tree
 
-    @self.bot.group(name='other', invoke_without_command=True)
+    @bot.group(name='other', invoke_without_command=True)
     async def other(self, interaction:discord.Interaction):
         pass
 
-    @self.bot.group(name='lol', invoke_without_command=True)
+    @bot.group(name='lol', invoke_without_command=True)
     async def lol(self, interaction:discord.Interaction):
         pass
 

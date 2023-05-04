@@ -66,7 +66,7 @@ class OtherCommands(app_commands.Group):
         last_date = str(used_names_file.readline().rstrip())
         print(last_date)
         print(today)
-        if today == last_date:  # this part DOES work
+        if today == last_date:
             # if so, give bottom name from used_names file
             line = ""
             for name in used_names_file:
@@ -75,9 +75,13 @@ class OtherCommands(app_commands.Group):
             last_name = line
             return last_name
         #if not, pull random name from file, remove it, and add to alt file
-        else:  # this section does not work. Random not found
+        else:
             names_list_file = open("/home/andweste/Scripts/girl_names.txt", "r")
             name_list = names_list_file.readlines()
+            for x in range(len(name_list)):
+                if x > 5:
+                    break
+                print(name_list[x])
             todays_name = random.choice(name_list)
             print(todays_name)
             # now remove the name from list and write to the file

@@ -45,9 +45,9 @@ class BabyStuff:
             # finally, add the new name to the bottom of the used_names file
             used_names_file = open("/home/andweste/Scripts/used_names.txt", "r")  # open in read
             used_names_text = used_names_file.read()
-            # build the next datetime based on TODAY's date, plus the new time
+            # build the next datetime based on TODAY's date, plus the last time that was eligible for a name
             # that way if you miss days you can't just do a bunch after missing
-            new_date = str(today).split(' ')[0] + " " + str(new_date).split(' ')[1]
+            new_date = str(today).split(' ')[0] + " " + last_time + ":00:00"
             used_names_text = used_names_text.replace(last_date, new_date)
             used_names_file = open("/home/andweste/Scripts/used_names.txt", "w") # open in write, clear text
             used_names_file.writelines(used_names_text)  # write all names

@@ -55,13 +55,13 @@ class BabyStuff:
                 current_time = int(str(today).split(' ')[1].split(':')[0])
                 print(str(current_time) + "  current time")
                 if times_for_names[1] > current_time > times_for_names[0]:
-                    time_to_record = times_for_names[0]
+                    time_to_record = "00"
                 elif times_for_names[2] > current_time > times_for_names[1]:
-                    time_to_record = times_for_names[1]
+                    time_to_record = str(times_for_names[1])
                 else:
-                    time_to_record = times_for_names[2]
+                    time_to_record = str(times_for_names[2])
             # always use today's date as the last recorded time
-            last_used_datetime = str(today).split(' ')[0] + " " + str(time_to_record) + ":00:00"
+            last_used_datetime = str(today).split(' ')[0] + " " + time_to_record + ":00:00"
             used_names_text = used_names_text.replace(last_date, last_used_datetime)
             used_names_file = open("/home/andweste/Scripts/used_names.txt", "w") # open in write, clear text
             used_names_file.writelines(used_names_text)  # write all names

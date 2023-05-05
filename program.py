@@ -1,12 +1,12 @@
 import datetime
 import discord.ext
-import Commands
+import commands
 import discord
 from discord import app_commands
-import DiscordClient
+import discord_client
 import threading
 import asyncio
-from LeagueModels import League_API
+from LeagueModels import league_api
 
 
 on_pi = True
@@ -35,8 +35,11 @@ active_client.tree.add_command(Commands.OtherCommands(active_client))
 active_client.tree.add_command(Commands.Lol(active_client))
 
 # set up league api
-# token = open("/home/andweste/Scripts.league_token.txt").read()
-# league_api = League_API.LeagueAPI(token)
+try:
+    token = open("/home/andweste/Scripts.league_token.txt").read()
+    league_api = League_API.LeagueAPI(token)
+except Exception(e):
+    print("Error: " + e)
 
 
 if __name__ == "__main__":

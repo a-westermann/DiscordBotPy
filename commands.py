@@ -73,7 +73,7 @@ class OtherCommands(app_commands.Group):
             await interaction.response.send_message("failed")
 
 
-    @app_commands.command(name="baby_name", description="get specific baby name")
+    @app_commands.command(name="baby_name", description="get specific baby name's origin")
     async def baby_name(self, interaction: discord.Interaction, name: str):
         search_results = helpers.google_search(search_term=name + " girl's name origin", num_results=1)
         await interaction.response.send_message(search_results)

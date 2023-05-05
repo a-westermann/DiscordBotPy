@@ -38,7 +38,7 @@ class OtherCommands(app_commands.Group):
     def __init__(self, bot: discord.ext.commands.Bot):
         super().__init__()
         self.bot = bot
-        self.baby = Baby.baby.BabyStuff()
+        self.baby = Baby.baby.BabyStuff(self)
 
 
     @app_commands.command(name="ping")

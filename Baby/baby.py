@@ -1,5 +1,6 @@
 import datetime
 import random
+import helpers
 
 
 class BabyStuff:
@@ -9,13 +10,20 @@ class BabyStuff:
 
     def get_todays_name(self):
         # check date to see if gave one already
-        today = str(datetime.date.today())
+        today = helpers.get_date_hour()
         used_names_file = open("/home/andweste/Scripts/used_names.txt", "r")
         last_date = str(used_names_file.readline().rstrip())
-        print("prev date = " + last_date)
-        print("today = " + today)
-        if today == last_date:
-            # if so, give bottom name from used_names file
+        today = get_date_hour()
+        print("today = " + str(today))
+        print("last time = " + last_date)
+        times_for_names = [00, 12, 17]  # midnight, noon, 5pm
+        last_time = last_date.split(' ')[1].split(':')[0]
+        # find the last time and get the next one
+        last_time_index = times_for_names.index(list(filter(lambda t: t == int(last_time), times_for_names))[0])
+        new_time = times_for_names[0] if last_time_index == 2 else times_for_names[(last_time_index + 1)]
+        new_date = last_date.split(' ')[0] + " " + str(new_time) + ":00:00"
+        print("new date = " + new_date)
+        if today <= datetime.strptime(new_date, "%Y-%m-%d %H:%M:%S"):  # give last name
             line = ""
             for name in used_names_file:
                 line = name
@@ -37,6 +45,9 @@ class BabyStuff:
             # finally, add the new name to the bottom of the used_names file
             used_names_file = open("/home/andweste/Scripts/used_names.txt", "r")  # open in read
             used_names_text = used_names_file.read()
+            # build the next datetime based on TODAY's date, plus the new time
+            # that way if you miss days you can't just do a bunch in a row
+            new_date = str(today).split(' ')[0] + " " + str(new_date).split(' ')[1]
             used_names_text = used_names_text.replace(last_date, today)
             used_names_file = open("/home/andweste/Scripts/used_names.txt", "w") # open in write, clear text
             used_names_file.writelines(used_names_text)  # write all names

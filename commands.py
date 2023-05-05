@@ -16,8 +16,6 @@ class Lol(app_commands.Group):
         bot = discord_bot
 
 
-
-
     @app_commands.command(name="recap", description="Get a recap of your history with a champ")
     async def recap(self, interaction: discord.Interaction):
         await interaction.response.send_message("in development")

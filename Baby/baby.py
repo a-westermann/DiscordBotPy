@@ -47,8 +47,8 @@ class BabyStuff:
             used_names_text = used_names_file.read()
             # build the next datetime based on TODAY's date, plus the last time that was eligible for a name
             # that way if you miss days you can't just do a bunch after missing
-            new_date = str(today).split(' ')[0] + " " + last_time + ":00:00"
-            used_names_text = used_names_text.replace(last_date, new_date)
+            last_used_datetime = str(today).split(' ')[0] + " " + str(times_for_names[last_time_index]) + ":00:00"
+            used_names_text = used_names_text.replace(last_date, last_used_datetime)
             used_names_file = open("/home/andweste/Scripts/used_names.txt", "w") # open in write, clear text
             used_names_file.writelines(used_names_text)  # write all names
             used_names_file = open("/home/andweste/Scripts/used_names.txt", "a")  # open in append mode to add name

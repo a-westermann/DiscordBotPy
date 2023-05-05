@@ -6,12 +6,12 @@ import helpers
 class BabyStuff:
     def __init__(self, command_module):
         self.command_module = command_module
-        self.helpers = helpers()
+        # self.helpers = helpers()
 
 
     def get_todays_name(self):
         # check date to see if gave one already
-        today = self.helpers.get_date_hour()
+        today = helpers.get_date_hour()
         used_names_file = open("/home/andweste/Scripts/used_names.txt", "r")
         last_date = str(used_names_file.readline().rstrip())
         today = get_date_hour()

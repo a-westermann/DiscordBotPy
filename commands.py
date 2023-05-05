@@ -17,7 +17,7 @@ class Lol(app_commands.Group):
         super().__init__()  # this is to call the parent class's __init__() (parentclass=app_commands.Group)
         if token != "":
             self.token = token
-            self.league_api = LeagueModels.league_api.LeagueAPI(token)
+            self.league_api = league_api.LeagueAPI(token)
         self.bot = discord_bot
 
     @app_commands.command(name="test")

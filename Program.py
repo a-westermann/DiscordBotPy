@@ -35,8 +35,8 @@ active_client.tree.add_command(Commands.OtherCommands(active_client))
 active_client.tree.add_command(Commands.Lol(active_client))
 
 # set up league api
-token = open("/home/andweste/Scripts.league_token.txt").read()
-league_api = League_API.LeagueAPI(token)
+# token = open("/home/andweste/Scripts.league_token.txt").read()
+# league_api = League_API.LeagueAPI(token)
 
 
 if __name__ == "__main__":

@@ -57,7 +57,7 @@ class BabyStuff:
                     time_to_record = times_for_names[1]
                 else:
                     time_to_record = times_for_names[2]
-            last_used_datetime = str(today).split(' ')[0] + " " + time_to_record + ":00:00"
+            last_used_datetime = str(today).split(' ')[0] + " " + str(time_to_record) + ":00:00"
             used_names_text = used_names_text.replace(last_date, last_used_datetime)
             used_names_file = open("/home/andweste/Scripts/used_names.txt", "w") # open in write, clear text
             used_names_file.writelines(used_names_text)  # write all names

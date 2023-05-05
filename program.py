@@ -38,8 +38,8 @@ try:
     league_token = open("/home/andweste/Scripts.league_token.txt").read()
 except Exception as e:
     print("Error: " + str(e))
-if league_token != "":
-    league_api = league_api.LeagueAPI(token)
+    league_token = ""
+league_api = league_api.LeagueAPI(token)
 active_client.tree.add_command(commands.Lol(active_client, league_token))
 
 

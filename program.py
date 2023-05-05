@@ -34,14 +34,13 @@ active_client.receive_tree(tree)
 active_client.tree.add_command(commands.OtherCommands(active_client))
 
 # set up league command module & league_api
-token = ""
 try:
-    token = open("/home/andweste/Scripts.league_token.txt").read()
+    league_token = open("/home/andweste/Scripts.league_token.txt").read()
 except Exception as e:
     print("Error: " + str(e))
-if token != "":
+if league_token != "":
     league_api = league_api.LeagueAPI(token)
-active_client.tree.add_command(commands.Lol(active_client, token))
+active_client.tree.add_command(commands.Lol(active_client, league_token))
 
 
 

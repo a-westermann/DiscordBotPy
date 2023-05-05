@@ -24,7 +24,7 @@ class Lol(app_commands.Group):
 
     @app_commands.command(name="test")
     async def test(self, interaction: discord.Interaction):
-        summoner = League_API.LeagueAPI.get_summoner("Vierce")
+        summoner = league_api.LeagueAPI.get_summoner("Vierce")
         await interaction.response.send_message()
 
 
@@ -71,7 +71,7 @@ class OtherCommands(app_commands.Group):
 
     @app_commands.command(name="todays_baby_name", description="gives today's baby name")
     async def todays_baby_name(self, interaction: discord.Interaction):
-        name = Baby.Baby.BabyStuff.get_todays_name()
+        name = Baby.baby.BabyStuff.get_todays_name()
         search_results = helpers.google_search(search_term= name + " girl's name origin", num_results=1)
         await interaction.response.send_message("Name: " + name + search_results)
 

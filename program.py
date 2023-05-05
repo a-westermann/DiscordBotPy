@@ -15,7 +15,7 @@ on_pi = True
 def create_client():
     intents = discord.Intents.default()
     intents.message_content = True
-    client = DiscordClient.Client(intents=intents)
+    client = discord_client.Client(intents=intents)
     return client
 
 
@@ -31,13 +31,13 @@ token = get_token(on_pi)
 tree = app_commands.CommandTree(active_client)
 active_client.receive_tree(tree)
 
-active_client.tree.add_command(Commands.OtherCommands(active_client))
-active_client.tree.add_command(Commands.Lol(active_client))
+active_client.tree.add_command(commands.OtherCommands(active_client))
+active_client.tree.add_command(commands.Lol(active_client))
 
 # set up league api
 try:
     token = open("/home/andweste/Scripts.league_token.txt").read()
-    league_api = League_API.LeagueAPI(token)
+    league_api = league_api.LeagueAPI(token)
 except Exception(e):
     print("Error: " + e)
 

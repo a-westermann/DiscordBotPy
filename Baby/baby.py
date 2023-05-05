@@ -1,4 +1,4 @@
-from datetime import datetime
+from datetime import datetime, timedelta
 import random
 import helpers
 
@@ -21,7 +21,8 @@ class BabyStuff:
         # find the last time and get the next one
         last_time_index = times_for_names.index(list(filter(lambda t: t == int(last_time), times_for_names))[0])
         new_time = times_for_names[0] if last_time_index == 2 else times_for_names[(last_time_index + 1)]
-        new_date = last_date.split(' ')[0] + " " + str(new_time) + ":00:00"
+        new_day = str((today + timedelta(days=1))).split(' ')[0] if last_time_index == 2 else last_date.split(' ')[0]
+        new_date = new_day + " " + str(new_time) + ":00:00"
         print("new date = " + new_date)
         if today <= datetime.strptime(new_date, "%Y-%m-%d %H:%M:%S"):  # give last name
             line = ""
@@ -51,9 +52,9 @@ class BabyStuff:
                 time_to_record = str(times_for_names[last_time_index])
             else:  # last day was from previous date. Grab today + last time limit
                 current_time = int(str(today).split(' ')[1].split(':')[0])
-                if times_for_names[1] < current_time > times_for_names[0]:
+                if times_for_names[1] > current_time > times_for_names[0]:
                     time_to_record = times_for_names[0]
-                elif times_for_names[2] < current_time > times_for_names[1]:
+                elif times_for_names[2] > current_time > times_for_names[1]:
                     time_to_record = times_for_names[1]
                 else:
                     time_to_record = times_for_names[2]

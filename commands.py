@@ -15,9 +15,9 @@ import Baby.baby
 class Lol(app_commands.Group):
     def __init__(self, discord_bot: discord.ext.commands.Bot, token):
         super().__init__()  # this is to call the parent class's __init__() (parentclass=app_commands.Group)
-        if token != "":
-            self.token = token
-            self.league_api = LeagueModels.league_api.LeagueAPI(token)
+        # if token != "":
+        #     self.token = token
+        #     self.league_api = LeagueModels.league_api.LeagueAPI(token)
         self.bot = discord_bot
 
     @app_commands.command(name="test")

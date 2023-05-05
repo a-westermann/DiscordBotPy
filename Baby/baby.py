@@ -14,7 +14,6 @@ class BabyStuff:
         today = helpers.get_date_hour()
         used_names_file = open("/home/andweste/Scripts/used_names.txt", "r")
         last_date = str(used_names_file.readline().rstrip())
-        today = get_date_hour()
         print("today = " + str(today))
         print("last time = " + last_date)
         times_for_names = [00, 12, 17]  # midnight, noon, 5pm

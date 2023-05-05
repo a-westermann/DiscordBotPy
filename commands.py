@@ -13,13 +13,17 @@ import Baby.baby
 
 # League
 class Lol(app_commands.Group):
-    def __init__(self, discord_bot: discord.ext.commands.Bot):
+    def __init__(self, discord_bot: discord.ext.commands.Bot, token):
         super().__init__()  # this is to call the parent class's __init__() (parentclass=app_commands.Group)
-        self.league_api = LeagueModels.league_api.LeagueAPI()
+        self.token = token
+        self.league_api = LeagueModels.league_api.LeagueAPI(token)
         self.bot = discord_bot
 
     @app_commands.command(name="test")
     async def test(self, interaction: discord.Interaction):
+        if token == "":
+            await interaction.response.send_message("token invalid")
+            return
         summoner = self.league_api.LeagueAPI.get_summoner("Vierce")
         await interaction.response.send_message()
 
@@ -27,6 +31,9 @@ class Lol(app_commands.Group):
 
     @app_commands.command(name="recap", description="Get a recap of your history with a champ")
     async def recap(self, interaction: discord.Interaction):
+        if token == "":
+            await interaction.response.send_message("token invalid")
+            return
         await interaction.response.send_message("in development")
 
 

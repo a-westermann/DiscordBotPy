@@ -38,7 +38,7 @@ active_client.tree.add_command(commands.Lol(active_client))
 try:
     token = open("/home/andweste/Scripts.league_token.txt").read()
     league_api = league_api.LeagueAPI(token)
-except Exception(e):
+except Exception as e:
     print("Error: " + e)
 
 

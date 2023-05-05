@@ -34,7 +34,6 @@ class BabyStuff:
         else:  # if not, pull random name from file, remove it, and add to alt file
             names_list_file = open("/home/andweste/Scripts/girl_names.txt", "r")
             name_list = names_list_file.readlines()
-            # read().split("\n")
             todays_name = random.choice(name_list)
             print("today's name = " + todays_name)
             # now remove the name from list and write to the file
@@ -47,7 +46,18 @@ class BabyStuff:
             used_names_text = used_names_file.read()
             # build the next datetime based on TODAY's date, plus the last time that was eligible for a name
             # that way if you miss days you can't just do a bunch after missing
-            last_used_datetime = str(today).split(' ')[0] + " " + str(times_for_names[last_time_index]) + ":00:00"
+            if str(today).split(' ')[0] == new_date.split(' ')[0]:
+                # last day recorded == today
+                time_to_record = str(times_for_names[last_time_index])
+            else:  # last day was from previous date. Grab today + last time limit
+                current_time = str(today).split(' ')[1].split(':')[0]
+                if times_for_names[1] < current_time > times_for_names[0]:
+                    time_to_record = times_for_names[0]
+                elif times_for_names[2] < current_time > times_for_names[1]:
+                    time_to_record = times_for_names[1]
+                else:
+                    time_to_record = times_for_names[2]
+            last_used_datetime = str(today).split(' ')[0] + " " + time_to_record + ":00:00"
             used_names_text = used_names_text.replace(last_date, last_used_datetime)
             used_names_file = open("/home/andweste/Scripts/used_names.txt", "w") # open in write, clear text
             used_names_file.writelines(used_names_text)  # write all names

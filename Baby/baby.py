@@ -50,7 +50,7 @@ class BabyStuff:
             # that way if you miss days you can't just do a bunch after missing
             if str(today).split(' ')[0] == new_date.split(' ')[0]:
                 # last day recorded == today
-                time_to_record = str(times_for_names[new_time])
+                time_to_record = str(new_time)
             else:  # last day was from previous date. Grab today + last time limit
                 current_time = int(str(today).split(' ')[1].split(':')[0])
                 print(str(current_time) + "  current time")

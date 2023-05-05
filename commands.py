@@ -79,7 +79,7 @@ class OtherCommands(app_commands.Group):
         await interaction.response.send_message(search_results)
 
 
-    @app_commands.command(name="todays_baby_name", description="gives today's baby name")
+    @app_commands.command(name="todays_baby_name", description="gives today's baby name. Times are midnight, noon, 5pm")
     async def todays_baby_name(self, interaction: discord.Interaction):
         name = self.baby.get_todays_name()
         search_results = helpers.google_search(search_term= name + " girl's name origin", num_results=1)

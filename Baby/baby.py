@@ -53,6 +53,7 @@ class BabyStuff:
                 time_to_record = str(times_for_names[last_time_index])
             else:  # last day was from previous date. Grab today + last time limit
                 current_time = int(str(today).split(' ')[1].split(':')[0])
+                print(str(current_time) + "  current time")
                 if times_for_names[1] > current_time > times_for_names[0]:
                     time_to_record = times_for_names[0]
                 elif times_for_names[2] > current_time > times_for_names[1]:

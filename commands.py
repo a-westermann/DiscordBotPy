@@ -14,7 +14,7 @@ import Baby.baby
 # League
 class Lol(app_commands.Group):
     def __init__(self, discord_bot: discord.ext.commands.Bot):
-        super().__init__()
+        super().__init__()  # this is to call the parent class's __init__() (parentclass=app_commands.Group)
         self.league_api = LeagueModels.league_api.LeagueAPI()
         self.bot = discord_bot
 

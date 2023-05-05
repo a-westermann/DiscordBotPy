@@ -39,7 +39,7 @@ try:
     token = open("/home/andweste/Scripts.league_token.txt").read()
     league_api = league_api.LeagueAPI(token)
 except Exception as e:
-    print("Error: " + e)
+    print("Error: " + str(e))
 
 
 if __name__ == "__main__":

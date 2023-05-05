@@ -48,7 +48,7 @@ class BabyStuff:
             # build the next datetime based on TODAY's date, plus the new time
             # that way if you miss days you can't just do a bunch after missing
             new_date = str(today).split(' ')[0] + " " + str(new_date).split(' ')[1]
-            used_names_text = used_names_text.replace(last_date, today)
+            used_names_text = used_names_text.replace(last_date, new_date)
             used_names_file = open("/home/andweste/Scripts/used_names.txt", "w") # open in write, clear text
             used_names_file.writelines(used_names_text)  # write all names
             used_names_file = open("/home/andweste/Scripts/used_names.txt", "a")  # open in append mode to add name

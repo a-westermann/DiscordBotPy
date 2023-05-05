@@ -15,7 +15,7 @@ import Baby.baby
 class Lol(app_commands.Group):
     def __init__(self, discord_bot: discord.ext.commands.Bot):
         super().__init__()
-        self.league_api = LeagueModels.league_api.LeagueAPI
+        self.league_api = LeagueModels.league_api.LeagueAPI()
         self.bot = discord_bot
 
     @app_commands.command(name="test")
@@ -38,7 +38,7 @@ class OtherCommands(app_commands.Group):
     def __init__(self, bot: discord.ext.commands.Bot):
         super().__init__()
         self.bot = bot
-        self.baby = Baby.baby.BabyStuff
+        self.baby = Baby.baby.BabyStuff()
 
 
     @app_commands.command(name="ping")

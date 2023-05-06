@@ -85,11 +85,11 @@ class OtherCommands(app_commands.Group):
         name = self.baby.get_todays_name()
         search_results = helpers.google_search(search_term= name + " girl's name origin", num_results=1)
         buttons = []
-        for i in range(10):
-            style = ButtonStyle.red if i < 4 else \
-                ButtonStyle.blurple if i < 8 else ButtonStyle.green
-            buttons.append(Button(label=str(i), style=style))
-        await interaction.response.send_message("Name: " + name + search_results, components=[[buttons]])
+        # for i in range(10):
+        #     style = ButtonStyle.red if i < 4 else \
+        #         ButtonStyle.blurple if i < 8 else ButtonStyle.green
+        #     buttons.append(Button(label=str(i), style=style))
+        await interaction.response.send_message("Name: " + name + search_results, components=[[Button(label="test")]])
 
 
 

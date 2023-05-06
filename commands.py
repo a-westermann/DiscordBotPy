@@ -3,6 +3,7 @@ import LeagueModels.league_api
 import discord
 from discord.ext import commands
 from discord import app_commands
+from discord import Button, ButtonStyle
 import discord.ext
 import subprocess
 import helpers
@@ -83,7 +84,12 @@ class OtherCommands(app_commands.Group):
     async def todays_baby_name(self, interaction: discord.Interaction):
         name = self.baby.get_todays_name()
         search_results = helpers.google_search(search_term= name + " girl's name origin", num_results=1)
-        await interaction.response.send_message("Name: " + name + search_results)
+        buttons = []
+        for i in range(10):
+            style = ButtonStyle.red if i < 4 else \
+                ButtonStyle.blurple if i < 8 else ButtonStyle.green
+            buttons.append(Button(label=str(i), style=style))
+        await interaction.response.send_message("Name: " + name + search_results, components=[[buttons]])
 
 
 

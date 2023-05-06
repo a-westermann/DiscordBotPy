@@ -89,7 +89,7 @@ class OtherCommands(app_commands.Group):
         #     style = ButtonStyle.red if i < 4 else \
         #         ButtonStyle.blurple if i < 8 else ButtonStyle.green
         #     buttons.append(Button(label=str(i), style=style))
-        await interaction.response.send_message("Name: " + name + search_results)
+        await interaction.response.send_message("Name: " + name + search_results, components=Button(label="test"))
                                                 # , components=[[buttons]])
 
 

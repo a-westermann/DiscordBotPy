@@ -7,7 +7,7 @@ from Baby.baby import BabyStuff
 class BabyView(discord.ui.View):
     def __init__(self, baby: BabyStuff, original_message: discord.Interaction, baby_name: str):
         super().__init__()
-        self.score, self.baby_name = None
+        self.score = None
         self.baby = baby
         self.original_message = original_message
         self.baby_name = baby_name

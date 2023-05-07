@@ -29,6 +29,7 @@ class BabyStuff:
                       + timedelta(days=1))).split(' ')[0] if last_time_index == 2 else last_date.split(' ')[0]
         new_date = new_day + " " + str(new_time) + ":00:00"
         print("new date = " + new_date)
+        got_new_name = None
         if today <= datetime.strptime(new_date, "%Y-%m-%d %H:%M:%S"):  # give last name
             line = ""
             for name in used_names_file:
@@ -36,7 +37,8 @@ class BabyStuff:
                 pass
             last_name = line
             print("Already got a name today. Name =" + last_name)
-            return last_name
+            got_new_name = False
+            return last_name, got_new_name
         else:  # if not, pull random name from file, remove it, and add to alt file
             names_list_file = open("/home/andweste/Scripts/girl_names.txt", "r")
             name_list = names_list_file.readlines()
@@ -71,10 +73,11 @@ class BabyStuff:
             used_names_file.writelines(used_names_text)  # write all names
             used_names_file = open("/home/andweste/Scripts/used_names.txt", "a")  # open in append mode to add name
             used_names_file.write(todays_name)
-        return todays_name
+            got_new_name = True
+            return todays_name, got_new_name
 
 
-    async def submit_name_score(self, score: int, view: discord.Interaction):
+    async def submit_name_score(self, score: int, name: str, view: discord.Interaction):
         print("submitting score.... " + str(score))
-        await view.response.send_message("Score submitted: " + str(score))
+        await view.response.send_message("Score submitted for " + name + " : " + str(score))
         await view.message.delete()

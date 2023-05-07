@@ -84,14 +84,15 @@ class OtherCommands(app_commands.Group):
 
     @app_commands.command(name="todays_baby_name", description="gives today's baby name. Times are midnight, noon, 5pm")
     async def todays_baby_name(self, interaction: discord.Interaction):
-        name = self.baby.get_todays_name()
+        name, got_new_name = self.baby.get_todays_name()
         search_results = helpers.google_search(search_term= name + " girl's name origin", num_results=1)
-        buttons = []
-        # await interaction.response.send_message("Name: " + name + search_results, components=Button(label="test"))
-        await interaction.response.send_message("Name: " + name + "\n" + search_results)
-        await asyncio.sleep(1)
-        view = Baby.baby_view.BabyView(self.baby, interaction.response) # pass in search message to edit with score later
-        await interaction.followup.send("Rate the name: ", view=view)
+        regave_name = "" if got_new_name else " (this name was already chosen) "
+        message_content = "Name: " + name + regave_name + "\n" + search_results
+        await interaction.response.send_message(message_content)
+        if got_new_name:
+            await asyncio.sleep(1)
+            view = Baby.baby_view.BabyView(self.baby, interaction.response, name) # pass in search message to edit with score later
+            await interaction.followup.send("Rate the name: ", view=view)
 
 
 

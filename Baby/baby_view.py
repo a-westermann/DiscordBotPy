@@ -43,40 +43,40 @@ class BabyView(discord.ui.View):
     async def five(self, interaction: discord.Interaction, button: discord.ui.Button):
         self.score = 5
         print("scored 5")
-        button.callback = self.baby.submit_name_score(self.score, interaction)
+        button.callback = await self.baby.submit_name_score(self.score, interaction)
         self.stop()
 
     @discord.ui.button(label="6", style=discord.ButtonStyle.blurple)
     async def six(self, interaction: discord.Interaction, button: discord.ui.Button):
         self.score = 6
         print("scored 6")
-        button.callback = self.baby.submit_name_score(self.score, interaction)
+        button.callback = await self.baby.submit_name_score(self.score, interaction)
         self.stop()
 
     @discord.ui.button(label="7", style=discord.ButtonStyle.green)
     async def seven(self, interaction: discord.Interaction, button: discord.ui.Button):
         self.score = 7
         print("scored 7")
-        button.callback = self.baby.submit_name_score(self.score, interaction)
+        button.callback = await self.baby.submit_name_score(self.score, interaction)
         self.stop()
 
     @discord.ui.button(label="8", style=discord.ButtonStyle.green)
     async def eight(self, interaction: discord.Interaction, button: discord.ui.Button):
         self.score = 8
         print("scored 8")
-        button.callback = self.baby.submit_name_score(self.score, interaction)
+        button.callback = await self.baby.submit_name_score(self.score, interaction)
         self.stop()
 
     @discord.ui.button(label="9", style=discord.ButtonStyle.green)
     async def nine(self, interaction: discord.Interaction, button: discord.ui.Button):
         self.score = 9
         print("scored 9")
-        button.callback = self.baby.submit_name_score(self.score, interaction)
+        button.callback = await self.baby.submit_name_score(self.score, interaction)
         self.stop()
 
     @discord.ui.button(label="10", style=discord.ButtonStyle.green)
     async def ten(self, interaction: discord.Interaction, button: discord.ui.Button):
         self.score = 10
         print("scored 10")
-        button.callback = self.baby.submit_name_score(self.score, interaction)
+        button.callback = await self.baby.submit_name_score(self.score, interaction)
         self.stop()

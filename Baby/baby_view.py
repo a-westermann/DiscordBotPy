@@ -11,5 +11,5 @@ class BabyView(discord.ui.View):
 
     @discord.ui.button(label="1", style=discord.ButtonStyle.red)
     async def one(self, interaction: discord.Interaction, button: discord.ui.Button):
-        await interaction.response("1")
         self.score = 1
+        print("scored 1")

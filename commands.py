@@ -89,7 +89,7 @@ class OtherCommands(app_commands.Group):
         buttons = []
         # await interaction.response.send_message("Name: " + name + search_results, components=Button(label="test"))
         await interaction.response.send_message("Name: " + name + "\n" + search_results)
-        await asyncio.sleep(3)
+        await asyncio.sleep(1)
         view = Baby.baby_view.BabyView()
         await interaction.followup.send(view=view)
 

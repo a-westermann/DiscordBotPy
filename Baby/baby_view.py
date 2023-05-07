@@ -27,7 +27,7 @@ class BabyView(discord.ui.View):
         print("scored 3")
         self.stop()
 
-    @discord.ui.button(label="4", style=discord.Button.style.blurple)
+    @discord.ui.button(label="4", style=discord.ButtonStyle.blurple)
     async def four(self, interaction: discord.Interaction, button: discord.ui.Button):
         self.score = 4
         print("scored 4")

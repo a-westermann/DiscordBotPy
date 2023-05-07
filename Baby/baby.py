@@ -46,12 +46,13 @@ class BabyStuff:
             print("today's name = " + todays_name)
             # now remove the name from list and write to the file
             name_list.remove(todays_name)
-            names_list_file = open("/home/andweste/Scripts/girl_names.txt", "w")  # opening in write mode clears file
-            for name in name_list:
-                names_list_file.write(f"{name}")
+            # names_list_file = open("/home/andweste/Scripts/girl_names.txt", "w")  # opening in write mode clears file
+            # for name in name_list:
+            #     names_list_file.write(f"{name}")
             # finally, add the new name to the bottom of the used_names file
             used_names_file = open("/home/andweste/Scripts/used_names.txt", "r")  # open in read
             used_names_text = used_names_file.read()
+            used_names_file.close()
             # build the next datetime based on TODAY's date, plus the last time that was eligible for a name
             # that way if you miss days you can't just do a bunch after missing
             if str(today).split(' ')[0] == new_date.split(' ')[0]:
@@ -71,13 +72,22 @@ class BabyStuff:
             used_names_text = used_names_text.replace(last_date, last_used_datetime)
             used_names_file = open("/home/andweste/Scripts/used_names.txt", "w") # open in write, clear text
             used_names_file.writelines(used_names_text)  # write all names
+            used_names_file.close()
             used_names_file = open("/home/andweste/Scripts/used_names.txt", "a")  # open in append mode to add name
             used_names_file.write(todays_name)
+            used_names_file.close()
             got_new_name = True
             return todays_name, got_new_name
 
 
     async def submit_name_score(self, score: int, name: str, view: discord.Interaction):
         print("submitting score.... " + str(score))
-        await view.response.send_message("Score submitted for " + name + " : " + str(score))
-        await view.message.delete()
+        try:  # write score to the used_names.txt
+            used_names_file = open("/home/andweste/Scripts/used_names.txt", "a")
+            used_names_file.write(";" + str(score))
+            used_names_file.close()
+            await view.response.send_message("Score submitted for " + name + " : " + str(score))
+            await view.message.delete()
+        except:
+            await view.response.send_message("Unable to submit score. Please try again. Or don't, I don't know.")
+

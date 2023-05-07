@@ -5,7 +5,7 @@ import discord.ext
 from Baby.baby import BabyStuff
 
 class BabyView(discord.ui.View):
-    def __init__(self, baby: BabyStuff, original_message: discord.interaction):
+    def __init__(self, baby: BabyStuff, original_message: discord.Interaction):
         super().__init__()
         self.score = None
         self.baby = baby

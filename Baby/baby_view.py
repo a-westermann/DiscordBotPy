@@ -15,28 +15,28 @@ class BabyView(discord.ui.View):
     async def one(self, interaction: discord.Interaction, button: discord.ui.Button):
         self.score = 1
         print("scored 1")
-        button.callback = self.baby.submit_name_score(self.score, interaction)
+        button.callback = await self.baby.submit_name_score(self.score, interaction)
         self.stop()
 
     @discord.ui.button(label="2", style=discord.ButtonStyle.red)
     async def two(self, interaction: discord.Interaction, button: discord.ui.Button):
         self.score = 2
         print("scored 2")
-        button.callback = self.baby.submit_name_score(self.score, interaction)
+        button.callback = await self.baby.submit_name_score(self.score, interaction)
         self.stop()
 
     @discord.ui.button(label="3", style=discord.ButtonStyle.red)
     async def three(self, interaction: discord.Interaction, button: discord.ui.Button):
         self.score = 3
         print("scored 3")
-        button.callback = self.baby.submit_name_score(self.score, interaction)
+        button.callback = await self.baby.submit_name_score(self.score, interaction)
         self.stop()
 
     @discord.ui.button(label="4", style=discord.ButtonStyle.blurple)
     async def four(self, interaction: discord.Interaction, button: discord.ui.Button):
         self.score = 4
         print("scored 4")
-        button.callback = self.baby.submit_name_score(self.score, interaction)
+        button.callback = await self.baby.submit_name_score(self.score, interaction)
         self.stop()
 
     @discord.ui.button(label="5", style=discord.ButtonStyle.blurple)

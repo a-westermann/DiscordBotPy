@@ -91,7 +91,7 @@ class OtherCommands(app_commands.Group):
         await interaction.response.send_message("Name: " + name + "\n" + search_results)
         await asyncio.sleep(1)
         view = Baby.baby_view.BabyView()
-        await interaction.followup.send(view=view)
+        await interaction.followup.send("Rate the name: ", view=view)
 
 
 

@@ -48,6 +48,7 @@ class OtherCommands(app_commands.Group):
     def __init__(self, bot: commands.Bot):
         super().__init__()
         self.bot = bot
+        # self.client = client
         self.baby = Baby.baby.BabyStuff(self)
 
 
@@ -90,7 +91,8 @@ class OtherCommands(app_commands.Group):
         await interaction.response.send_message("Name: " + name + "\n" + search_results)
         await asyncio.sleep(3)
         view = Baby.baby_view.BabyView()
-        await interaction.response.send_message(view=view)
+        await interaction.followup("test")
+        # await interaction.response.send_message(view=view)
 
 
 

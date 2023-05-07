@@ -93,7 +93,7 @@ class OtherCommands(app_commands.Group):
         await interaction.response.send_message(message_content)
         if got_new_name:
             await asyncio.sleep(1)
-            view = Baby.baby_view.BabyView(self.baby, interaction.response, name) # pass in search message to edit with score later
+            view = Baby.baby_view.BabyView(self.baby, interaction.response, str(name).strip()) # pass in search message to edit with score later
             await interaction.followup.send("Rate the name: ", view=view)
 
 

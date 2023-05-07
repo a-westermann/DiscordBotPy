@@ -77,4 +77,4 @@ class BabyStuff:
     async def submit_name_score(self, score: int, interaction: discord.Interaction, view: discord.ui.View):
         print("submitting score.... " + str(score))
         await interaction.response.send_message("Score submitted: " + str(score))
-        await view.clear_items()
+        view.clear_items()

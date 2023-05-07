@@ -87,11 +87,12 @@ class BabyStuff:
             text = used_names_file.readlines()
             text[len(text) - 1] += ";" + str(score)
             # used_names_file.write(";" + str(score))
-            used_names_file = open("/home/andweste/Scripts/used_names.txt", w)
+            used_names_file = open("/home/andweste/Scripts/used_names.txt", "w")
             used_names_file.writelines(text)
             used_names_file.close()
             await view.response.send_message("Score submitted for " + name + " : " + str(score))
             await view.message.delete()
-        except:
-            await view.response.send_message("Unable to submit score. Please try again. Or don't, I don't know.")
+        except Exception as e:
+            await view.response.send_message("Unable to submit score. Please try again. Or don't, I don't know."\
+                                             + "\n" + str(e))
 

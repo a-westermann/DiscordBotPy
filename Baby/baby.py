@@ -1,6 +1,10 @@
 from datetime import datetime, timedelta
 import random
 import helpers
+from discord.ext import commands
+from discord import app_commands
+import discord.ext
+import discord
 
 
 class BabyStuff:
@@ -70,5 +74,6 @@ class BabyStuff:
         return todays_name
 
 
-    def submit_name_score(self, score: int):
+    def submit_name_score(self, score: int, interaction: discord.Interaction):
         print("submitting score.... " + str(score))
+        await interaction.response.send_message("Score submitted: " + str(score))

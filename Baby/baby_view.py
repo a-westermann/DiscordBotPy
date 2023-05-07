@@ -13,3 +13,10 @@ class BabyView(discord.ui.View):
     async def one(self, interaction: discord.Interaction, button: discord.ui.Button):
         self.score = 1
         print("scored 1")
+        self.stop()
+
+    @discord.ui.button(label="2", style=discord.ButtonStyle.red)
+    async def one(self, interaction: discord.Interaction, button: discord.ui.Button):
+        self.score = 2
+        print("scored 2")
+        self.stop()

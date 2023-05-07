@@ -1,6 +1,6 @@
 import datetime
 import discord.ext
-import commands
+from discord.ext import commands
 import discord
 from discord import app_commands
 import discord_client
@@ -28,10 +28,11 @@ def get_token(in_rasp_pi):
 active_client = create_client()
 token = get_token(on_pi)
 # guilds = active_client.get_guilds(on_pi)
-tree = app_commands.CommandTree(active_client)
+context = commands.Context
+tree = app_commands.CommandTree(active_client, context)
 active_client.receive_tree(tree)
 
-active_client.tree.add_command(commands.OtherCommands(active_client))
+active_client.tree.add_command(commands.OtherCommands(active_client, context))
 
 # set up league command module & league_api
 try:

@@ -35,7 +35,7 @@ class BabyStuff:
             for name in used_names_file:
                 line = name
                 pass
-            last_name = line
+            last_name = line.split(';')[0]  # split on the score delimiter
             print("Already got a name today. Name =" + last_name)
             got_new_name = False
             return last_name, got_new_name
@@ -85,7 +85,8 @@ class BabyStuff:
         try:  # write score to the used_names.txt
             used_names_file = open("/home/andweste/Scripts/used_names.txt", "r")
             text = used_names_file.readlines()
-            text[len(text) - 2] += ";" + str(score)
+            final_name = text[len(text) - 1]
+            text[len(text) - 1] = final_name + ";" + str(score)
             # used_names_file.write(";" + str(score))
             used_names_file = open("/home/andweste/Scripts/used_names.txt", "w")
             used_names_file.writelines(text)

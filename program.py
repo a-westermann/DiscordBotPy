@@ -1,6 +1,6 @@
 import datetime
 import discord.ext
-from discord.ext import commands
+import commands
 import discord
 from discord import app_commands
 import discord_client

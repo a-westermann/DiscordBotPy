@@ -28,11 +28,10 @@ def get_token(in_rasp_pi):
 active_client = create_client()
 token = get_token(on_pi)
 # guilds = active_client.get_guilds(on_pi)
-context = commands.Context()
-tree = app_commands.CommandTree(active_client, context)
+tree = app_commands.CommandTree(active_client)
 active_client.receive_tree(tree)
 
-active_client.tree.add_command(commands.OtherCommands(active_client, context))
+active_client.tree.add_command(commands.OtherCommands(active_client))
 
 # set up league command module & league_api
 try:

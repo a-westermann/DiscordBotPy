@@ -15,12 +15,13 @@ from Baby import baby, baby_view
 
 # League
 class Lol(app_commands.Group):
-    def __init__(self, discord_bot: discord.ext.commands.Bot, token):
+    def __init__(self, bot: commands.Bot, context: commands.Context, token):
         super().__init__()  # this is to call the parent class's __init__() (parentclass=app_commands.Group)
         if token != "":
             self.token = token
             self.league_api = league_api.LeagueAPI(token)
-        self.bot = discord_bot
+        self.bot = bot
+        self.context = context
 
     @app_commands.command(name="test")
     async def test(self, interaction: discord.Interaction):
@@ -45,9 +46,10 @@ class Lol(app_commands.Group):
 
 # Other
 class OtherCommands(app_commands.Group):
-    def __init__(self, bot: discord.ext.commands.Bot):
+    def __init__(self, bot: commands.Bot, context: commands.Context):
         super().__init__()
         self.bot = bot
+        self.context = context
         self.baby = Baby.baby.BabyStuff(self)
 
 
@@ -90,7 +92,7 @@ class OtherCommands(app_commands.Group):
         await interaction.response.send_message("Name: " + name + "\n" + search_results)
         await asyncio.sleep(3)
         view = Baby.baby_view.BabyView()
-        await commands.Context.send(view=view)
+        await self.context.send(view=view)
 
 
 

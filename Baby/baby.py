@@ -85,8 +85,8 @@ class BabyStuff:
         try:  # write score to the used_names.txt
             used_names_file = open("/home/andweste/Scripts/used_names.txt", "r")
             text = used_names_file.readlines()
-            final_name = text[len(text) - 1]
-            text[len(text) - 1] = final_name + ";" + str(score)
+            final_name = text[len(text) - 1].strip()
+            text[len(text) - 1] = final_name + ";" + str(score) + "\n"
             # used_names_file.write(";" + str(score))
             used_names_file = open("/home/andweste/Scripts/used_names.txt", "w")
             used_names_file.writelines(text)

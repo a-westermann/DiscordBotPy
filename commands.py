@@ -1,14 +1,15 @@
 import datetime
+import asyncio
+import Baby.baby_view
 import LeagueModels.league_api
 import discord
 from discord.ext import commands
 from discord import app_commands
-from discord import Button, ButtonStyle
 import discord.ext
 import subprocess
 import helpers
 from LeagueModels import league_api
-import Baby.baby
+from Baby import baby, baby_view
 
 
 
@@ -85,12 +86,11 @@ class OtherCommands(app_commands.Group):
         name = self.baby.get_todays_name()
         search_results = helpers.google_search(search_term= name + " girl's name origin", num_results=1)
         buttons = []
-        # for i in range(10):
-        #     style = ButtonStyle.red if i < 4 else \
-        #         ButtonStyle.blurple if i < 8 else ButtonStyle.green
-        #     buttons.append(Button(label=str(i), style=style))
-        await interaction.response.send_message("Name: " + name + search_results, components=Button(self, label="test"))
-                                                # , components=[[buttons]])
+        # await interaction.response.send_message("Name: " + name + search_results, components=Button(label="test"))
+        await interaction.response.send_message("Name: " + name + "\n" + search_results)
+        await asyncio.sleep(3)
+        view = Baby.baby_view.BabyView()
+        await commands.context.Context.send("Rate the name.", view=view)
 
 
 

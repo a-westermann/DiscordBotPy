@@ -90,7 +90,7 @@ class OtherCommands(app_commands.Group):
         # await interaction.response.send_message("Name: " + name + search_results, components=Button(label="test"))
         await interaction.response.send_message("Name: " + name + "\n" + search_results)
         await asyncio.sleep(1)
-        view = Baby.baby_view.BabyView(self.baby)
+        view = Baby.baby_view.BabyView(self.baby, interaction) # pass in search message to edit with score later
         await interaction.followup.send("Rate the name: ", view=view)
 
 

@@ -5,10 +5,11 @@ import discord.ext
 from Baby.baby import BabyStuff
 
 class BabyView(discord.ui.View):
-    def __init__(self, baby: BabyStuff):
+    def __init__(self, baby: BabyStuff, original_message: discord.Interaction):
         super().__init__()
         self.score = None
         self.baby = baby
+        self.original_message = original_message
 
 
     @discord.ui.button(label="1", style=discord.ButtonStyle.red)

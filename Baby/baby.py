@@ -68,3 +68,7 @@ class BabyStuff:
             used_names_file = open("/home/andweste/Scripts/used_names.txt", "a")  # open in append mode to add name
             used_names_file.write(todays_name)
         return todays_name
+
+
+    def submit_name_score(self, score: int):
+        print("submitting score.... " + str(score))

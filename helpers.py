@@ -3,8 +3,8 @@ from datetime import datetime
 import discord
 
 
-users = { "Vierce":322164425002057728 , "Naiyvara":879464051267223572,
-    "ComradeGiraffe":159815678508007424 , "The Great Ratsby":157183377089363969 , "GoldForce":238467012399988738 }
+users = { 322164425002057728:"Vierce" , 879464051267223572:"Naiyvara",
+    159815678508007424:"ComradeGiraffe" , 157183377089363969:"The Great Ratsby" , 238467012399988738:"GoldForce" }
 
 
 
@@ -24,9 +24,7 @@ def get_date_hour():
 def check_user(interaction: discord.Interaction, allowed_users: []):
     user = None
     try:  # creates a list of dictionary entries that match the allowed_users set
-        for key, value in users.items():
-            if interaction.user.id == value:
-                user = key
+        user = users[int(interaction.user.id)]
     except  Exception as e:
         print("Error: " + str(e))
     # user and user in allowed_users will be None if not found

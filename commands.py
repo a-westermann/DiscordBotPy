@@ -55,13 +55,13 @@ class OtherCommands(app_commands.Group):
     @app_commands.command(name="ping")
     async def say_hello(self, interaction: discord.Interaction):
         print('pinging server')
-        await interaction.response.send_message("hello")
+        await interaction.response.send_message("ultra low latency")
 
 
     @app_commands.command(name="start_program", description="starts a program") # need to check if user=me
     async  def start_program(self, interaction: discord.Interaction, name: str, start: bool):
-        if interaction.user.id != 322164425002057728:
-            await interaction.response.send_message("unauthorized!")
+        if helpers.check_user(interaction, ["Vierce"]) is False:
+            await interaction.response.send_message("Unauthorized")
             return
         try:
             if start == True:
@@ -87,7 +87,7 @@ class OtherCommands(app_commands.Group):
 
     @app_commands.command(name="todays_baby_name", description="gives today's baby name. Times are midnight, noon, 5pm")
     async def todays_baby_name(self, interaction: discord.Interaction):
-        if helpers.check_user(interaction, [ "Naiyvara"]) is False:
+        if helpers.check_user(interaction, [ "Vierce", "Naiyvara"]) is False:
             await interaction.response.send_message("Unauthorized")
             return
         name, got_new_name = self.baby.get_todays_name()
@@ -102,5 +102,9 @@ class OtherCommands(app_commands.Group):
             view = Baby.baby_view.BabyView(self.baby, interaction.response, str(name).strip()) # pass in search message to edit with score later
             await interaction.followup.send("Rate the name: ", view=view)
 
+
+    @app_commands.command(name="baby_name_summary", description="get the top rated names")
+    async  def baby_name_summary(self, interaction: discord.Interaction):
+        await interaction.response.send_message("")
 
 

@@ -83,6 +83,7 @@ class BabyStuff:
     async def submit_name_score(self, score: int, name: str, view: discord.Interaction):
         print("submitting score.... " + str(score))
         try:  # write score to the used_names.txt
+            user = interaction.user.id
             used_names_file = open("/home/andweste/Scripts/used_names.txt", "r")
             text = used_names_file.readlines()
             final_name = text[len(text) - 1].strip()

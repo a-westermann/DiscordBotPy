@@ -87,7 +87,7 @@ class OtherCommands(app_commands.Group):
 
     @app_commands.command(name="todays_baby_name", description="gives today's baby name. Times are midnight, noon, 5pm")
     async def todays_baby_name(self, interaction: discord.Interaction):
-        if helpers.check_user(interaction, [ "Vierce", "Naiyvara"]) is False:
+        if helpers.check_user(interaction, [ "ierce", "Naiyvara"]) is False:
             await interaction.response.send_message("Unauthorized")
             return
         name, got_new_name = self.baby.get_todays_name()

@@ -19,7 +19,7 @@ class BabyView(discord.ui.View):
     async def one(self, interaction: discord.Interaction, button: discord.ui.Button):
         user = helpers.get_user_name(interaction)
         if helpers.get_name(user) != self.rater:
-            print("user name " + helpers.get_name(user))
+            print("interaction user name " + helpers.get_name(user))
             await self.orig_message.followup.send("Please use your own rating box.")
             return
         self.score = 1

@@ -46,9 +46,9 @@ class BabyStuff:
             print("today's name = " + todays_name)
             # now remove the name from list and write to the file
             name_list.remove(todays_name)
-            # names_list_file = open("/home/andweste/Scripts/girl_names.txt", "w")  # opening in write mode clears file
-            # for name in name_list:
-            #     names_list_file.write(f"{name}")
+            names_list_file = open("/home/andweste/Scripts/girl_names.txt", "w")  # opening in write mode clears file
+            for name in name_list:
+                names_list_file.write(f"{name}")
             # finally, add the new name to the bottom of the used_names file
             used_names_file = open("/home/andweste/Scripts/used_names.txt", "r")  # open in read
             used_names_text = used_names_file.read()
@@ -81,7 +81,7 @@ class BabyStuff:
 
 
     async def submit_name_score(self, score: int, name: str, view: discord.Interaction, rater: str):
-        print("submitting score.... " + str(score))
+        print("submitting score for " + rater + ".... " + str(score))
         try:  # write score to the used_names.txt
             used_names_file = open("/home/andweste/Scripts/used_names.txt", "r")
             text = used_names_file.readlines()
@@ -96,7 +96,7 @@ class BabyStuff:
             used_names_file = open("/home/andweste/Scripts/used_names.txt", "w")
             used_names_file.writelines(text)
             used_names_file.close()
-            await view.response.send_message("Score submitted for " + name + " : " + str(score))
+            await view.response.send_message(rater + "'s " + "score submitted for " + name + " : " + str(score))
             await view.message.delete()
         except Exception as e:
             await view.response.send_message("Unable to submit score. Please try again. Or don't, I don't know."\

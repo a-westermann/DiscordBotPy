@@ -99,9 +99,9 @@ class OtherCommands(app_commands.Group):
         await interaction.response.send_message(message_content)
         if got_new_name:
             await asyncio.sleep(1)
-            view = Baby.baby_view.BabyView(self.baby, str(name).strip(), "Naiyvara")
+            view = Baby.baby_view.BabyView(self.baby, str(name).strip(), "Naiyvara", interaction)
             await interaction.followup.send("Ashley\nRate the name: ", view=view)
-            view = Baby.baby_view.BabyView(self.baby, str(name).strip(), "Vierce")
+            view = Baby.baby_view.BabyView(self.baby, str(name).strip(), "Vierce", interaction)
             await interaction.followup.send("Andrew\nRate the name: ", view=view)
 
 

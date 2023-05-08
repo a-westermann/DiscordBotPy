@@ -13,12 +13,14 @@ class BabyStuff:
         # self.helpers = helpers()
 
 
+    def read_file(self, path):
+        file = open(path, "r")
+        return file
+
     def get_todays_name(self):
         # check date to see if gave one already
         today = helpers.get_date_hour()
-        used_names_file = open("/home/andweste/Scripts/used_names.txt", "r")
-        for line in used_names_file:
-            print(line)
+        used_names_file = self.read_file("/home/andweste/Scripts/used_names.txt")
         last_date = str(used_names_file.readline().rstrip())
         print("today = " + str(today))
         print("last time = " + last_date)

@@ -17,6 +17,8 @@ class BabyStuff:
         # check date to see if gave one already
         today = helpers.get_date_hour()
         used_names_file = open("/home/andweste/Scripts/used_names.txt", "r")
+        for line in used_names_file:
+            print(line)
         last_date = str(used_names_file.readline().rstrip())
         print("today = " + str(today))
         print("last time = " + last_date)

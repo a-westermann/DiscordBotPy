@@ -8,6 +8,7 @@ from Baby.baby import BabyStuff
 class BabyView(discord.ui.View):
     def __init__(self, baby: BabyStuff, baby_name: str, rater: str, orig_message: discord.Interaction):
         super().__init__()
+        self.timeout = 5
         self.score = None
         self.baby = baby
         self.baby_name = baby_name

@@ -30,4 +30,5 @@ def check_user(interaction: discord.Interaction, allowed_users: []):
     except  Exception as e:
         print("Error: " + str(e))
     # user and user in allowed_users will be None if not found
+    print("user allowed: " + str(user and user in allowed_users is True))
     return user and user in allowed_users is True

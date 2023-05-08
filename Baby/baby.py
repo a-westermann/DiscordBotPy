@@ -5,6 +5,7 @@ from discord.ext import commands
 from discord import app_commands
 import discord.ext
 import discord
+import asyncio
 
 
 class BabyStuff:
@@ -17,7 +18,7 @@ class BabyStuff:
         file = open(path, "r")
         return file
 
-    def get_todays_name(self):
+    async def get_todays_name(self):
         # check date to see if gave one already
         today = helpers.get_date_hour()
         used_names_file = self.read_file("/home/andweste/Scripts/used_names.txt")
@@ -26,6 +27,8 @@ class BabyStuff:
         print("last time = " + last_date)
         times_for_names = [00, 10, 17]  # midnight, noon, 5pm
         last_time = last_date.split(' ')[1].split(':')[0]
+        await asyncio.sleep(0.5)
+
         # find the last time and get the next one
         last_time_index = times_for_names.index(list(filter(lambda t: t == int(last_time), times_for_names))[0])
         new_time = times_for_names[0] if last_time_index == 2 else times_for_names[(last_time_index + 1)]

@@ -46,9 +46,9 @@ class BabyStuff:
             print("today's name = " + todays_name)
             # now remove the name from list and write to the file
             name_list.remove(todays_name)
-            names_list_file = open("/home/andweste/Scripts/girl_names.txt", "w")  # opening in write mode clears file
-            for name in name_list:
-                names_list_file.write(f"{name}")
+            # names_list_file = open("/home/andweste/Scripts/girl_names.txt", "w")  # opening in write mode clears file
+            # for name in name_list:
+            #     names_list_file.write(f"{name}")
             # finally, add the new name to the bottom of the used_names file
             used_names_file = open("/home/andweste/Scripts/used_names.txt", "r")  # open in read
             used_names_text = used_names_file.read()

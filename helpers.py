@@ -24,7 +24,7 @@ def get_date_hour():
 def check_user(interaction: discord.Interaction, allowed_users: []):
     try:  # creates a list of dictionary entries that match the allowed_users set
         for key, value in users.items():
-            if interaction.author.id == value:
+            if interaction.user.id == value:
                 user = key
     except  Exception as e:
         print("Error: " + str(e))

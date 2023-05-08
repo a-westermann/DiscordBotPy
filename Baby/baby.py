@@ -20,7 +20,7 @@ class BabyStuff:
         last_date = str(used_names_file.readline().rstrip())
         print("today = " + str(today))
         print("last time = " + last_date)
-        times_for_names = [00, 12, 17]  # midnight, noon, 5pm
+        times_for_names = [00, 10, 17]  # midnight, noon, 5pm
         last_time = last_date.split(' ')[1].split(':')[0]
         # find the last time and get the next one
         last_time_index = times_for_names.index(list(filter(lambda t: t == int(last_time), times_for_names))[0])

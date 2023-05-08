@@ -78,12 +78,18 @@ class OtherCommands(app_commands.Group):
 
     @app_commands.command(name="baby_name", description="get specific baby name's origin")
     async def baby_name(self, interaction: discord.Interaction, name: str):
+        if not helpers.check_user(interaction, ["Vierce", "Naiyvara"]):
+            await interaction.response.send_message("Unauthorized")
+            return
         search_results = helpers.google_search(search_term=name + " girl's name origin", num_results=1)
         await interaction.response.send_message(search_results)
 
 
     @app_commands.command(name="todays_baby_name", description="gives today's baby name. Times are midnight, noon, 5pm")
     async def todays_baby_name(self, interaction: discord.Interaction):
+        if not helpers.check_user(interaction, [ "Naiyvara"]):
+            await interaction.response.send_message("Unauthorized")
+            return
         name, got_new_name = self.baby.get_todays_name()
         print(str(name).strip() + " = name")
         print(str(got_new_name) + " got new name")

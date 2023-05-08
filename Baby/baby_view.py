@@ -8,12 +8,18 @@ import asyncio
 
 class BabyView(discord.ui.View):
     def __init__(self, baby: BabyStuff, baby_name: str, rater: str, orig_message: discord.Interaction):
-        super().__init__()
+        super().__init__(timeout=5)
+        # super().__init__(timeout=5)
         self.score = None
         self.baby = baby
         self.baby_name = baby_name
         self.rater = rater
         self.orig_message = orig_message
+
+    async def on_timouet(self):
+        print("timeout")
+        self.clear_items()
+        self.refresh()
 
 
     @discord.ui.button(label="1", style=discord.ButtonStyle.red)

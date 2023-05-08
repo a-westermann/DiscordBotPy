@@ -6,7 +6,7 @@ import discord.ext
 from Baby.baby import BabyStuff
 
 class BabyView(discord.ui.View):
-    def __init__(self, baby: BabyStuff, baby_name: str, rater: str):
+    def __init__(self, baby: BabyStuff, baby_name: str, rater: str, orig_message: discord.Interaction):
         super().__init__()
         self.score = None
         self.baby = baby
@@ -18,7 +18,7 @@ class BabyView(discord.ui.View):
     async def one(self, interaction: discord.Interaction, button: discord.ui.Button):
         user = helpers.get_user_name(interaction)
         if helpers.get_name(user) != self.rater:
-            await discord.Interaction(self).response.send_message("Please use your own rating box.")
+            await orig_message.followup.send("Please use your own rating box.")
         self.score = 1
         print("scored 1")
         button.callback = await self.baby.submit_name_score(self.score, self.baby_name, interaction, self.rater)

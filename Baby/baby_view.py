@@ -8,7 +8,7 @@ import asyncio
 
 class BabyView(discord.ui.View):
     def __init__(self, baby: BabyStuff, baby_name: str, rater: str, orig_message: discord.Interaction):
-        super().__init__(timeout=5)
+        super().__init__()
         # super().__init__(timeout=5)
         self.score = None
         self.baby = baby

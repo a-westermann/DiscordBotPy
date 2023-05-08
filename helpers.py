@@ -3,7 +3,7 @@ from datetime import datetime
 import discord
 
 
-users = { "Vierce":111 , "Naiyvara":879464051267223572,
+users = { "Vierce":322164425002057728 , "Naiyvara":879464051267223572,
     "ComradeGiraffe":159815678508007424 , "The Great Ratsby":157183377089363969 , "GoldForce":238467012399988738 }
 
 

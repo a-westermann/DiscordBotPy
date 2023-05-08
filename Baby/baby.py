@@ -46,9 +46,9 @@ class BabyStuff:
             print("today's name = " + todays_name)
             # now remove the name from list and write to the file
             name_list.remove(todays_name)
-            names_list_file = open("/home/andweste/Scripts/girl_names.txt", "w")  # opening in write mode clears file
-            for name in name_list:
-                names_list_file.write(f"{name}")
+            # names_list_file = open("/home/andweste/Scripts/girl_names.txt", "w")  # opening in write mode clears file
+            # for name in name_list:
+            #     names_list_file.write(f"{name}")
             # finally, add the new name to the bottom of the used_names file
             used_names_file = open("/home/andweste/Scripts/used_names.txt", "r")  # open in read
             used_names_text = used_names_file.read()
@@ -80,15 +80,19 @@ class BabyStuff:
             return todays_name, got_new_name
 
 
-    async def submit_name_score(self, score: int, name: str, view: discord.Interaction):
+    async def submit_name_score(self, score: int, name: str, view: discord.Interaction, rater: str):
         print("submitting score.... " + str(score))
         try:  # write score to the used_names.txt
-            user = interaction.user.id
             used_names_file = open("/home/andweste/Scripts/used_names.txt", "r")
             text = used_names_file.readlines()
-            final_name = text[len(text) - 1].strip()
-            text[len(text) - 1] = final_name + ";" + str(score) + "\n"
-            # used_names_file.write(";" + str(score))
+            final_name_line = text[len(text) - 1].strip()
+            final_name = final_name_line.split(';')[0]
+            ashley_score = final_name_line.split(';')[1]
+            andrew_score = final_name_line.split(';')[2]
+            if rater == "Ashley":
+                text[len(text) - 1] = final_name + ";" + str(score) + ";" + andrew_score + "\n"
+            elif rater == "Andrew":
+                text[len(text) - 1] = final_name + ";" + ashley_score + ";" + str(score) + "\n"
             used_names_file = open("/home/andweste/Scripts/used_names.txt", "w")
             used_names_file.writelines(text)
             used_names_file.close()

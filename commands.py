@@ -87,7 +87,7 @@ class OtherCommands(app_commands.Group):
 
     @app_commands.command(name="todays_baby_name", description="gives today's baby name. Times are midnight, noon, 5pm")
     async def todays_baby_name(self, interaction: discord.Interaction):
-        if helpers.check_user(interaction, [ "ierce", "Naiyvara"]) is False:
+        if helpers.check_user(interaction, [ "Vierce", "Naiyvara"]) is False:
             await interaction.response.send_message("Unauthorized")
             return
         name, got_new_name = self.baby.get_todays_name()
@@ -99,8 +99,10 @@ class OtherCommands(app_commands.Group):
         await interaction.response.send_message(message_content)
         if got_new_name:
             await asyncio.sleep(1)
-            view = Baby.baby_view.BabyView(self.baby, interaction.response, str(name).strip()) # pass in search message to edit with score later
-            await interaction.followup.send("Rate the name: ", view=view)
+            view = Baby.baby_view.BabyView(self.baby, str(name).strip(), "Naiyvara")
+            await interaction.followup.send("Ashley\nRate the name: ", view=view)
+            view = Baby.baby_view.BabyView(self.baby, str(name).strip(), "Vierce")
+            await interaction.followup.send("Andrew\nRate the name: ", view=view)
 
 
     @app_commands.command(name="baby_name_summary", description="get the top rated names")

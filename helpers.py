@@ -6,7 +6,7 @@ import discord
 users = { 322164425002057728:"Vierce" , 879464051267223572:"Naiyvara",
     159815678508007424:"ComradeGiraffe" , 157183377089363969:"The Great Ratsby" , 238467012399988738:"GoldForce" }
 
-
+names = {"Naiyvara":"Ashley" , "Vierce":"Andrew"}
 
 # General functions
 def google_search(search_term, num_results):
@@ -32,3 +32,9 @@ def check_user(interaction: discord.Interaction, allowed_users: []):
     user = get_user_name(interaction)
     # user and user in allowed_users will be None if not found
     return (user is not None and user in allowed_users) is True
+
+def get_name(user_name: str):
+    try:
+        return names[user_name]
+    except Exception as e:
+        return none

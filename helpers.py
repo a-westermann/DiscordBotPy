@@ -29,4 +29,4 @@ def check_user(interaction: discord.Interaction, allowed_users: []):
     except  Exception as e:
         print("Error: " + str(e))
         return False
-    return user in allowed_users
+    return user and user in allowed_users

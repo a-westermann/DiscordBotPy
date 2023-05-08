@@ -108,8 +108,8 @@ class OtherCommands(app_commands.Group):
     @app_commands.command(name="baby_name_summary", description="get the top rated names")
     async def baby_name_summary(self, interaction: discord.Interaction):
         embed = discord.Embed(color=discord.Color.from_str(r"#FFD700"), title="Top choices",
-                              description="This is a test embed" )
-        embed.set_thumbnail = "http://clipart-library.com/img/1751191.png"
+                              description="This is a test embed", url="http://clipart-library.com/img/1751191.png" )
+        # embed.set_thumbnail = "http://clipart-library.com/img/1751191.png"
 
         await interaction.response.send_message(embed=embed)
 

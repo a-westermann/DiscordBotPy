@@ -4,16 +4,22 @@ import discord
 from discord import app_commands
 import discord.ext
 from Baby.baby import BabyStuff
+import asyncio
 
 class BabyView(discord.ui.View):
     def __init__(self, baby: BabyStuff, baby_name: str, rater: str, orig_message: discord.Interaction):
         super().__init__()
-        self.timeout = 5
+        # self.timeout = 5
+        self.clear_after(5)
         self.score = None
         self.baby = baby
         self.baby_name = baby_name
         self.rater = rater
         self.orig_message = orig_message
+
+    def clear_after(self, seconds: int):
+        asyncio.sleep(seconds)
+        self.children.clear()
 
 
     @discord.ui.button(label="1", style=discord.ButtonStyle.red)

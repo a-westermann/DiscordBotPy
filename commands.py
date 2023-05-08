@@ -96,8 +96,7 @@ class OtherCommands(app_commands.Group):
         search_results = helpers.google_search(search_term= name + " girl's name origin", num_results=1)
         regave_name = "" if got_new_name else " (this name was already chosen) "
         message_content = "Name: " + name + regave_name + "\n" + search_results
-        # await interaction.response.send_message(message_content)
-        await interaction.followup.send(message_content)
+        await interaction.response.send_message(message_content)
         if got_new_name:
             await asyncio.sleep(1)
             view = Baby.baby_view.BabyView(self.baby, str(name).strip(), "Ashley", interaction)

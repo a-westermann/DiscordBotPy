@@ -9,17 +9,11 @@ import asyncio
 class BabyView(discord.ui.View):
     def __init__(self, baby: BabyStuff, baby_name: str, rater: str, orig_message: discord.Interaction):
         super().__init__()
-        # self.timeout = 5
-        self.clear_after(5)
         self.score = None
         self.baby = baby
         self.baby_name = baby_name
         self.rater = rater
         self.orig_message = orig_message
-
-    async def clear_after(self, seconds: int):
-        await asyncio.sleep(seconds)
-        self.children.clear()
 
 
     @discord.ui.button(label="1", style=discord.ButtonStyle.red)

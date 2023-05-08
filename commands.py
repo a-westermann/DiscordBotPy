@@ -5,7 +5,6 @@ import LeagueModels.league_api
 import discord
 from discord.ext import commands
 from discord import app_commands
-from discord import embed
 import discord.ext
 import subprocess
 import helpers

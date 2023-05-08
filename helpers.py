@@ -21,12 +21,14 @@ def get_date_hour():
     return simple_today
 
 
+def get_user_name(interaction: discord.Interaction):
+    try:
+        return users[int(interaction.user.id)]
+    except Exception as e:
+        print("Error in get_user_name: " + str(e))
+        return None
+
 def check_user(interaction: discord.Interaction, allowed_users: []):
-    user = None
-    try:  # creates a list of dictionary entries that match the allowed_users set
-        user = users[int(interaction.user.id)]
-    except  Exception as e:
-        print("Error: " + str(e))
+    user = get_user_name(interaction)
     # user and user in allowed_users will be None if not found
-    print("user allowed: " + str((user is not None and user in allowed_users) is True))
     return (user is not None and user in allowed_users) is True

@@ -12,13 +12,14 @@ class BabyView(discord.ui.View):
         self.baby = baby
         self.baby_name = baby_name
         self.rater = rater
+        self.orig_message = orig_message
 
 
     @discord.ui.button(label="1", style=discord.ButtonStyle.red)
     async def one(self, interaction: discord.Interaction, button: discord.ui.Button):
         user = helpers.get_user_name(interaction)
         if helpers.get_name(user) != self.rater:
-            await orig_message.followup.send("Please use your own rating box.")
+            await self.orig_message.followup.send("Please use your own rating box.")
         self.score = 1
         print("scored 1")
         button.callback = await self.baby.submit_name_score(self.score, self.baby_name, interaction, self.rater)

@@ -74,7 +74,7 @@ class BabyStuff:
             used_names_file.writelines(used_names_text)  # write all names
             used_names_file.close()
             used_names_file = open("/home/andweste/Scripts/used_names.txt", "a")  # open in append mode to add name
-            used_names_file.write(todays_name)
+            used_names_file.write(todays_name + ";0;0")
             used_names_file.close()
             got_new_name = True
             return todays_name, got_new_name

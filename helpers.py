@@ -26,6 +26,6 @@ def check_user(interaction: discord.Interaction, allowed_users: []):
         allowed_ids = [id for key in allowed_users if key in users for id in users[key]]
     except  Exception as e:
         print("Error: " + str(e))  # key not in dict
-        return false
+        return False
     return interaction.author.id in allowed_ids
     # user_name = list(users.keys())[list(users.values()).index(interaction.author.id)]

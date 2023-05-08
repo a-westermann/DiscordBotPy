@@ -34,7 +34,8 @@ def check_user(interaction: discord.Interaction, allowed_users: []):
     return (user is not None and user in allowed_users) is True
 
 def get_name(user_name: str):
+    print("Getting name for ... " + user_name)
     try:
         return names[user_name]
     except Exception as e:
-        return none
+        return None

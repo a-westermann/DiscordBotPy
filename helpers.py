@@ -29,6 +29,5 @@ def check_user(interaction: discord.Interaction, allowed_users: []):
                 user = key
     except  Exception as e:
         print("Error: " + str(e))
-        return False
-    print("user allowed = " + str(user and user in allowed_users))
-    return user and user in allowed_users
+    # user and user in allowed_users will be None if not found
+    return user and user in allowed_users is True

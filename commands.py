@@ -90,7 +90,7 @@ class OtherCommands(app_commands.Group):
         if helpers.check_user(interaction, [ "Vierce", "Naiyvara"]) is False:
             await interaction.response.send_message("Unauthorized")
             return
-        name, got_new_name = self.baby.get_todays_name()
+        name, got_new_name = await self.baby.get_todays_name()
         print(str(name).strip() + " = name")
         print(str(got_new_name) + " got new name")
         search_results = helpers.google_search(search_term= name + " girl's name origin", num_results=1)

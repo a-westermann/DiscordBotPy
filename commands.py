@@ -121,5 +121,7 @@ class OtherCommands(app_commands.Group):
         chart_file = "names_diagram.png"
         pyplot.savefig(chart_file)
         chart_image = discord.File(chart_file)
-        await interaction.response.send_message(file=chart_image)
+        embed = discord.Embed(color=discord.Color.from_str(r"#FFD700"))
+        embed.set_image(url="attachment://names_diagram.png")
+        await interaction.response.send_message(embed=embed, file=chart_image)
 

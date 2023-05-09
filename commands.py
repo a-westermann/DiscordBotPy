@@ -12,7 +12,7 @@ from LeagueModels import league_api
 from Baby import baby, baby_view, baby_chart
 import pylab
 import matplotlib.pyplot as pyplot
-from matplotlib_venn import venn3, venn3_circles
+# from matplotlib_venn import venn3, venn3_circles
 
 
 

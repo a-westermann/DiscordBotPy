@@ -10,9 +10,6 @@ import subprocess
 import helpers
 from LeagueModels import league_api
 from Baby import baby, baby_view, baby_chart
-import pylab
-import matplotlib.pyplot as pyplot
-# from matplotlib_venn import venn3, venn3_circles
 
 
 
@@ -41,6 +38,9 @@ class Lol(app_commands.Group):
             await interaction.response.send_message("token invalid")
             return
         await interaction.response.send_message("in development")
+
+
+    # @app_commands.command(name="chart", description="See a chart of recent match history for the boys")
 
 
 
@@ -114,13 +114,7 @@ class OtherCommands(app_commands.Group):
         #                       description="This is a test embed" )
         # embed.set_thumbnail(url="http://clipart-library.com/img/1751191.png")
         # await interaction.response.send_message(embed=embed)
-        ashley_names = set(['Evelyn', 'Heidi', 'Paytona500', 'Sophia'])
-        andrew_names = set(['Evelyn', 'Heidi', 'Rosemary', 'Anya'])
-        venn = venn3([ashley_names, andrew_names], ('Ashley_Names', 'Andrew_Names'))
-        # pyplot.show()
-        chart_file = "names_diagram.png"
-        pyplot.savefig(chart_file)
-        chart_image = discord.File(chart_file)
+        chart = baby_chart.get_baby_venn()
         embed = discord.Embed(color=discord.Color.from_str(r"#FFD700"))
         embed.set_image(url="attachment://names_diagram.png")
         await interaction.response.send_message(embed=embed, file=chart_image)

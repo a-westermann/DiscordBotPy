@@ -22,7 +22,7 @@ def get_baby_venn():
     pyplot.show()
     chart_file = "names_diagram.png"
     pyplot.figure()
-    figure.savefig(chart_file)
+    pyplot.savefig(chart_file)
     chart_image = discord.File(chart_file)
     # could pass in dpi to savefig as chart
     return chart_image

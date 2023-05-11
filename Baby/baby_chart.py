@@ -6,6 +6,7 @@ import discord.ext
 
 
 def get_baby_venn():
+    pyplot.figure()
     subsets = (1, 1, 1)
     ashley_names = set(['Evelyn', 'Heidi', 'Paytona500', 'Sophia'])
     andrew_names = set(['Evelyn', 'Heidi', 'Rosemary', 'Anya'])
@@ -17,8 +18,10 @@ def get_baby_venn():
     #     venn.get_label_by_id(label).set_text(label)
     # venn.get_label_by_id('100').set_text('andrew')
     # pyplot.show()
+    pyplot.title("Baby Names")
+    pyplot.show()
     chart_file = "names_diagram.png"
-    figure = pyplot.figure()
+    pyplot.figure()
     figure.savefig(chart_file)
     chart_image = discord.File(chart_file)
     # could pass in dpi to savefig as chart

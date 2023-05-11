@@ -12,11 +12,9 @@ def get_baby_venn():
     andrew_names = set(['Evelyn', 'Heidi', 'Rosemary', 'Anya'])
     venn = venn2(subsets=(ashley_names, andrew_names), set_labels=('Andrew', 'Ashley', 'Shared'))
 
-    # labels =  ['Ashley_Names', 'Andrew_Names']
-    # labels = ['Andrew', 'Ashley', 'Shared']
     # for label in labels:
     #     venn.get_label_by_id(label).set_text(label)
-    # venn.get_label_by_id('100').set_text('andrew')
+    venn.get_label_by_id('100').set_text('Rosemary')
 
     pyplot.title("Baby Names")
     chart_file = "names_diagram.png"

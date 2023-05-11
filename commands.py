@@ -27,7 +27,7 @@ class Lol(app_commands.Group):
         if self.token == "":
             await interaction.response.send_message("token invalid")
             return
-        summoner = self.league_api.LeagueAPI.get_summoner("Vierce")
+        summoner = self.league_api.get_summoner("Vierce")
         await interaction.response.send_message()
 
 

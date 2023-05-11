@@ -10,14 +10,15 @@ import helpers
 def get_baby_venn():
     pyplot.figure()
     subsets = (1, 1, 1)
-    ashley_names = set(['Evelyn', 'Heidi', 'Paytona500', 'Sophia'])
-    andrew_names = set(['Evelyn', 'Heidi', 'Rosemary', 'Anya'])
+    # ashley_names = set(['Evelyn', 'Heidi', 'Paytona500', 'Sophia'])
+    # andrew_names = set(['Evelyn', 'Heidi', 'Rosemary', 'Anya'])
+    ashley_names = helpers.get_used_babies('Ashley', True, 5)[:1] # chop off score
+    andrew_names = helpers.get_used_babies('Andrew', True, 5)[:1]
     venn = venn2(subsets=(ashley_names, andrew_names), set_labels=('Andrew', 'Ashley', 'Shared'))
 
     # for label in labels:
     #     venn.get_label_by_id(label).set_text(label)
     # venn.get_label_by_id('100').set_text('Rosemary')
-    top_names = helpers.get_used_babies(True, 10)
 
     pyplot.title("Baby Names")
     chart_file = "names_diagram.png"

@@ -2,6 +2,7 @@ import pylab
 import matplotlib.pyplot as pyplot
 from matplotlib_venn import venn2, venn3, venn3_circles
 import discord
+import discord.ext
 
 
 def get_baby_venn():
@@ -17,6 +18,8 @@ def get_baby_venn():
     # venn.get_label_by_id('100').set_text('andrew')
     # pyplot.show()
     chart_file = "names_diagram.png"
-    pyplot.savefig(chart_file)
+    figure = pyplot.figure()
+    figure.savefig(chart_file)
     chart_image = discord.File(chart_file)
+    # could pass in dpi to savefig as chart
     return chart_image

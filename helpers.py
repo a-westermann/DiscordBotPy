@@ -42,6 +42,6 @@ def get_name(user_name: str):
 
 def get_used_babies(top: bool, number: int):
     used_names_text = open("/home/andweste/Scripts/used_names.txt", "r").readlines()
-    for line in range[2:]:
+    for line in lines[2:]:
         print(line)
 

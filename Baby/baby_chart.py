@@ -16,7 +16,7 @@ def get_baby_venn():
     andrew_names = set(helpers.get_used_babies('Andrew', True, 5, False))
     venn = venn2(subsets=(ashley_names, andrew_names), set_labels=('Andrew', 'Ashley', 'Shared'))
 
-    shared_names = set(andrew_names) & set(ashley_names)
+    shared_names = list(set(andrew_names) & set(ashley_names))
     andrew_solo_names = set(ashley_names - andrew_names)
     ashley_solo_names = set(andrew_names - ashley_names)
     andrew_names_str = ', '.join(andrew_solo_names)

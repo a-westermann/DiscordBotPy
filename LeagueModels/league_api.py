@@ -23,7 +23,8 @@ class LeagueAPI:
 
 
     def get_recent_matches(self, puuid, count):
-        match = self.lol_watcher.match.matchlist_by_puuid(region=region, puuid=puuid, count=count)
+        matches = self.lol_watcher.match.matchlist_by_puuid(region=region, puuid=puuid, count=count)
+        return matches
 
     # def get_kda(self, match: LolWatcher.match, puuid):
 

@@ -1,4 +1,5 @@
 from riotwatcher import LolWatcher, ApiError
+import summoner_history as s_history
 
 
 region = 'na1'
@@ -28,7 +29,7 @@ class LeagueAPI:
 
     def build_match(self, match_id: str):
         match = self.lol_watcher.match.by_id(region, match_id)
-        print(match['metadata']['dataVersion'])
+        # print(match['metadata']['dataVersion'])  # <-- access nested elements like this
 
 
     # def get_kda(self, match: LolWatcher.match, puuid):
@@ -41,10 +42,17 @@ class LeagueAPI:
     # iterate through and build kda, store as a summoner_history object
     # chart the kda's on one line chart
     # later on can worry about creating a db
+#TODO only include matches w/ 3 of us or more
+#TODO when grouping multi summoners aggregate the match list so i don't request same match multiple times
+#TODO create sql db to save histories
     def build_kda(self, summoner_name):
         puuid = self.get_puuid(summoner_name)
         match_ids = self.get_recent_matches(puuid=puuid, count=10)
+        matches = []
         for match_id in match_ids:
-            self.build_match(match_id)
+            matches.append(self.build_match(match_id))
             break
+        summoner_history = s_history.SummonerHistory()
+        summoner_history
+
 

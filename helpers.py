@@ -40,9 +40,9 @@ def get_name(user_name: str):
     except Exception as e:
         return None
 
-def get_used_babies(user: str, top: bool, number: int):
+def get_used_babies(user: str, top: bool, number: int, include_score: bool):
     # returns (name: str, score: int)
-    print("\n" + user)
+    print("\nTop names for: " + user)
     used_names_text = open("/home/andweste/Scripts/used_names.txt", "r").readlines()
     name_list = []
     for line in used_names_text[2:]:
@@ -55,6 +55,9 @@ def get_used_babies(user: str, top: bool, number: int):
         sorted_list.pop(0)
     for s in sorted_list:
         print(s)
+    if not include_score:
+        for name in sorted_list:
+            name = name[:1]
     return sorted_list
 
 

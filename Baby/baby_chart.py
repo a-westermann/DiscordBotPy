@@ -22,8 +22,8 @@ def get_baby_venn():
     andrew_names_str = ', '.join(andrew_solo_names)
     ashley_names_str = ', '.join(ashley_solo_names)
     venn.get_label_by_id('100').set_text(andrew_names_str)
-    venn.get_label_by_id('110').set_text(andrew_names_str)
-    # venn.get_label_by_id('011').set_text(shared_names)
+    venn.get_label_by_id('110').set_text(shared_names)
+    venn.get_label_by_id('101').set_text(ashley_names_str)
 
     pyplot.title("Baby Names")
     chart_file = "names_diagram.png"

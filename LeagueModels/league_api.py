@@ -17,7 +17,7 @@ class LeagueAPI:
         puuid = ""
         for line in text_file:
             if line.split(';')[0] == summoner_name:
-                puuid = line.strip()
+                puuid = line.split(';')[1].strip()
                 break
         return puuid
 

@@ -11,4 +11,5 @@ class LeagueAPI:
         lol_watcher = LolWatcher(api_key=token)
 
     def get_summoner(self, summoner_name):
+        print(region)
         return lol_watcher.summoner.by_name(region, summoner_name)

@@ -5,7 +5,7 @@ import discord
 
 
 def get_baby_venn():
-    subsets = (1, 1, 0.5)
+    subsets = (1, 1, 1)
     ashley_names = set(['Evelyn', 'Heidi', 'Paytona500', 'Sophia'])
     andrew_names = set(['Evelyn', 'Heidi', 'Rosemary', 'Anya'])
     venn = venn3(subsets=subsets)

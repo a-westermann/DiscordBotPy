@@ -56,8 +56,8 @@ def get_used_babies(user: str, top: bool, number: int, include_score: bool):
     for s in sorted_list:
         print(s)
     if not include_score:
-        for name in sorted_list:
-            name = name[:1]
+        for i in range(len(sorted_list)):
+            sorted_list[i] = sorted_list[i][0]
     return sorted_list
 
 

@@ -51,7 +51,7 @@ def get_used_babies(user: str, top: bool, number: int):
     # sort list by score
     sorted_list = sorted(name_list, key=lambda tuple: tuple[1])
     for i in range(len(sorted_list) - number):
-        sorted_list.pop()
+        sorted_list.pop(0)
     for s in sorted_list:
         print(s)
     return sorted_list

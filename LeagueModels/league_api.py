@@ -6,7 +6,7 @@ region = 'na1'
 class LeagueAPI:
     def __init__(self, api_token):
         self.token = api_token
-        self.lol_watcher = LolWatcher(api_key=token)
+        self.lol_watcher = LolWatcher(api_key=self.token)
 
     def get_summoner(self, summoner_name):
         return self.lol_watcher.summoner.by_name(region, summoner_name)

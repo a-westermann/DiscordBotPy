@@ -19,10 +19,10 @@ def get_baby_venn():
     # venn.get_label_by_id('100').set_text('andrew')
     # pyplot.show()
     pyplot.title("Baby Names")
-    pyplot.show()
+    # pyplot.show()
     chart_file = "names_diagram.png"
     pyplot.figure()
-    chart_file = pyplot.savefig(chart_file)
+    pyplot.savefig(chart_file)
     chart_image = discord.File(chart_file)
-    # could pass in dpi to savefig as chart
+    # could pass in dpi to savefig as chart's dpi to increase resolution
     return chart_image

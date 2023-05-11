@@ -117,5 +117,5 @@ class OtherCommands(app_commands.Group):
         chart = baby_chart.get_baby_venn()
         embed = discord.Embed(color=discord.Color.from_str(r"#FFD700"))
         embed.set_image(url="attachment://names_diagram.png")
-        await interaction.response.send_message(embed=embed, file=chart_image)
+        await interaction.response.send_message(embed=embed, file=chart)
 

@@ -17,8 +17,8 @@ def get_baby_venn():
     venn = venn2(subsets=(ashley_names, andrew_names), set_labels=('Andrew', 'Ashley', 'Shared'))
 
     shared_names = set(andrew_names) & set(ashley_names)
-    andrew_solo_names = andrew_names.symmetric_difference(ashley_names)
-    ashley_solo_names = ashley_names.symmetric_difference(andrew_names)
+    andrew_solo_names = set(ashley_names - andrew_names)
+    ashley_solo_names = set(andrew_names - ashley_names)
     andrew_names_str = ', '.join(andrew_solo_names)
     ashley_names_str = ', '.join(ashley_solo_names)
     venn.get_label_by_id('100').set_text(andrew_names_str)

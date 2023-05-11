@@ -45,6 +45,7 @@ def get_used_babies(user: str, top: bool, number: int):
     used_names_text = open("/home/andweste/Scripts/used_names.txt", "r").readlines()
     name_list = []
     for line in used_names_text[2:]:
+        print(line)
         index = 1 if user == "Ashley" else 2
         name = line.split(';')[0]
         name_list.append((name, ';' + line.split(';')[index]))

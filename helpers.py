@@ -42,6 +42,7 @@ def get_name(user_name: str):
 
 def get_used_babies(user: str, top: bool, number: int):
     # returns (name: str, score: int)
+    print("\n" + user)
     used_names_text = open("/home/andweste/Scripts/used_names.txt", "r").readlines()
     name_list = []
     for line in used_names_text[2:]:

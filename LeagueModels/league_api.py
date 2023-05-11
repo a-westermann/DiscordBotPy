@@ -14,8 +14,9 @@ class LeagueAPI:
 
     def get_puuid(self, summoner_name):
         text_file = open(r"/home/andweste/Tokens/secret_creds_repo/league_ids.txt").readlines()
+        puuid = ""
         for line in text_file:
-            if line.strip() == summoner_name:
+            if line.split(';')[0] == summoner_name:
                 puuid = line.strip()
                 break
         return puuid

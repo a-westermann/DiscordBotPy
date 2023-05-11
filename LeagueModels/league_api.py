@@ -55,10 +55,15 @@ class LeagueAPI:
             break
 
         for match in matches:
-            # not sure this works
-            participant = (s for s in match if  match["metadata"]["participants"] if s == puuid)
-            print(participant)
-            # participant = match["metadata"]["participants"].
-        print(summoner_history.kills)
+            # participant = match.info.participants
+            # participant = (s for s in match if  match["metadata"]["participants"] if s == puuid)
+            participants = match["info"]["participants"]
+            for i in range(len(participants)):
+                if participants[i] == puuid:
+                    participant = participants[i]
+                    break
+            print("match data kills = " + participant["kills"])
+            summoner_history.add_match_score(participant.kills, participant.deaths, participant.assists)
+        print(summoner_history.kills + "/" + summoner_history.deaths)
 
 

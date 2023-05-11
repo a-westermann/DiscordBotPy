@@ -12,6 +12,7 @@ class SummonerHistory:
 
 
     def add_match_score(self, kills, deaths, assists):
+        # should change this to allow passing in a Participant
         self.kills += kills
         self.deaths += deaths
         self.assists += assists

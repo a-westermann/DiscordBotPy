@@ -1,6 +1,6 @@
 import pylab
 import matplotlib.pyplot as pyplot
-from matplotlib_venn import venn3, venn3_circles
+from matplotlib_venn import venn2, venn3, venn3_circles
 import discord
 
 

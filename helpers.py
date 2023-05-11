@@ -47,13 +47,13 @@ def get_used_babies(user: str, top: bool, number: int):
     for line in used_names_text[2:]:
         index = 1 if user == "Ashley" else 2
         name = line.split(';')[0]
-        name_list.append((name, ';' + line.split(';')[index]))
+        name_list.append((name, line.split(';')[index].strip()))
     # sort list by score
     sorted_list = sorted(name_list, key=lambda tuple: tuple[1])
-    for s in sorted_list:
-        print(s)
     for i in range(len(sorted_list) - number):
         sorted_list.pop()
+    for s in sorted_list:
+        print(s)
     return sorted_list
 
 

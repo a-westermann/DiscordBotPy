@@ -35,7 +35,7 @@ active_client.tree.add_command(commands.OtherCommands(active_client))
 
 # set up league command module & league_api
 try:
-    league_token = open("/home/andweste/Tokens/secret_creds_repo/league_token.txt").read()
+    league_token = open("/home/andweste/Tokens/secret_creds_repo/token_league.txt").read()
 except Exception as e:
     print("Error: " + str(e))
     league_token = ""

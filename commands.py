@@ -119,3 +119,9 @@ class OtherCommands(app_commands.Group):
         embed.set_image(url="attachment://names_diagram.png")
         await interaction.response.send_message(embed=embed, file=chart)
 
+
+    # @app_commands.command(name="backfill_baby_scores", description="fill in any name scores you missed")
+    # async def backfill_baby_scores(self, interaction: discord.Interaction):
+        # how will this work?
+            # A: pops up a baby_view for one name, waits for a score, moves on to the next one
+

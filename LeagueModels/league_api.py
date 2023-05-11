@@ -56,10 +56,12 @@ class LeagueAPI:
             # break
 
         for match in matches:
+            # participant = riotwatcher.LolWatcher.
+            participant = None
             # participant = match.info.participants
             # participant = (s for s in match if  match["metadata"]["participants"] if s == puuid)
             participants = match["info"]["participants"]
-            for i in range(len(participants)):
+            for i in range(len(participants) + 1):
                 if participants[i] == puuid:
                     participant = participants[i]
                     break

@@ -1,8 +1,10 @@
+import helpers
 import pylab
 import matplotlib.pyplot as pyplot
 from matplotlib_venn import venn2, venn3, venn3_circles
 import discord
 import discord.ext
+import helpers
 
 
 def get_baby_venn():
@@ -14,7 +16,8 @@ def get_baby_venn():
 
     # for label in labels:
     #     venn.get_label_by_id(label).set_text(label)
-    venn.get_label_by_id('100').set_text('Rosemary')
+    # venn.get_label_by_id('100').set_text('Rosemary')
+    top_names = helpers.get_used_babies(True, 10)
 
     pyplot.title("Baby Names")
     chart_file = "names_diagram.png"

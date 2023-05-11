@@ -39,3 +39,9 @@ def get_name(user_name: str):
         return names[user_name]
     except Exception as e:
         return None
+
+def get_used_babies(top: bool, number: int):
+    used_names_text = open("/home/andweste/Scripts/used_names.txt", "r").readlines()
+    for line in range[2:]:
+        print(line)
+

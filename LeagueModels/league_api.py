@@ -56,17 +56,13 @@ class LeagueAPI:
             # break
 
         for match in matches:
-            # participant = riotwatcher.LolWatcher.
             participant = None
-            # participant = match.info.participants
-            # participant = (s for s in match if  match["metadata"]["participants"] if s == puuid)
             participants = match["info"]["participants"]
             for i in range(len(participants)):
                 if participants[i]["puuid"] == puuid:
                     participant = participants[i]
                     break
-            print("match data kills = " + str(participant["kills"]))
             summoner_history.add_match_score(participant["kills"], participant["deaths"], participant["assists"])
-        print(str(summoner_history.kills) + "/" + str(summoner_history.deaths))
+        print(str(summoner_history.kills) + "/" + str(summoner_history.deaths) + "/" + str(summoner_history.assists))
 
 

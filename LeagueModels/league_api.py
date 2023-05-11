@@ -61,8 +61,8 @@ class LeagueAPI:
             # participant = match.info.participants
             # participant = (s for s in match if  match["metadata"]["participants"] if s == puuid)
             participants = match["info"]["participants"]
-            for i in range(len(participants) + 1):
-                if participants[i] == puuid:
+            for i in range(len(participants)):
+                if participants[i]["puuid"] == puuid:
                     participant = participants[i]
                     break
             print("match data kills = " + participant["kills"])

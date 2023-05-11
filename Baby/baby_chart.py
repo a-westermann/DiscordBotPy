@@ -22,9 +22,12 @@ def get_baby_venn():
     shared_names_str = ',\n'.join(shared_names)
     andrew_names_str = ',\n '.join(andrew_solo_names)
     ashley_names_str = ',\n '.join(ashley_solo_names)
+    # could count up the names in each group, and if over x add a '\n' character
+
     venn.get_label_by_id('100').set_text(andrew_names_str)
-    venn.get_label_by_id('110').set_text(shared_names)
+    venn.get_label_by_id('110').set_text(shared_names_str)
     venn.get_label_by_id('010').set_text(ashley_names_str)
+
 
     pyplot.title("Baby Names")
     chart_file = "names_diagram.png"

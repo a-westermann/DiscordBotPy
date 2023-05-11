@@ -65,8 +65,8 @@ class LeagueAPI:
                 if participants[i]["puuid"] == puuid:
                     participant = participants[i]
                     break
-            print("match data kills = " + participant["kills"])
+            print("match data kills = " + str(participant["kills"]))
             summoner_history.add_match_score(participant.kills, participant.deaths, participant.assists)
-        print(summoner_history.kills + "/" + summoner_history.deaths)
+        print(str(summoner_history.kills) + "/" + str(summoner_history.deaths))
 
 

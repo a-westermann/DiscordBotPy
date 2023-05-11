@@ -20,7 +20,7 @@ def get_baby_venn():
     # for i in range(len(labels)):
     #     venn.get_label_by_id(labels[i]).set_text(label)
     andrew_names_str = ', '.join(andrew_names)
-    venn.get_label_by_id('100').set_text('andrew_names_str')
+    venn.get_label_by_id('100').set_text(andrew_names_str)
 
     pyplot.title("Baby Names")
     chart_file = "names_diagram.png"

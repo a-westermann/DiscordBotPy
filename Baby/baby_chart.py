@@ -16,11 +16,14 @@ def get_baby_venn():
     andrew_names = set(helpers.get_used_babies('Andrew', True, 5, False))
     venn = venn2(subsets=(ashley_names, andrew_names), set_labels=('Andrew', 'Ashley', 'Shared'))
 
-    # labels = ['100', '110', '011']
-    # for i in range(len(labels)):
-    #     venn.get_label_by_id(labels[i]).set_text(label)
-    andrew_names_str = ', '.join(andrew_names)
+    shared_names = set(andrew_names) & set(ashley_names)
+    andrew_solo_names = set(andrew_names) ^ set(ashley_names)
+    ashley_solo_names = set(ashley_names) ^ set(andrew_names)
+    andrew_names_str = ', '.join(andrew_solo_names)
+    ashley_names_str = ', '.join(ashley_solo_names)
     venn.get_label_by_id('100').set_text(andrew_names_str)
+    venn.get_label_by_id('110').set_text(andrew_names_str)
+    venn.get_label_by_id('011').set_text(shared_names)
 
     pyplot.title("Baby Names")
     chart_file = "names_diagram.png"

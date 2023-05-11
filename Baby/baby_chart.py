@@ -14,6 +14,10 @@ def get_baby_venn():
     # andrew_names = set(['Evelyn', 'Heidi', 'Rosemary', 'Anya'])
     ashley_names = set(helpers.get_used_babies('Ashley', True, 5)[:1]) # chop off score
     andrew_names = set(helpers.get_used_babies('Andrew', True, 5)[:1])
+    for n in ashley_names:
+        print(n)
+    for n in andrew_names:
+        print(n)
     venn = venn2(subsets=(ashley_names, andrew_names), set_labels=('Andrew', 'Ashley', 'Shared'))
 
     # for label in labels:

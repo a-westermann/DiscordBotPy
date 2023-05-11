@@ -19,9 +19,9 @@ def get_baby_venn():
     shared_names = set(andrew_names) & set(ashley_names)
     andrew_solo_names = set(ashley_names - andrew_names)
     ashley_solo_names = set(andrew_names - ashley_names)
-    shared_names_str = ',\n'.join(shared_names)
-    andrew_names_str = ',\n '.join(andrew_solo_names)
-    ashley_names_str = ',\n '.join(ashley_solo_names)
+    shared_names_str = '\n'.join(shared_names)
+    andrew_names_str = '\n '.join(andrew_solo_names)
+    ashley_names_str = '\n '.join(ashley_solo_names)
     # could count up the names in each group, and if over x add a '\n' character
 
     venn.get_label_by_id('100').set_text(ashley_names_str)

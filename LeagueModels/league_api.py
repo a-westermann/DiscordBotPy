@@ -52,7 +52,8 @@ class LeagueAPI:
         for match_id in match_ids:
             matches.append(self.build_match(match_id))
             break
-        summoner_history = s_history.SummonerHistory()
-        summoner_history
+        summoner_history = s_history.SummonerHistory(summoner_name)
+        summoner_history.kills + 5
+        print(summoner_history.kills)
 
 

@@ -32,12 +32,21 @@ class Lol(app_commands.Group):
 
 
 
-    @app_commands.command(name="recap", description="Get a recap of your history with a champ")
-    async def recap(self, interaction: discord.Interaction):
+    @app_commands.command(name="kda_chart", description="see your recent kda changes")
+    async def lol_chart(self, interaction: discord.Interaction, summoner_first_letter: str):
         if self.token == "":
             await interaction.response.send_message("token invalid")
             return
-        await interaction.response.send_message("in development")
+        summoner_name = helpers.get_summoner_name_from_first_letter(summoner_first_letter)
+        self.league_api.build_kda(summoner_name)
+
+
+    # @app_commands.command(name="recap", description="Get a recap of your history with a champ")
+    # async def recap(self, interaction: discord.Interaction):
+    #     if self.token == "":
+    #         await interaction.response.send_message("token invalid")
+    #         return
+    #     await interaction.response.send_message("in development")
 
 
     # @app_commands.command(name="chart", description="See a chart of recent match history for the boys")

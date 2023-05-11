@@ -47,13 +47,18 @@ class LeagueAPI:
 #TODO create sql db to save histories
     def build_kda(self, summoner_name):
         puuid = self.get_puuid(summoner_name)
+        summoner_history = s_history.SummonerHistory(summoner_name)
         match_ids = self.get_recent_matches(puuid=puuid, count=10)
         matches = []
         for match_id in match_ids:
             matches.append(self.build_match(match_id))
             break
-        summoner_history = s_history.SummonerHistory(summoner_name)
-        summoner_history.add_match_score(5, 2, 1)
+
+        for match in matches:
+            # not sure this works
+            participant = (s for s in match if  match["metadata"]["participants"] if s == puuid)
+            print(participant)
+            # participant = match["metadata"]["participants"].
         print(summoner_history.kills)
 
 

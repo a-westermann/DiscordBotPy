@@ -1,5 +1,5 @@
 from riotwatcher import LolWatcher, ApiError
-import summoner_history as s_history
+from LeagueModels import summoner_history as s_history
 
 
 region = 'na1'

@@ -28,7 +28,7 @@ class LeagueAPI:
 
     def build_match(self, match_id: str):
         match = self.lol_watcher.match.by_id(region, match_id)
-        print(match.gameDuration)
+        print(match)
 
 
     # def get_kda(self, match: LolWatcher.match, puuid):
@@ -46,4 +46,5 @@ class LeagueAPI:
         match_ids = self.get_recent_matches(puuid=puuid, count=10)
         for match_id in match_ids:
             self.build_match(match_id)
+            break
 

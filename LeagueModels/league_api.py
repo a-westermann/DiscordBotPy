@@ -29,7 +29,7 @@ class LeagueAPI:
 
     def build_match(self, match_id: str):
         match = self.lol_watcher.match.by_id(region, match_id)
-        # print(match['metadata']['dataVersion'])  # <-- access nested elements like this
+        print("test " + match['metadata']['dataVersion'])  # <-- access nested elements like this
 
 
     # def get_kda(self, match: LolWatcher.match, puuid):

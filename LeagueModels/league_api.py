@@ -63,6 +63,8 @@ class LeagueAPI:
                     participant = participants[i]
                     break
             summoner_history.add_match_score(participant["kills"], participant["deaths"], participant["assists"])
-        print(str(summoner_history.kills) + "/" + str(summoner_history.deaths) + "/" + str(summoner_history.assists))
+        # print(str(summoner_history.kills) + "/" + str(summoner_history.deaths) + "/" + str(summoner_history.assists))
+        return "K=" + str(summoner_history.kills) + "/D=" + str(summoner_history.deaths)\
+                    + "/A=" + str(summoner_history.assists)
 
 

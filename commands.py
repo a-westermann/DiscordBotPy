@@ -41,7 +41,7 @@ class Lol(app_commands.Group):
         # kda is a place holder. Will eventually return a line chart for all 4 boyz
         kda = self.league_api.build_kda(summoner_name)
         interaction.response.send_message(summoner_name + "\n" + kda)
-
+#test
 
     # @app_commands.command(name="recap", description="Get a recap of your history with a champ")
     # async def recap(self, interaction: discord.Interaction):

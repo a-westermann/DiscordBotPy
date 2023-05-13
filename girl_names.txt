@@ -14,7 +14,6 @@ Gianna
 Elizabeth
 Eleanor
 Ella
-Abigail
 Sofia
 Avery
 Scarlett
@@ -24,7 +23,6 @@ Penelope
 Chloe
 Layla
 Mila
-Nora
 Hazel
 Madison
 Ellie
@@ -76,7 +74,6 @@ Genesis
 Sophie
 Hailey
 Sadie
-Natalia
 Quinn
 Caroline
 Allison
@@ -96,19 +93,15 @@ Madeline
 Piper
 Rylee
 Athena
-Peyton
 Everleigh
 Vivian
 Clara
-Raelynn
 Liliana
 Samantha
-Maria
 Iris
 Ayla
 Eloise
 Lyla
-Eliza
 Hadley
 Melody
 Julia
@@ -122,7 +115,6 @@ Eden
 Remi
 Mackenzie
 Maeve
-Margaret
 Reagan
 Charlie
 Alaia
@@ -148,7 +140,6 @@ Reese
 Emersyn
 Sienna
 Kehlani
-River
 Freya
 Valerie
 Blakely
@@ -161,8 +152,6 @@ Norah
 Amaya
 Bailey
 Ember
-Ryleigh
-Georgia
 Catalina
 Emerson
 Alexandra
@@ -189,7 +178,6 @@ Amy
 Ruth
 Aubree
 Gemma
-Taylor
 Oakley
 Margot
 Arabella
@@ -198,16 +186,12 @@ Journee
 Harmony
 Blake
 Alaina
-Aspen
 Noelle
 Selena
 Oaklynn
-Morgan
 Londyn
 Zuri
 Aliyah
-Jordyn
-Juliana
 Finley
 Presley
 Zara
@@ -259,13 +243,10 @@ Saylor
 Brooke
 Lola
 Miriam
-Alayna
 Adelaide
 Daniela
 Jane
-Payton
 Journey
-Lilith
 Delaney
 Dakota
 Mya
@@ -278,7 +259,6 @@ Trinity
 Gia
 Tatum
 Raegan
-Camille
 Kaylani
 Kali
 Stevie
@@ -299,8 +279,6 @@ Angelina
 Leia
 Paige
 Julianna
-Milani
-Talia
 Rebecca
 Kendall
 Harley
@@ -308,7 +286,6 @@ Lia
 Phoenix
 Dahlia
 Logan
-Camilla
 Thea
 Jayla
 Brooklynn
@@ -335,7 +312,6 @@ Adriana
 Gracelynn
 Lauren
 Cali
-Kalani
 Aniyah
 Nicole
 Alexis
@@ -345,7 +321,6 @@ Wynter
 Amina
 Ariyah
 Adelynn
-Remington
 Reign
 Alaya
 Dream
@@ -388,7 +363,6 @@ Serena
 Royalty
 Rylie
 Celine
-Laura
 Brinley
 Frances
 Michelle
@@ -415,7 +389,6 @@ Lyric
 Alicia
 Lexi
 Addilyn
-Anaya
 Malani
 Paislee
 Elisa
@@ -429,7 +402,6 @@ Aylin
 Skye
 Daniella
 Makenzie
-Veronica
 Legacy
 Maia
 Ariah
@@ -463,7 +435,6 @@ Kamryn
 Kenzie
 Alora
 Holly
-Matilda
 Sylvia
 Cameron
 Armani
@@ -492,7 +463,6 @@ Angel
 Edith
 Jennifer
 Raya
-Ryan
 Heaven
 Kyla
 Wrenley
@@ -504,7 +474,6 @@ Kinley
 Maci
 Mae
 Salem
-Aisha
 Adley
 Carolina
 Sierra
@@ -519,7 +488,6 @@ Macie
 Maddison
 April
 Aviana
-Lorelai
 Alondra
 Kennedi
 Monroe
@@ -534,7 +502,6 @@ Imani
 Amber
 Analia
 Ariya
-Anya
 Emberly
 Emmy
 Mara
@@ -583,20 +550,16 @@ Nia
 Fernanda
 Jaliyah
 Jenna
-Sylvie
 Miranda
-Anne
 Mina
 Myra
 Aleena
 Alia
 Frankie
-Ellis
 Kathryn
 Nalani
 Nola
 Jemma
-Lennox
 Marie
 Angelica
 Cassandra
@@ -622,7 +585,6 @@ Alejandra
 Kelsey
 Charley
 Capri
-Priscilla
 Zariyah
 Savanna
 Emerie
@@ -692,10 +654,8 @@ Kassidy
 Noah
 Monica
 Keilani
-Zahra
 Zaylee
 Hadassah
-Jamie
 Allyson
 Anahi
 Maxine
@@ -721,7 +681,6 @@ Coraline
 Selene
 Bridget
 Alaiya
-Angie
 Fallon
 Thalia
 Rayna
@@ -734,7 +693,6 @@ Roselyn
 Theodora
 Jolie
 Dani
-Elodie
 Halo
 Nala
 Promise
@@ -840,7 +798,6 @@ Kaydence
 Rosalyn
 Royal
 Alianna
-August
 Nyra
 Vienna
 Amoura
@@ -873,7 +830,6 @@ Zendaya
 Simone
 Alexia
 Alisson
-Angelique
 Ocean
 Elia
 Lilianna
@@ -892,13 +848,11 @@ Adalee
 Tinsley
 Violeta
 Baylor
-Lauryn
 Marlowe
 Birdie
 Jaycee
 Lexie
 Loretta
-Lilyana
 Princess
 Shay
 Hadleigh
@@ -926,7 +880,6 @@ Addilynn
 Giavanna
 Samira
 Amaris
-Madalyn
 Scarlette
 Stormi
 Etta
@@ -956,7 +909,6 @@ Magdalena
 Kailey
 Arleth
 Joyce
-Judith
 Crystal
 Emberlynn
 Landry
@@ -974,7 +926,6 @@ Frida
 Jaylene
 Kiera
 Loyalty
-Azaria
 Jaylee
 Kamilah
 Keyla
@@ -992,7 +943,6 @@ Luisa
 Vida
 Ryder
 Tatiana
-Tori
 Aarya
 Eleanora
 Sandra

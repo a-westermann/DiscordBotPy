@@ -46,15 +46,16 @@ class LeagueAPI:
 #TODO only include matches w/ 3 of us or more
 #TODO when grouping multi summoners aggregate the match list so i don't request same match multiple times
 #TODO create sql db to save histories
-    def build_kda(self, summoner_name):
+    def get_matches(self, summoner_name, match_count: int):
         puuid = self.get_puuid(summoner_name)
-        summoner_history = s_history.SummonerHistory(summoner_name)
-        match_ids = self.get_recent_matches(puuid=puuid, count=10)
+        match_ids = self.get_recent_matches(puuid=puuid, count=match_count)
         matches = []
         for match_id in match_ids:
             matches.append(self.build_match(match_id))
-            # break
+        return matches
 
+    def build_summoner_history(self, summoner_name, matches: list):
+        summoner_history = s_history.SummonerHistory(summoner_name)
         for match in matches:
             participant = None
             participants = match["info"]["participants"]
@@ -64,7 +65,6 @@ class LeagueAPI:
                     break
             summoner_history.add_match_score(participant["kills"], participant["deaths"], participant["assists"])
         # print(str(summoner_history.kills) + "/" + str(summoner_history.deaths) + "/" + str(summoner_history.assists))
-        return "K=" + str(summoner_history.kills) + "/D=" + str(summoner_history.deaths)\
-                    + "/A=" + str(summoner_history.assists)
+        return summoner_history
 
 

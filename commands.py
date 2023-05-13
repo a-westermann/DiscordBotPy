@@ -39,8 +39,10 @@ class Lol(app_commands.Group):
             return
         summoner_name = helpers.get_summoner_name_from_first_letter(summoner_first_letter)
         # kda is a place holder. Will eventually return a line chart for all 4 boyz
-        kda = self.league_api.build_kda(summoner_name)
-        interaction.response.send_message(summoner_name + "\n" + kda)
+        matches = self.league_api.get_matches(summoner_name, match_count=10)
+        summoner_history = self.league_api.build_summoner_history(summoner_name, matches=matches)
+        kda = (summoner_history.kills, summoner_history.deaths, summoner_history.assists)
+        interaction.response.send_message(summoner_name + "\n" + str((kda[0] + kda[2]) / kda[1]))
 
 
     # @app_commands.command(name="recap", description="Get a recap of your history with a champ")

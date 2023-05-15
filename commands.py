@@ -109,7 +109,11 @@ class OtherCommands(app_commands.Group):
         name, got_new_name = await self.baby.get_todays_name()
         print(str(name).strip() + " = name")
         print(str(got_new_name) + " got new name")
-        search_results = helpers.google_search(search_term= name + " girl's name origin", num_results=1)
+        search_results = ""
+        try:
+            search_results = helpers.google_search(search_term= name + " girl's name origin", num_results=1)
+        except:
+            search_results = "google rejected the search"
         regave_name = "" if got_new_name else " (this name was already chosen) "
         message_content = "Name: " + name + regave_name + "\n" + search_results
         await interaction.response.send_message(message_content)

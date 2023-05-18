@@ -102,7 +102,7 @@ class OtherCommands(app_commands.Group):
 
 
 #TODO: need to use defer() to allow interactions to take longer time. The bot sometimes doesn't respond
-# with in 3 seconds, causing it to fail 404
+# with in 3 seconds, causing it to fail 404. Not OUR response but the Bot when it hits latency
     @app_commands.command(name="todays_baby_name", description="gives today's baby name. Times are midnight, noon, 5pm")
     async def todays_baby_name(self, interaction: discord.Interaction):
         if helpers.check_user(interaction, [ "Vierce", "Naiyvara"]) is False:

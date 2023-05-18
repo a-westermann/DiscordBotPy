@@ -1,4 +1,4 @@
-from datetime import datetime, timedelta
+from datetime import datetime as dt, timedelta
 import datetime
 import random
 import helpers
@@ -31,12 +31,12 @@ class BabyStuff:
         # find the last time and get the next one
         last_time_index = times_for_names.index(list(filter(lambda t: t == int(last_time), times_for_names))[0])
         new_time = times_for_names[0] if last_time_index == 2 else times_for_names[(last_time_index + 1)]
-        new_day = str((datetime.strptime(last_date, "%Y-%m-%d %H:%M:%S")
+        new_day = str((datetime.datetime.strptime(last_date, "%Y-%m-%d %H:%M:%S")
                       + timedelta(days=1))).split(' ')[0] if last_time_index == 2 else last_date.split(' ')[0]
         new_date = new_day + " " + str(new_time) + ":00:00"
         print("new date = " + new_date)
         got_new_name = None
-        if today <= datetime.strptime(new_date, "%Y-%m-%d %H:%M:%S"):  # give last name
+        if today <= datetime.datetime.strptime(new_date, "%Y-%m-%d %H:%M:%S"):  # give last name
             line = ""
             for name in used_names_file:
                 line = name

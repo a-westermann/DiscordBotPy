@@ -108,6 +108,7 @@ class OtherCommands(app_commands.Group):
         if helpers.check_user(interaction, [ "Vierce", "Naiyvara"]) is False:
             await interaction.response.send_message("Unauthorized")
             return
+        self.baby.backup_used_names()  # back up the file first
         name, got_new_name = await self.baby.get_todays_name()
         print(str(name).strip() + " = name")
         print(str(got_new_name) + " got new name")
@@ -146,10 +147,8 @@ class OtherCommands(app_commands.Group):
         command_user = helpers.get_user_name(interaction)
         users_real_name = helpers.get_name(command_user)
         # get the used names list as-is. Make a backup first
+        self.baby.backup_used_names()
         used_names_file = open("used_names.txt", "r").readlines()
-        date_string = str(datetime.date.today())
-        backup_file = open("used_names_backups/used_names.txt.backup_" + date_string, "w")
-        backup_file.writelines(used_names_file)
         # find all the 0 names for the user
         score_index = 1 if users_real_name == "Ashley" else 2
         rescore_names = []

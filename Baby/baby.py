@@ -1,4 +1,5 @@
 from datetime import datetime, timedelta
+import datetime
 import random
 import helpers
 from discord.ext import commands
@@ -107,3 +108,8 @@ class BabyStuff:
             await view.response.send_message("Unable to submit score. Please try again. Or don't, I don't know."\
                                              + "\n" + str(e))
 
+    def backup_used_names(self):
+        used_names_file = open("used_names.txt", "r").readlines()
+        date_string = str(datetime.date.today())
+        backup_file = open("used_names_backups/used_names.txt.backup_" + date_string, "w")
+        backup_file.writelines(used_names_file)

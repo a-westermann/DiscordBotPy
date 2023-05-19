@@ -8,7 +8,7 @@ port=5432
 
 
 class PSQL:
-    def open_connection(self, database: str, username: str, password: str, hostname: str, port: int):
+    def open_connection(self):
         self.connection = psycopg2.connect(database=database, user=username, password=password,
                                       host=hostname, port=port)
         self.cursor = self.connection.cursor()

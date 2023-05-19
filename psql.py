@@ -29,7 +29,8 @@ class PSQL:
 
     def get_summoner_matches(self, summoner_name):
         self.open_connection()
-        self.cursor.execute("SELECT * FROM match_history WHERE summoner_name = '{0}'".format(summoner_name))
+        self.cursor.execute("SELECT * FROM match_history WHERE summoner_name = '{0}', \
+                             ORDER BY date_created;".format(summoner_name))
         records = self.cursor.fetchall()
         self.connection.close()
         return records

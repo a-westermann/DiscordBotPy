@@ -21,8 +21,7 @@ class Lol(app_commands.Group):
             self.token = token
             self.league_api = league_api.LeagueAPI(token)
         self.bot = bot
-        self.psql = psql.PSQL(database="league", username="andweste", password="apostria1", hostname="localhost",
-                              port=5432)
+        self.psql = psql.PSQL()
 
 
     @app_commands.command(name="test")

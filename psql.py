@@ -3,7 +3,7 @@ import psycopg2
 
 class PSQL:
     def __init__(self, database: str, username: str, password: str, hostname: str, port: int):
-        self.connection = psycopg2.connect(database=database, username=username, password=password,
+        self.connection = psycopg2.connect(database=database, user=username, password=password,
                                       hostname=hostname, port=port)
         self.cursor = self.connection.cursor()
 

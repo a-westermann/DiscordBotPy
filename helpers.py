@@ -64,6 +64,6 @@ def get_used_babies(user: str, top: bool, number: int, include_score: bool):
 def get_summoner_name_from_first_letter(letter: str):
     if letter.lower() == "v": return "Vierce"
     if letter.lower() == "t": return "The Great Ratsby"
-    if letter.lower() == "c": return "CommradeGiraffe"
+    if letter.lower() == "c": return "ComradeGiraffe"
     if letter.lower() == "g": return "Gold Force"
 

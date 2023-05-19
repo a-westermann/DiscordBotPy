@@ -37,6 +37,7 @@ class Lol(app_commands.Group):
         if self.token == "":
             await interaction.response.send_message("token invalid")
             return
+        await interaction.response.defer()
         summoner_name = helpers.get_summoner_name_from_first_letter(summoner_first_letter)
         # kda is a place holder. Will eventually return a line chart for all 4 boyz
         matches = self.league_api.get_matches(summoner_name, match_count=10)

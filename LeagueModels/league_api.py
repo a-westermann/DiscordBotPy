@@ -51,7 +51,7 @@ class LeagueAPI:
 #TODO create sql db to save histories
     def kda_chart(self, summoner_name):
         # first fill the psql table with new matches
-        matches = self.get_matches(summoner_name, match_count=10)
+        matches = self.get_matches(summoner_name, match_count=100)
         for match in matches:
             self.fill_match_table(match, summoner_name)
 
@@ -62,15 +62,15 @@ class LeagueAPI:
         match_ids = self.get_recent_matches(puuid=puuid, count=match_count)
         matches = []
         for match_id in match_ids:
+            # only build match if it's not on table for summoner
+            results = self.psql.get_specific_match(match_id, summoner_name)
+            if len(results) > 0: continue  # match already recorded
             matches.append(self.build_match(match_id))
         return matches
 
 
     def fill_match_table(self, match, summoner_name):
         id = match["metadata"]["matchId"]
-        # check if match is already on table
-        results = self.psql.get_specific_match(id, summoner_name)
-        if len(results) > 0: return  # match already recorded
         game_timestamp = datetime.utcfromtimestamp(int(match["info"]["gameCreation"])/1000.0)
         summoner_history = self.build_summoner_history(summoner_name, [match])
         self.psql.insert_match(id, summoner_name, summoner_history.kills, summoner_history.deaths,

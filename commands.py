@@ -42,7 +42,7 @@ class Lol(app_commands.Group):
         matches = self.league_api.get_matches(summoner_name, match_count=10)
         summoner_history = self.league_api.build_summoner_history(summoner_name, matches=matches)
         kda = (summoner_history.kills, summoner_history.deaths, summoner_history.assists)
-        interaction.response.send_message(summoner_name + "\n" + str((kda[0] + kda[2]) / kda[1]))
+        await interaction.response.send_message(summoner_name + "\n" + str((kda[0] + kda[2]) / kda[1]))
 
 
     # @app_commands.command(name="recap", description="Get a recap of your history with a champ")

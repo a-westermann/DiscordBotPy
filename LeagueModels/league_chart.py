@@ -14,7 +14,7 @@ def plot_kda(sql_match_rows):
             if j > i:
                 break  # ensures for the first 10 games in the list we don't try to go negative i
             evaulate_match = sql_match_rows[i - j]
-            kda = (evaulate_match["kills"] + evaulate_match["assists"]) + evaulate_match["deaths"]
+            kda = (evaulate_match["kills"] + evaulate_match["assists"]) / evaulate_match["deaths"]
             kda_points.append(round(kda, 2))
 
     for kda in kda_points:

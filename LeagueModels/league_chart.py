@@ -35,7 +35,7 @@ def plot_kda(sql_match_rows):
 
     pyplot.plot(x, y)
     # reduce # of ticks for dates
-    pyplot.xticks(x[::5])
+    pyplot.xticks(x[::5], rotation="vertical")
     pyplot.title(str(sql_match_rows[0]["summoner_name"]) + " KDA")
     chart_file = "kda_chart.png"
     pyplot.savefig(chart_file) # could pass in dpi to savefig as chart's dpi to increase resolution

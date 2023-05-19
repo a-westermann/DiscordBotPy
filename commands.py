@@ -43,11 +43,11 @@ class Lol(app_commands.Group):
         await interaction.response.defer()  # ensures bot has enough time to answer
         summoner_name = helpers.get_summoner_name_from_first_letter(summoner_first_letter)
         # kda is a place holder. Will eventually return a line chart for all 4 boyz
-        self.league_api.kda_chart(summoner_name)
-        # kda = (summoner_history.kills, summoner_history.deaths, summoner_history.assists)
-        # text = summoner_name + "\n" + str((kda[0] + kda[2]) / kda[1])
-        # await interaction.response.send_message()
-        await interaction.followup.send("ok")
+        chart = self.league_api.kda_chart(summoner_name)
+        embed = discord.Embed(color=discord.Color.from_str(r"#FFD700"))
+        embed.set_image(url="attachment://kda_chart.png")
+        description = "each point is the kda average from the last 10 games played from that match"
+        await interaction.followup.send(embed=embed, file=chart, description=description)
 
     # @app_commands.command(name="recap", description="Get a recap of your history with a champ")
     # async def recap(self, interaction: discord.Interaction):

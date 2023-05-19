@@ -72,7 +72,7 @@ class LeagueAPI:
         results = self.psql.get_specific_match(id, summoner_name)
         if len(results) > 0: return  # match already recorded
         game_timestamp = datetime.utcfromtimestamp(int(match["info"]["gameCreation"])/1000.0)
-        summoner_history = self.build_summoner_history(summoner_name, match)
+        summoner_history = self.build_summoner_history(summoner_name, [match])
         self.psql.insert_match(id, summoner_name, summoner_history.kills, summoner_history.deaths,
                                summoner_history.assists, summoner_history.doubles, summoner_history.triples,
                                summoner_history.quadras, summoner_history.pentas, game_timestamp)

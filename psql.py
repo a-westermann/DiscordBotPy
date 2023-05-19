@@ -10,5 +10,5 @@ class PSQL:
 
     def get_summoner_matches(self, summoner_name):
         self.cursor.execute("SELECT * FROM match_history")
-        records = cursor.fetchall()
+        records = self.cursor.fetchall()
         print(records)

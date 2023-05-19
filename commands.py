@@ -10,7 +10,7 @@ import subprocess
 import helpers
 from LeagueModels import league_api
 from Baby import baby, baby_view, baby_chart
-
+import psql
 
 
 # League
@@ -21,13 +21,17 @@ class Lol(app_commands.Group):
             self.token = token
             self.league_api = league_api.LeagueAPI(token)
         self.bot = bot
+        self.psql = psql.PSQL(database="league", username="andweste", password="apostria1", hostname="localhost",
+                              port=5432)
+
 
     @app_commands.command(name="test")
     async def test(self, interaction: discord.Interaction):
         if self.token == "":
             await interaction.response.send_message("token invalid")
             return
-        summoner = self.league_api.get_summoner("Vierce")
+        # summoner = self.league_api.get_summoner("Vierce")
+        self.psql
         await interaction.response.send_message(str(summoner))
 
 
@@ -37,7 +41,7 @@ class Lol(app_commands.Group):
         if self.token == "":
             await interaction.response.send_message("token invalid")
             return
-        await interaction.response.defer()
+        await interaction.response.defer()  # ensures bot has enough time to answer
         summoner_name = helpers.get_summoner_name_from_first_letter(summoner_first_letter)
         # kda is a place holder. Will eventually return a line chart for all 4 boyz
         matches = self.league_api.get_matches(summoner_name, match_count=10)
@@ -103,13 +107,12 @@ class OtherCommands(app_commands.Group):
         await interaction.response.send_message(search_results)
 
 
-#TODO: need to use defer() to allow interactions to take longer time. The bot sometimes doesn't respond
-# with in 3 seconds, causing it to fail 404. Not OUR response but the Bot when it hits latency
     @app_commands.command(name="todays_baby_name", description="gives today's baby name. Times are midnight, noon, 5pm")
     async def todays_baby_name(self, interaction: discord.Interaction):
         if helpers.check_user(interaction, [ "Vierce", "Naiyvara"]) is False:
             await interaction.response.send_message("Unauthorized")
             return
+        await interaction.response.defer()  # ensures bot has enough time to answer
         self.baby.backup_used_names()  # back up the file first
         name, got_new_name = await self.baby.get_todays_name()
         print(str(name).strip() + " = name")

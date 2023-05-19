@@ -17,11 +17,11 @@ import psql
 class Lol(app_commands.Group):
     def __init__(self, bot: commands.Bot, token):
         super().__init__()  # this is to call the parent class's __init__() (parentclass=app_commands.Group)
+        self.psql = psql.PSQL()
         if token != "":
             self.token = token
-            self.league_api = league_api.LeagueAPI(token)
+            self.league_api = league_api.LeagueAPI(token, self.psql)
         self.bot = bot
-        self.psql = psql.PSQL()
 
 
     @app_commands.command(name="test")
@@ -43,12 +43,11 @@ class Lol(app_commands.Group):
         await interaction.response.defer()  # ensures bot has enough time to answer
         summoner_name = helpers.get_summoner_name_from_first_letter(summoner_first_letter)
         # kda is a place holder. Will eventually return a line chart for all 4 boyz
-        matches = self.league_api.get_matches(summoner_name, match_count=10)
-        summoner_history = self.league_api.build_summoner_history(summoner_name, matches=matches)
-        kda = (summoner_history.kills, summoner_history.deaths, summoner_history.assists)
-        text = summoner_name + "\n" + str((kda[0] + kda[2]) / kda[1])
+        self.league_api.kda_chart(summoner_name)
+        # kda = (summoner_history.kills, summoner_history.deaths, summoner_history.assists)
+        # text = summoner_name + "\n" + str((kda[0] + kda[2]) / kda[1])
         # await interaction.response.send_message()
-        await interaction.followup.send(text)
+        await interaction.followup.send("ok")
 
     # @app_commands.command(name="recap", description="Get a recap of your history with a champ")
     # async def recap(self, interaction: discord.Interaction):

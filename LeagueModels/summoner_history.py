@@ -9,12 +9,20 @@ class SummonerHistory:
         self.kills = 0
         self.deaths = 0
         self.assists = 0
+        self.doubles = 0
+        self.triples = 0
+        self.quadras = 0
+        self.pentas = 0
 
 
-    def add_match_score(self, kills, deaths, assists):
+    def add_match_score(self, kills, deaths, assists, doubles, triples, quadras, pentas):
         # should change this to allow passing in a Participant
         self.kills += kills
         self.deaths += deaths
         self.assists += assists
+        self.doubles += doubles
+        self.triples += triples
+        self.quadras += quadras
+        self.pentas += pentas
 
 

@@ -23,6 +23,7 @@ def plot_kda(sql_match_rows):
         deaths = deaths if deaths > 0 else 1
         kda = (kills + assists) / deaths
         match_date = str(evaulate_match["date_created"]).split(' ')[0]
+        match_date = match_date.split('-')[1] + match_date.split('-')[2]
         kda_points.append(round(kda, 2))
         dates.append(match_date)
 

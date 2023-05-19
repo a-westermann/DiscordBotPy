@@ -28,6 +28,8 @@ def plot_kda(sql_match_rows):
 
     x = dates
     y = kda_points
+    # reduce # of ticks for dates
+    pyplot.locator_params(axis="x", nbins=10)
 
     pyplot.plot(x, y)
     pyplot.title(str(sql_match_rows[0]["summoner_name"]) + " KDA")

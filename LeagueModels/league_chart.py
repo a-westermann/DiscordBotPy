@@ -40,4 +40,5 @@ def plot_kda(sql_match_rows):
     chart_file = "kda_chart.png"
     pyplot.savefig(chart_file) # could pass in dpi to savefig as chart's dpi to increase resolution
     chart_image = discord.File(chart_file)
+    plt.close()
     return chart_image

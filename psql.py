@@ -30,10 +30,22 @@ class PSQL:
     def get_summoner_matches(self, summoner_name):
         self.open_connection()
         self.cursor.execute("SELECT * FROM match_history WHERE summoner_name = '{0}' \
-                             ORDER BY date_created;".format(summoner_name))
+                             ORDER BY date_created LIMIT 100;".format(summoner_name))
         records = self.cursor.fetchall()
         self.connection.close()
         return records
+
+
+    # ensure only grab matches 3+ were in
+    def get_recent_100_matches(self, summoner_name):
+        self.open_connection()
+        self.cursor.execute("SELECT * FROM match_history WHERE "
+                            "COUNT(select  \
+                             ORDER BY date_created LIMIT 100;")
+        records = self.cursor.fetchall()
+        self.connection.close()
+        return records
+
 
     def get_specific_match(self, match_id, summoner_name):
         self.open_connection()

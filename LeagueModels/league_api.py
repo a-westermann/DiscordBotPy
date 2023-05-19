@@ -45,7 +45,7 @@ class LeagueAPI:
     # chart the kda's on one line chart
 #TODO only include matches w/ 3 of us or more
 #TODO when grouping multi summoners aggregate the match list so i don't request same match multiple times
-    def kda_chart(self, summoner_name):
+    def individual_kda_chart(self, summoner_name):
         # first fill the psql table with new matches
         matches = self.get_matches(summoner_name, match_count=60)
         for match in matches:
@@ -55,6 +55,24 @@ class LeagueAPI:
         print("found " + str(len(sql_match_rows)) + " matches.")
         chart = league_chart.plot_kda(sql_match_rows)
         return chart
+
+
+#TODO: need to ensure I grab matches that are in the top 100 for ALL of us
+    def group_kda_chart(self):
+        # first fill the psql table with new matches
+        summoners = ["Vierce", "The Great Ratsby", "ComradeGiraffe", "Gold Force"]
+        for summoner in summoners:
+            matches = self.get_matches(summoner_name, match_count=60)
+            for match in matches:
+                self.fill_match_table(match, summoner_name)
+        # now build out the kda averages over time. Each point is the cumulative kda average of the last 10 games
+        sql_match_rows = self.psql.get_recent_100_matches()
+        print("found " + str(len(sql_match_rows)) + " rows.")
+        chart = league_chart.group_plot_kda(sql_match_rows)
+        return chart
+
+# this gives 100 rows , seems wrong? Or just coincidence??
+    #select match_id FROM match_history GROUP BY match_id HAVING COUNT(match_id)>2
 
 
 

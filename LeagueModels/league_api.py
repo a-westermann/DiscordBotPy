@@ -51,7 +51,7 @@ class LeagueAPI:
 #TODO create sql db to save histories
     def kda_chart(self, summoner_name):
         # first fill the psql table with new matches
-        matches = self.get_matches(summoner_name, match_count=100)
+        matches = self.get_matches(summoner_name, match_count=50)
         for match in matches:
             self.fill_match_table(match, summoner_name)
 

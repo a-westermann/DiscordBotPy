@@ -47,7 +47,7 @@ class Lol(app_commands.Group):
         embed = discord.Embed(color=discord.Color.from_str(r"#FFD700"))
         embed.set_image(url="attachment://kda_chart.png")
         description = "each point is the kda average from the last 10 games played from that match"
-        await interaction.followup.send(embed=embed, file=chart, description=description)
+        await interaction.followup.send(embed=embed, file=chart, name=description)
 
     # @app_commands.command(name="recap", description="Get a recap of your history with a champ")
     # async def recap(self, interaction: discord.Interaction):

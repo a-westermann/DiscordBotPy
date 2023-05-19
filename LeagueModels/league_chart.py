@@ -8,5 +8,5 @@ import helpers
 
 def plot_kda(sql_match_rows):
     for match in sql_match_rows:
-        print("kills = " + match["kills"])
+        print("kills = " + str(match["kills"]))
         break

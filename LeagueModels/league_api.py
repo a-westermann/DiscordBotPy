@@ -1,5 +1,5 @@
 from riotwatcher import LolWatcher, ApiError
-from LeagueModels import summoner_history as s_history
+from LeagueModels import summoner_history as s_history, league_chart
 import psql
 from datetime import datetime
 
@@ -36,8 +36,6 @@ class LeagueAPI:
         return match
 
 
-    # def get_kda(self, match: LolWatcher.match, puuid):
-
 
 
 # major methods
@@ -45,29 +43,33 @@ class LeagueAPI:
     # get last x matches for each summoner puuid
     # iterate through and build kda, store as a summoner_history object
     # chart the kda's on one line chart
-    # later on can worry about creating a db
 #TODO only include matches w/ 3 of us or more
 #TODO when grouping multi summoners aggregate the match list so i don't request same match multiple times
-#TODO create sql db to save histories
     def kda_chart(self, summoner_name):
         # first fill the psql table with new matches
-        matches = self.get_matches(summoner_name, match_count=100)
+        matches = self.get_matches(summoner_name, match_count=60)
         for match in matches:
             self.fill_match_table(match, summoner_name)
+        # now build out the kda averages over time. Each point is the cumulative kda average of the last 10 games
+        sql_match_rows = self.psql.get_summoner_matches(summoner_name)
+        print("found " + str(len(sql_match_rows)) + " matches.")
+        chart = league_chart(sql_match_rows)
 
 
 
+# Every request should probably start with get_matches to fill recent matches
+# this includes adding recap later
     def get_matches(self, summoner_name, match_count: int):
         puuid = self.get_puuid(summoner_name)
         print("puuid for " + summoner_name + " " + puuid)
         match_ids = self.get_recent_matches(puuid=puuid, count=match_count)
         matches = []
 #TODO: change the sql to an IN() statement contianing all matches, then do a python compare to determine
-# which ones need to be added
+#TODO: which ones need to be added
         for match_id in match_ids:
             # only build match if it's not on table for summoner
             results = self.psql.get_specific_match(match_id, summoner_name)
-            if len(results) > 0: continue  # match already recorded
+            if len(results) > 0: break  # stop looking - hit the most current recorded match
             matches.append(self.build_match(match_id))
         return matches
 

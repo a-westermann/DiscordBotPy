@@ -9,6 +9,7 @@ import helpers
 
 def plot_kda(sql_match_rows):
     kda_points = []
+    dates = []
     for i, match in enumerate(sql_match_rows):
         # for each match, look at the last 10 and create the kda average
         kills, deaths, assists = 0, 0, 0
@@ -22,10 +23,11 @@ def plot_kda(sql_match_rows):
         deaths = deaths if deaths > 0 else 1
         kda = (kills + assists) / deaths
         match_date = str(evaulate_match["date_created"])
-        kda_points.append(tuple((round(kda, 2), match_date)))
+        kda_points.append(round(kda, 2))
+        dates.append(match_date)
 
-    x = kda_points[1]
-    y = kda_points[0]
+    x = dates
+    y = kda_points
 
     pyplot.plot(x, y)
     pyplot.title(str(sql_match_rows[0]["summoner_name"]) + " KDA")

@@ -28,7 +28,17 @@ class PSQL:
 
     def get_summoner_matches(self, summoner_name):
         self.open_connection()
-        self.cursor.execute("SELECT * FROM match_history WHERE summoner_name = '{0}'".format('Vierce'))
+        self.cursor.execute("SELECT * FROM match_history WHERE summoner_name = '{0}'".format(summoner_name))
         records = self.cursor.fetchall()
         print(records)
         self.connection.close()
+        return records
+
+    def get_specific_match(self, match_id, summoner_name):
+        self.open_connection()
+        self.cursor.execute("SELECT * FROM match_history WHERE match_id = '{0}' \
+                            AND summoner_name = '{1}';".format(match_id, summoner_name))
+        records = self.cursor.fetchall()
+        print(records)
+        self.connection.close()
+        return records

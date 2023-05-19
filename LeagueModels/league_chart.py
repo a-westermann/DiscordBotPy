@@ -5,6 +5,7 @@ import matplotlib.pyplot as pyplot
 import discord
 import discord.ext
 import helpers
+import datetime
 
 
 def plot_kda(sql_match_rows):
@@ -23,7 +24,8 @@ def plot_kda(sql_match_rows):
         deaths = deaths if deaths > 0 else 1
         kda = (kills + assists) / deaths
         match_date = str(evaulate_match["date_created"]).split(' ')[0]
-        match_date = match_date.split('-')[1] + match_date.split('-')[2]
+        # match_date = match_date.split('-')[1] + match_date.split('-')[2]
+        match_date = datetime.datetime.strptime(match_date, '%Y-%m-%d')
         kda_points.append(round(kda, 2))
         dates.append(match_date)
 

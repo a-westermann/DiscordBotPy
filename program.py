@@ -39,7 +39,6 @@ try:
 except Exception as e:
     print("Error: " + str(e))
     league_token = ""
-league_api = league_api.LeagueAPI(token)
 active_client.tree.add_command(commands.Lol(active_client, league_token))
 
 

@@ -56,6 +56,7 @@ class LeagueAPI:
 
     def build_summoner_history(self, summoner_name, matches: list):
         summoner_history = s_history.SummonerHistory(summoner_name)
+        puuid = self.get_puuid(summoner_name)
         for match in matches:
             participant = None
             participants = match["info"]["participants"]

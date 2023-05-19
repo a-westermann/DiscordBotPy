@@ -30,7 +30,6 @@ class PSQL:
         self.open_connection()
         self.cursor.execute("SELECT * FROM match_history WHERE summoner_name = '{0}'".format(summoner_name))
         records = self.cursor.fetchall()
-        print(records)
         self.connection.close()
         return records
 

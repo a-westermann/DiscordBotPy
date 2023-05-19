@@ -1,5 +1,6 @@
 import helpers
 import pylab
+import numpy as np
 import matplotlib.pyplot as pyplot
 import discord
 import discord.ext
@@ -20,7 +21,15 @@ def plot_kda(sql_match_rows):
             assists += evaulate_match["assists"]
         deaths = deaths if deaths > 0 else 1
         kda = (kills + assists) / deaths
-        kda_points.append(round(kda, 2))
+        match_date = evaulate_match["date_created"]
+        kda_points.append((round(kda, 2), match_date))
 
-    for kda in kda_points:
-        print(kda)
+    x = kda_points[1]
+    y = kda_points[0]
+
+    pyplot.plot(x, y)
+    pyplot.title(str(sql_match_rows[0]["summoner_name"]) + " KDA")
+    chart_file = "kda_chart.png"
+    pyplot.savefig(chart_file) # could pass in dpi to savefig as chart's dpi to increase resolution
+    chart_image = discord.File(chart_file)
+    return chart_image

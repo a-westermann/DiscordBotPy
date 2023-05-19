@@ -54,6 +54,7 @@ class LeagueAPI:
         sql_match_rows = self.psql.get_summoner_matches(summoner_name)
         print("found " + str(len(sql_match_rows)) + " matches.")
         chart = league_chart.plot_kda(sql_match_rows)
+        return chart
 
 
 

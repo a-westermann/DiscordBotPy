@@ -31,8 +31,8 @@ class Lol(app_commands.Group):
             await interaction.response.send_message("token invalid")
             return
         # summoner = self.league_api.get_summoner("Vierce")
-        self.psql
-        await interaction.response.send_message(str(summoner))
+        self.psql.get_summoner_matches("Vierce")
+        # await interaction.response.send_message(str(summoner))
 
 
 

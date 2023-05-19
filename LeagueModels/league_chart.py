@@ -26,7 +26,7 @@ def plot_kda(sql_match_rows):
         match_date = str(evaulate_match["date_created"]).split(' ')[0]
         # match_date = match_date.split('-')[1] + match_date.split('-')[2]
         match_date = datetime.datetime.strptime(match_date, '%Y-%m-%d')
-        match_date = match_date.strptime('%m/%d')
+        match_date = match_date.strftime('%m/%d')
         kda_points.append(round(kda, 2))
         dates.append(match_date)
 

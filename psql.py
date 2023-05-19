@@ -5,12 +5,13 @@ username="andweste"
 password="apostria1"
 hostname="localhost"
 port=5432
+from psycopg2.extras import RealDictCursor
 
 
 class PSQL:
     def open_connection(self):
         self.connection = psycopg2.connect(database=database, user=username, password=password,
-                                      host=hostname, port=port)
+                                      host=hostname, port=port, cursor_factory=RealDictCursor)
         self.cursor = self.connection.cursor()
 
 

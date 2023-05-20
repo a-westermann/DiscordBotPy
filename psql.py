@@ -47,8 +47,7 @@ class PSQL:
         list_records = ""
         for row in records:
             list_records += "'" + str(row["match_id"]) + "',"
-        list_records = list_records[0:len(list_records) - 1]
-        print(list_records)
+        list_records = list_records[0:len(list_records) - 1] # remove last comma
         self.connection.close()
         # now pull all rows for each member that match those match_id's
         self.open_connection()

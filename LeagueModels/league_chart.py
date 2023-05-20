@@ -72,9 +72,12 @@ def group_plot_kda(sql_match_rows, summoners: [str]):
         dates.add(match_date)  # only add if not exists (set)
 
     x = dates
-    y = kda_points
+    y1, y2, y3, y4 = kda_points[0], kda_points[1], kda_points[2], kda_points[3]
 
-    pyplot.plot(x, y)
+    pyplot.plot(x, y1)
+    pyplot.plot(x, y2)
+    pyplot.plot(x, y3)
+    pyplot.plot(x, y4)
     # reduce # of ticks for dates
     pyplot.xticks(x[::5], rotation="vertical")
     pyplot.title("KDA last 100 matches")

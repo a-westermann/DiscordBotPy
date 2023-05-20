@@ -126,7 +126,7 @@ class OtherCommands(app_commands.Group):
         if helpers.check_user(interaction, [ "Vierce", "Naiyvara"]) is False:
             await interaction.response.send_message("Unauthorized")
             return
-        await interaction.response.defer()  # ensures bot has enough time to answer
+        # await interaction.response.defer()  # ensures bot has enough time to answer
         self.baby.backup_used_names()  # back up the file first
         name, got_new_name = await self.baby.get_todays_name()
         print(str(name).strip() + " = name")

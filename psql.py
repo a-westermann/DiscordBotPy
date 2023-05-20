@@ -46,7 +46,9 @@ class PSQL:
         records = self.cursor.fetchall()
         list_records = []
         for row in records:
-            list_records.append(str(row[0]))
+            list_records.append(str(row))
+            print(str(row))
+
         self.connection.close()
         # now pull all rows for each member that match those match_id's
         self.open_connection()

@@ -39,9 +39,15 @@ class PSQL:
 #TODO: ensure only grab matches 3+ were in
     def get_recent_100_matches(self):
         self.open_connection()
-        self.cursor.execute("SELECT * FROM match_history WHERE "
-                            "COUNT(select  \
-                             ORDER BY date_created DESC LIMIT 400;")
+        # first get the top 100 where 3+ members were in game
+        self.cursor.execute("select match_id FROM match_history "
+                            "GROUP BY match_id, date_created "
+                            " HAVING COUNT(match_id)>2 ORDER BY date_created DESC LIMIT 100")
+        records = list(self.cursor.fetchall())
+        self.connection.close()
+        # now pull all rows for each member that match those match_id's
+        self.open_connection()
+        self.cursor.execute("SELECT * FROM match_history WHERE match_id IN(%s)", records)
         records = self.cursor.fetchall()
         self.connection.close()
         return records

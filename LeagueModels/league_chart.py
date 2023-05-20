@@ -49,10 +49,9 @@ def plot_kda(sql_match_rows):
 def group_plot_kda(sql_match_rows, summoners):
 
     kda_points = []
-    dates = []
+    dates = set()
     for s in summoners:
         kda_points.append([])
-        dates.append([])
     for i, match in enumerate(sql_match_rows):
         summoner = str(match["summoner_name"])
         # for each match, look at the last 10 and create the kda average
@@ -72,17 +71,19 @@ def group_plot_kda(sql_match_rows, summoners):
         match_date = match_date.strftime('%m/%d')
         list_index = list(summoners).index(summoner)
         kda_points[list_index].append(round(kda, 2))
-        dates[list_index].append(match_date)
+        dates.add(match_date)
 
-    x1, x2, x3, x4 = dates[0], dates[1], dates[2], dates[3]
+    # x1, x2, x3, x4 = dates[0], dates[1], dates[2], dates[3]
     y1, y2, y3, y4 = kda_points[0], kda_points[1], kda_points[2], kda_points[3]
-    for x in kda_points[0]:
-        print(x)
+    y1mask = np.isinf(y1)
+    y2mask = np.isinf(y2)
+    y3mask = np.isinf(y3)
+    y4mask = np.isinf(y4)
 
-    pyplot.plot(x1, y1)
-    pyplot.plot(x2, y2)
-    pyplot.plot(x3, y3)
-    pyplot.plot(x4, y4)
+    pyplot.plot(x[y1mask], y1[y1mask])
+    pyplot.plot(x[y2mask], y2[y2mask])
+    pyplot.plot(x[y3mask], y3[y3mask])
+    pyplot.plot(x[y4mask], y4[y4mask])
     # reduce # of ticks for dates
     pyplot.xticks(x1[::5], rotation="vertical")
     pyplot.xticks(x2[::5])

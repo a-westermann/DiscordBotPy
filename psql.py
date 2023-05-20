@@ -55,7 +55,7 @@ class PSQL:
         records = self.cursor.fetchall()
         self.connection.close()
         # reverse the rows to put the oldest games first
-        records.reverse()
+        records = records.reverse()
         return records
 
 

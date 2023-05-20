@@ -45,10 +45,14 @@ def plot_kda(sql_match_rows):
 
 
 
-def group_plot_kda(sql_match_rows):
-    kda_points = []
-    dates = []
+#sql_match_rows will include duplicates, each match has rows for each summoner
+def group_plot_kda(sql_match_rows, summoners: [str]):
+    kda_points = [[]]
+    for s in summoners:
+        kda_points.append(s)
+    dates = set()
     for i, match in enumerate(sql_match_rows):
+        summoner = match["summoner_name"]
         # for each match, look at the last 10 and create the kda average
         kills, deaths, assists = 0, 0, 0
         for j in range(10):
@@ -64,8 +68,8 @@ def group_plot_kda(sql_match_rows):
         # match_date = match_date.split('-')[1] + match_date.split('-')[2]
         match_date = datetime.datetime.strptime(match_date, '%Y-%m-%d')
         match_date = match_date.strftime('%m/%d')
-        kda_points.append(round(kda, 2))
-        dates.append(match_date)
+        kda_record = [s for s in kda_points if s == summoner].append(round(kda, 2))
+        dates.add(match_date)  # only add if not exists (set)
 
     x = dates
     y = kda_points
@@ -73,7 +77,7 @@ def group_plot_kda(sql_match_rows):
     pyplot.plot(x, y)
     # reduce # of ticks for dates
     pyplot.xticks(x[::5], rotation="vertical")
-    pyplot.title(str(sql_match_rows[0]["summoner_name"]) + " KDA")
+    pyplot.title("KDA last 100 matches")
     chart_file = "kda_chart.png"
     pyplot.savefig(chart_file) # could pass in dpi to savefig as chart's dpi to increase resolution
     chart_image = discord.File(chart_file)

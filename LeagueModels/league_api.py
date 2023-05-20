@@ -62,9 +62,9 @@ class LeagueAPI:
         # first fill the psql table with new matches
         summoners = ["Vierce", "The Great Ratsby", "ComradeGiraffe", "Gold Force"]
         for summoner in summoners:
-            matches = self.get_matches(summoner_name, match_count=60)
+            matches = self.get_matches(summoner, match_count=60)
             for match in matches:
-                self.fill_match_table(match, summoner_name)
+                self.fill_match_table(match, summoner)
         # now build out the kda averages over time. Each point is the cumulative kda average of the last 10 games
         sql_match_rows = self.psql.get_recent_100_matches()
         print("found " + str(len(sql_match_rows)) + " rows.")

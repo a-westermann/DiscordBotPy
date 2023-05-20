@@ -70,7 +70,8 @@ def group_plot_kda(sql_match_rows, summoners: [str]):
         match_date = datetime.datetime.strptime(match_date, '%Y-%m-%d')
         match_date = match_date.strftime('%m/%d')
         list = [s for s in kda_points if s == summoner]
-        print(list + " found list")
+        for l in list:
+            print(str(l) + " list")
         [s for s in kda_points if s == summoner].append(round(kda, 2))
         [s for s in dates if s == summoner].append(match_date)
 

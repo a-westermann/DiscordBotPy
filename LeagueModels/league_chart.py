@@ -47,6 +47,7 @@ def plot_kda(sql_match_rows):
 
 #sql_match_rows will include duplicates, each match has rows for each summoner
 def group_plot_kda(sql_match_rows, summoners):
+
     kda_points = []
     dates = []
     for s in summoners:

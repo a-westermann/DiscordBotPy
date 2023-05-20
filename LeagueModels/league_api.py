@@ -68,7 +68,7 @@ class LeagueAPI:
         # now build out the kda averages over time. Each point is the cumulative kda average of the last 10 games
         sql_match_rows = self.psql.get_recent_100_matches()
         print("found " + str(len(sql_match_rows)) + " rows.")
-        chart = league_chart.group_plot_kda(sql_match_rows)
+        chart = league_chart.group_plot_kda(sql_match_rows, summoners)
         return chart
 
 # this gives 100 rows , seems wrong? Or just coincidence??

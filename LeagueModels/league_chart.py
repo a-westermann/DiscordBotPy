@@ -48,9 +48,10 @@ def plot_kda(sql_match_rows):
 #sql_match_rows will include duplicates, each match has rows for each summoner
 def group_plot_kda(sql_match_rows, summoners: [str]):
     kda_points = [[]]
+    dates = [[]]
     for s in summoners:
         kda_points.append(s)
-    dates = set()
+        dates.append(s)
     for i, match in enumerate(sql_match_rows):
         summoner = match["summoner_name"]
         # for each match, look at the last 10 and create the kda average
@@ -68,8 +69,8 @@ def group_plot_kda(sql_match_rows, summoners: [str]):
         # match_date = match_date.split('-')[1] + match_date.split('-')[2]
         match_date = datetime.datetime.strptime(match_date, '%Y-%m-%d')
         match_date = match_date.strftime('%m/%d')
-        kda_record = [s for s in kda_points if s == summoner].append(round(kda, 2))
-        dates.add(match_date)  # only add if not exists (set)
+        [s for s in kda_points if s == summoner].append(round(kda, 2))
+        [s for s in dates if s == summoner].append(match_date)
 
     x = list(dates)
     y1, y2, y3, y4 = kda_points[0], kda_points[1], kda_points[2], kda_points[3]

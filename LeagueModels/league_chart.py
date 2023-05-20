@@ -74,6 +74,8 @@ def group_plot_kda(sql_match_rows, summoners: [str]):
 
     x1, x2, x3, x4 = dates[0], dates[1], dates[2], dates[3]
     y1, y2, y3, y4 = kda_points[0], kda_points[1], kda_points[2], kda_points[3]
+    for x in kda_points[0]:
+        print(x)
 
     pyplot.plot(x1, y1)
     pyplot.plot(x2, y2)

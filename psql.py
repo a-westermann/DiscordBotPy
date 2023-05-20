@@ -54,8 +54,6 @@ class PSQL:
         self.cursor.execute("SELECT * FROM match_history WHERE match_id IN (" + list_records + ");")
         records = self.cursor.fetchall()
         self.connection.close()
-        # reverse the rows to put the oldest games first
-        records = list(records).reverse()
         return records
 
 

@@ -47,13 +47,10 @@ class PSQL:
         list_records = []
         for row in records:
             list_records.append(str(row["match_id"]))
-            print(str(row["match_id"]))
-
         self.connection.close()
         # now pull all rows for each member that match those match_id's
         self.open_connection()
-        self.cursor.execute("SELECT * FROM match_history WHERE match_id IN %s;",
-                            tuple([id[0] for id in list_records]))
+        self.cursor.execute("SELECT * FROM match_history WHERE match_id IN %s;", (list_records,))
         records = self.cursor.fetchall()
         self.connection.close()
         return records

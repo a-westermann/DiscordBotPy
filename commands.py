@@ -35,19 +35,35 @@ class Lol(app_commands.Group):
 
 
 
-    @app_commands.command(name="kda_chart", description="see your recent kda changes")
-    async def kda_chart(self, interaction: discord.Interaction, summoner_first_letter: str):
+    @app_commands.command(name="summoner_kda_chart", description="see your recent kda changes")
+    async def summoner_kda_chart(self, interaction: discord.Interaction, summoner_first_letter: str):
         if self.token == "":
             await interaction.response.send_message("token invalid")
             return
         await interaction.response.defer()  # ensures bot has enough time to answer
         summoner_name = helpers.get_summoner_name_from_first_letter(summoner_first_letter)
         # kda is a place holder. Will eventually return a line chart for all 4 boyz
-        chart = self.league_api.kda_chart(summoner_name)
+        chart = self.league_api.individual_kda_chart(summoner_name)
         embed = discord.Embed(color=discord.Color.from_str(r"#FFD700"))
         embed.set_image(url="attachment://kda_chart.png")
         embed.description = "*each point is the kda average from the last 10 games played from that match"
         await interaction.followup.send(embed=embed, file=chart)
+
+
+    @app_commands.command(name="kda_chart", description="see kda's over time for boys")
+    async  def kda_chart(self, interaction: discord.Interaction):
+        if self.token == "":
+            await interaction.response.send_message("token invalid")
+            return
+        await interaction.response.defer()  # ensures bot has enough time to answer
+        # kda is a place holder. Will eventually return a line chart for all 4 boyz
+        chart = self.league_api.group_kda_chart()
+        embed = discord.Embed(color=discord.Color.from_str(r"#FFD700"))
+        embed.set_image(url="attachment://kda_chart.png")
+        embed.description = "*each point is the kda average from the last 10 games played from that match"
+        await interaction.followup.send(embed=embed, file=chart)
+
+
 
     # @app_commands.command(name="recap", description="Get a recap of your history with a champ")
     # async def recap(self, interaction: discord.Interaction):
@@ -110,7 +126,7 @@ class OtherCommands(app_commands.Group):
         if helpers.check_user(interaction, [ "Vierce", "Naiyvara"]) is False:
             await interaction.response.send_message("Unauthorized")
             return
-        await interaction.response.defer()  # ensures bot has enough time to answer
+        # await interaction.response.defer()  # ensures bot has enough time to answer
         self.baby.backup_used_names()  # back up the file first
         name, got_new_name = await self.baby.get_todays_name()
         print(str(name).strip() + " = name")

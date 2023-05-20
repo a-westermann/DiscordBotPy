@@ -74,7 +74,7 @@ def group_plot_kda(sql_match_rows, summoners):
         dates.add(match_date)
 
     # x1, x2, x3, x4 = dates[0], dates[1], dates[2], dates[3]
-    x = dates
+    x = list(dates)
     y1, y2, y3, y4 = kda_points[0], kda_points[1], kda_points[2], kda_points[3]
     y1mask = np.isinf(y1)
     y2mask = np.isinf(y2)

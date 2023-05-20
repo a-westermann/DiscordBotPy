@@ -72,15 +72,18 @@ def group_plot_kda(sql_match_rows, summoners: [str]):
         [s for s in kda_points if s == summoner].append(round(kda, 2))
         [s for s in dates if s == summoner].append(match_date)
 
-    x = list(dates)
+    x1, x2, x3, x4 = dates[0], dates[1], dates[2], dates[3]
     y1, y2, y3, y4 = kda_points[0], kda_points[1], kda_points[2], kda_points[3]
 
-    pyplot.plot(x, y1)
-    pyplot.plot(x, y2)
-    pyplot.plot(x, y3)
-    pyplot.plot(x, y4)
+    pyplot.plot(x1, y1)
+    pyplot.plot(x2, y2)
+    pyplot.plot(x3, y3)
+    pyplot.plot(x4, y4)
     # reduce # of ticks for dates
-    pyplot.xticks(x[::5], rotation="vertical")
+    pyplot.xticks(x1[::5], rotation="vertical")
+    pyplot.xticks(x2[::0])
+    pyplot.xticks(x3[::0])
+    pyplot.xticks(x4[::0])
     pyplot.title("KDA last 100 matches")
     chart_file = "kda_chart.png"
     pyplot.savefig(chart_file) # could pass in dpi to savefig as chart's dpi to increase resolution

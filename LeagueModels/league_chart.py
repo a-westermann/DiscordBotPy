@@ -87,9 +87,6 @@ def group_plot_kda(sql_match_rows, summoners):
             list_index = list(summoners).index(summoner)
             # I am adding the match date without the hours/minutes. So is that screwing something up?
             match_date = str(match["date_created"]).split(' ')[0]
-            print("adding " + match_date)
-
-            #TRYING JUST ADDING IT AS A STRING
             # match_date = datetime.datetime.strptime(match_date, '%Y-%m-%d')
             kda_points[list_index].append((match_date, round(kda, 2)))
             match_dates.add(match_date)
@@ -117,6 +114,10 @@ def group_plot_kda(sql_match_rows, summoners):
         kda_list.reverse()
         # get first element (match_date) in the kda_list tuple (match_date, kda)
         kda_dates = [kda_date[0] for kda_date in kda_list]
+        kdas =  [kda_date[0] for kda_date in kda_list]
+        for k in kdas:
+            print(str(k))
+
         y = []
         for j, date in enumerate(dates_list):
             # if there is a match on this date, add the kda on that index

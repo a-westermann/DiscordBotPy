@@ -99,8 +99,8 @@ def group_plot_kda(sql_match_rows, summoners):
     # get a list of all dates between the first and last matches
     dates_list = list(match_dates)
     dates_list.sort()
-    start_date = dates_list[0]
-    end_date = dates_list[-1]
+    start_date = datetime.datetime.strptime(dates_list[0], '%Y-%m-%d')
+    end_date = datetime.datetime.strptime(dates_list[-1], '%Y-%m-%d')
     print("start = " + str(start_date) + "   end = " + str(end_date))
     dates_list = []
     while start_date <= end_date:

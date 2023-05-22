@@ -64,6 +64,7 @@ def group_plot_kda(sql_match_rows, summoners):
     # datetime.datetime.strptime(last_date, '%Y-%m-%d')
     # date_range = [first_date, last_date]
     match_dates = set()
+    match_dates_lists = [[] for _ in range(len(summoners))]
     # for s in summoners:
     #     kda_points.append([])
     for i, match in enumerate(sql_match_rows):
@@ -87,20 +88,22 @@ def group_plot_kda(sql_match_rows, summoners):
         match_date = str(evaulate_match["date_created"]).split(' ')[0]
         match_date = datetime.datetime.strptime(match_date, '%Y-%m-%d')
         match_dates.add(match_date)
+        # also add it to the list so we can x-ref with the kda's when building y-axis below
+        match_dates_lists[list_index].append(match_date)
 
 
     x = list(match_dates)
     x.sort()
     y_values = []
-    for kda_list in kda_points:  # add the kda_list for each summoner to the y_values list
-        # take into account differing # of matches per summoner
-        y = np.full(len(x), np.nan)  # np.nan ensures y values will be filled in to match x-length
-        dates_list = [str(date.date()) for date in x]
-        # now check if this y value match_date matches any dates in x
-        for i, date in enumerate(dates_list):
-            # if date in str(sql_match_rows[i+10]["date_created"]):
-            if date in match_dates:
-                y[i] = kda_list.pop()
+    dates_list = [str(date.date()) for date in x]  # get a list of the dates in the set
+    for i, kda_list in enumerate(kda_points):  # add the kda_list for each summoner to the y_values list
+        y = np.full(len(x), np.nan)  # np.nan fill in values = to # of x values. We will replace them w/ Y values
+        # iterate through dates AND the kda match history for this summoner & fill in matches
+        for j, date in enumerate(dates_list):
+            for k, match_d in match_dates_lists[i]:
+                if date == str(match_d):
+                    y[j] = kda_list[k]
+                    # y[j] = kda_list.pop()
         y_values.append(y)
 
         # y_values.append(np.array(kda_list))

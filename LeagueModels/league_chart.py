@@ -112,7 +112,7 @@ def group_plot_kda(sql_match_rows, summoners):
         y = np.array(kda_list[1])
         y = np.insert(y, 0, np.nan)
         # I need to reduce the length of y to be equal to x, doesn't allow mismatch axis lengths
-        y = np.insert(y, len(x), np.nan)
+        y = np.insert(y, len(y), np.nan)
         # fill in missing values with the mask
         y = np.ma.array(y, mask=mask)
         y_values.append(y)

@@ -66,10 +66,11 @@ def group_plot_kda(sql_match_rows, summoners):
             if s == str(match["summoner_name"]):
                 summoner_match_rows[i].append(match)
 
-    print(str(len(summoner_match_rows[0])) +  " matches for Vierce")
+
 
     # now iterate through each summoner's table, and each match inside it
     for match_table in summoner_match_rows:
+        print(str(match_table))
         summoner = str(match_table[0]["summoner_name"])
         for i, match in enumerate(match_table):
             # for each match, look at the last 10 and create the kda average

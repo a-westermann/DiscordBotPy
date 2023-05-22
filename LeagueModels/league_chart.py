@@ -88,7 +88,9 @@ def group_plot_kda(sql_match_rows, summoners):
             # I am adding the match date without the hours/minutes. So is that screwing something up?
             match_date = str(match["date_created"]).split(' ')[0]
             print("adding " + match_date)
-            match_date = datetime.datetime.strptime(match_date, '%Y-%m-%d')
+
+            #TRYING JUST ADDING IT AS A STRING
+            # match_date = datetime.datetime.strptime(match_date, '%Y-%m-%d')
             kda_points[list_index].append((match_date, round(kda, 2)))
             match_dates.add(match_date)
 
@@ -104,6 +106,7 @@ def group_plot_kda(sql_match_rows, summoners):
     while start_date <= end_date:
         dates_list.append(start_date)
         start_date += datetime.timedelta(days=1)
+        print(str(start_date) +  " added to date list")
 
     x = dates_list
     x.sort()

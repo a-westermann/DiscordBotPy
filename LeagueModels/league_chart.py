@@ -98,6 +98,7 @@ def group_plot_kda(sql_match_rows, summoners):
     dates_list.sort()
     start_date = dates_list[0]
     end_date = dates_list[-1]
+    print("start = " + str(start_date) + "   end = " + str(end_date))
     dates_list = []
     while start_date <= end_date:
         dates_list.append(start_date)
@@ -108,9 +109,6 @@ def group_plot_kda(sql_match_rows, summoners):
     y_lines = []
     for i, kda_list in enumerate(kda_points):  # add the kda_list for each summoner to the y_values list
         matching_dates_count = 0
-        # y = np.full(len(x), np.nan)  # np.nan fill in values = to # of x values. We will replace them w/ Y values
-        # create a mask instead to fill in missing points
-        # mask = np.ones(len(x), dtype=bool)
         # iterate through dates AND the kda match history for this summoner & fill in matches that match the date
         # reverse it so latest game played on that date is first for the match
         kda_list.reverse()

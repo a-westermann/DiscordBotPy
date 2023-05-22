@@ -20,7 +20,7 @@ def plot_kda(sql_match_rows):
         kills, deaths, assists = 0, 0, 0
         for j in range(10):
             if j > i:
-                break  # NO LONGER NEEDED since pulling 110
+                break
             evaulate_match = sql_match_rows[i - j]
             kills += evaulate_match["kills"]
             deaths +=  evaulate_match["deaths"]
@@ -78,8 +78,8 @@ def group_plot_kda(sql_match_rows, summoners):
             # for each match, look at the last 10 and create the kda average
             kills, deaths, assists = 0, 0, 0
             for j in range(10):
-            #     if j > i:
-            #         break  # NO LONGER NEEDED since pulling 110
+                if j > i:
+                    break
                 evaulate_match = sql_match_rows[i - j]
                 kills += evaulate_match["kills"]
                 deaths +=  evaulate_match["deaths"]

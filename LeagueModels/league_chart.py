@@ -33,9 +33,27 @@ def plot_kda(sql_match_rows):
     x = dates
     y = kda_points
 
-    pyplot.plot(x, y)
+    # pyplot.plot(x, y)
     # reduce # of ticks for dates
-    pyplot.xticks(x[::5], rotation="vertical")
+    # pyplot.xticks(x[::5], rotation="vertical")
+
+    fig, ax = pyplot.subplots()
+    ax.plot(x, y)
+
+    # set the X-axis tick locator and formatter
+    locator = pyplot.MultipleLocator(base=30)
+    formatter = pyplot.DateFormatter('%m/%d')
+    # elif days > 30:
+    #     locator = pyplot.MultipleLocator(base=7)
+    #     formatter = pyplot.DateFormatter('%m/%d')
+    # else:
+    #     locator = pyplot.DayLocator()
+    #     formatter = pyplot.DateFormatter('%m/%d')
+    ax.xaxis.set_major_locator(locator)
+    ax.xaxis.set_major_formatter(formatter)
+    ax.xaxis.set_tick_params(rotation=90)
+
+
     pyplot.title(str(sql_match_rows[0]["summoner_name"]) + " KDA")
     chart_file = "kda_chart.png"
     pyplot.savefig(chart_file) # could pass in dpi to savefig as chart's dpi to increase resolution

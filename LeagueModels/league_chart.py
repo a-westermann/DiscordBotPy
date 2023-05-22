@@ -67,6 +67,8 @@ def group_plot_kda(sql_match_rows, summoners):
                 summoner_match_rows[i].append(match)
 
 
+    for m in summoner_match_rows[1]:
+        print(m["summoner_name"] + "  -   " + str(m["kills"]) + str(m["deaths"]) + str(m["assists"]))
 
     # now iterate through each summoner's table, and each match inside it to build the kda
     for match_table in summoner_match_rows:

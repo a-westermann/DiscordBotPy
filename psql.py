@@ -51,7 +51,9 @@ class PSQL:
         self.connection.close()
         # now pull all rows for each member that match those match_id's
         self.open_connection()
-        self.cursor.execute("SELECT * FROM match_history WHERE match_id IN (" + list_records + ");")
+        # gives the matches in chronological order
+        self.cursor.execute("SELECT * FROM match_history WHERE match_id IN (" + list_records + ") "
+                                                                    " ORDER BY match_id;")
         records = self.cursor.fetchall()
         self.connection.close()
         return records

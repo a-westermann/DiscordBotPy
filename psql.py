@@ -53,7 +53,7 @@ class PSQL:
         self.open_connection()
         # gives the matches in chronological order
         self.cursor.execute("SELECT * FROM match_history WHERE match_id IN (" + list_records + ") "
-                                                                    " ORDER BY match_id;")
+                                                                    " ORDER BY date_created;")
         records = self.cursor.fetchall()
         self.connection.close()
         return records

@@ -14,7 +14,7 @@ def plot_kda(sql_match_rows):
     match_dates = []
     for i, match in enumerate(sql_match_rows):
         # pull 110 matches from db, but only use the first 10 to add to the average of the early games
-        if i < len(summoner_match_rows) - 100:
+        if i < len(sql_match_rows) - 100:
             continue
         # for each match, look at the last 10 and create the kda average
         kills, deaths, assists = 0, 0, 0

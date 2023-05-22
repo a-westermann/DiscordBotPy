@@ -30,7 +30,7 @@ class PSQL:
     def get_summoner_matches(self, summoner_name):
         self.open_connection()
         self.cursor.execute("SELECT * FROM match_history WHERE summoner_name = '{0}' \
-                             ORDER BY date_created DESC LIMIT 100;".format(summoner_name))
+                             ORDER BY date_created DESC LIMIT 110;".format(summoner_name))
         records = self.cursor.fetchall()[::-1] # reverse the results
         self.connection.close()
         return records
@@ -42,7 +42,7 @@ class PSQL:
         # first get the top 100 where 3+ members were in game
         self.cursor.execute("select match_id FROM match_history "
                             "GROUP BY match_id, date_created "
-                            " HAVING COUNT(match_id)>2 ORDER BY date_created DESC LIMIT 100")
+                            " HAVING COUNT(match_id)>2 ORDER BY date_created DESC LIMIT 110")
         records = self.cursor.fetchall()[::-1] # reverse the results
         list_records = ""
         for row in records:

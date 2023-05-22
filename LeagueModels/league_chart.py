@@ -13,6 +13,9 @@ def plot_kda(sql_match_rows):
     kda_points = []
     match_dates = []
     for i, match in enumerate(sql_match_rows):
+        # pull 110 matches from db, but only use the first 10 to add to the average of the early games
+        if i < 10:
+            continue
         # for each match, look at the last 10 and create the kda average
         kills, deaths, assists = 0, 0, 0
         for j in range(10):
@@ -25,35 +28,22 @@ def plot_kda(sql_match_rows):
         deaths = deaths if deaths > 0 else 1
         kda = (kills + assists) / deaths
         match_date = str(evaulate_match["date_created"]).split(' ')[0]
-        # match_date = match_date.split('-')[1] + match_date.split('-')[2]
         match_date = datetime.datetime.strptime(match_date, '%Y-%m-%d')
-        # match_date = match_date.strftime('%m/%d')
         kda_points.append(round(kda, 2))
         match_dates.append(match_date)
 
-    # dates = [datetime.datetime.strptime(d, '%Y-%m-%d').date() for d in dates]
     x = match_dates
     y = kda_points
 
-    # pyplot.plot(x, y)
-    # reduce # of ticks for dates
-    # pyplot.xticks(x[::5], rotation="vertical")
-    days = (x[-1] - x[0]).days
+    days = (x[-1] - x[0]).days #determine how many days in the data set. NOT USING THIS. just as a reminder
     fig, ax = pyplot.subplots()
     ax.plot(x, y)
-    if days > 90:
-        locator = dates.MonthLocator()
-        formatter = dates.DateFormatter('%m/%d\n%Y')
-    elif days > 30:
-        locator = dates.DayLocator(interval=7)
-        formatter = dates.DateFormatter('%m/%d')
-    else:
-        locator = dates.DayLocator()
-        formatter = dates.DateFormatter('%m/%d')
+    # set the formatting and intervals of the dates. evenly space them.
+    locator = dates.DayLocator(interval=7)
+    formatter = dates.DateFormatter('%m/%d')
     ax.xaxis.set_major_locator(locator)
     ax.xaxis.set_major_formatter(formatter)
     ax.xaxis.set_tick_params(rotation=90)
-
 
     pyplot.title(str(sql_match_rows[0]["summoner_name"]) + " KDA")
     chart_file = "kda_chart.png"
@@ -73,6 +63,9 @@ def group_plot_kda(sql_match_rows, summoners):
         kda_points.append([])
     for i, match in enumerate(sql_match_rows):
         summoner = str(match["summoner_name"])
+        # pull 110 matches from db, but only use the first 10 to add to the average of the early games
+        if i < 10:
+            continue
         # for each match, look at the last 10 and create the kda average
         kills, deaths, assists = 0, 0, 0
         for j in range(10):

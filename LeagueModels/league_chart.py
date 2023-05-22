@@ -136,7 +136,7 @@ def group_plot_kda(sql_match_rows, summoners):
         y = np.ma.array(y, mask=mask)
         y_lines.append(y)
 
-        print(str(matching_dates_count) + "  matching dates for " + str(strsummoners[i]) + "\n")
+        print(str(matching_dates_count) + "  matching dates for " + str(summoners[i]) + "\n")
 
         # y_values.append(np.array(kda_list))
 

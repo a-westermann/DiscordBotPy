@@ -106,7 +106,6 @@ def group_plot_kda(sql_match_rows, summoners):
     while start_date <= end_date:
         dates_list.append(start_date)
         start_date += datetime.timedelta(days=1)
-        print(str(start_date) +  " added to date list")
 
     x = dates_list
     x.sort()
@@ -122,6 +121,7 @@ def group_plot_kda(sql_match_rows, summoners):
         for j, date in enumerate(dates_list):
             # if there is a match on this date, add the kda on that index
             # (note it will be ONE of the matches on that date)
+            date = str(date).split(' ')[0]
             if date in kda_dates:
                 matching_dates_count += 1
                 index = kda_dates.index(date)

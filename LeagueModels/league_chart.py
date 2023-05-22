@@ -91,7 +91,7 @@ def group_plot_kda(sql_match_rows, summoners):
 
     x = list(match_dates)
     x.sort()
-    y_values = []
+    y_lines = []
     dates_list = [str(date.date()) for date in x]  # get a list of the dates in the set
     for i, kda_list in enumerate(kda_points):  # add the kda_list for each summoner to the y_values list
         # y = np.full(len(x), np.nan)  # np.nan fill in values = to # of x values. We will replace them w/ Y values
@@ -109,21 +109,19 @@ def group_plot_kda(sql_match_rows, summoners):
                     mask[j] = False # turn off mask, found match for this point
                     # y[j] = kda_list[k]
         kda_scores = [kda_score[1] for kda_score in kda_list]
-        for k in kda_scores:
-            print(str(k))
-        y = np.array(kda_scores[1])
+        y = np.array(kda_scores)
         y = np.insert(y, 0, np.nan)
         # I need to reduce the length of y to be equal to x, doesn't allow mismatch axis lengths
         y = np.insert(y, len(y), np.nan)
         # fill in missing values with the mask
         y = np.ma.array(y, mask=mask)
-        y_values.append(y)
+        y_lines.append(y)
 
         # y_values.append(np.array(kda_list))
 
     fig, ax = pyplot.subplots()
     # plot each y-value list
-    for i, y in enumerate(y_values):
+    for i, y in enumerate(y_lines):
         pyplot.plot(x, y, label=list(summoners)[i])
     ax.legend()
     # reduce # of ticks for dates

@@ -103,6 +103,7 @@ def group_plot_kda(sql_match_rows, summoners):
     x.sort()
     y_lines = []
     for i, kda_list in enumerate(kda_points):  # add the kda_list for each summoner to the y_values list
+        matching_dates_count = 0
         # y = np.full(len(x), np.nan)  # np.nan fill in values = to # of x values. We will replace them w/ Y values
         # create a mask instead to fill in missing points
         # mask = np.ones(len(x), dtype=bool)
@@ -111,12 +112,12 @@ def group_plot_kda(sql_match_rows, summoners):
         kda_list.reverse()
         # get first element (match_date) in the kda_list tuple (match_date, kda)
         kda_dates = [kda_date[0] for kda_date in kda_list]
-        print(kda_dates[0])
         y = []
         for j, date in enumerate(dates_list):
             # if there is a match on this date, add the kda on that index
             # (note it will be ONE of the matches on that date)
             if date in kda_dates:
+                matching_dates_count += 1
                 index = kda_dates.index(date)
                 y.append(kda_list[index][1])
             else:  # no match on this date, append a nan
@@ -134,6 +135,8 @@ def group_plot_kda(sql_match_rows, summoners):
         mask = np.isnan(y)
         y = np.ma.array(y, mask=mask)
         y_lines.append(y)
+
+        print(str(matching_dates_count) + "  matching dates for " + str(strsummoners[i]) + "\n")
 
         # y_values.append(np.array(kda_list))
 

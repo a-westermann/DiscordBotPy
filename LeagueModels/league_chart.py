@@ -66,6 +66,9 @@ def group_plot_kda(sql_match_rows, summoners):
             if s == str(match["summoner_name"]):
                 summoner_match_rows[i].append(match)
 
+    for x in summoner_match_rows[0]:
+        print(str(x["match_id"]))
+
     for match_table in summoner_match_rows:
         summoner = str(match_table[0]["summoner_name"])
         for i, match in enumerate(match_table):

@@ -100,7 +100,7 @@ def group_plot_kda(sql_match_rows, summoners):
         y = np.full(len(x), np.nan)  # np.nan fill in values = to # of x values. We will replace them w/ Y values
         # iterate through dates AND the kda match history for this summoner & fill in matches
         for j, date in enumerate(dates_list):
-            for k, match_d in match_dates_lists[i]:
+            for k, match_d in enumerate(match_dates_lists[i]):
                 if date == str(match_d):
                     y[j] = kda_list[k]
                     # y[j] = kda_list.pop()

@@ -66,9 +66,9 @@ def group_plot_kda(sql_match_rows, summoners):
             if s == str(match["summoner_name"]):
                 summoner_match_rows[i].append(match)
 
-
-    for m in summoner_match_rows[1]:
-        print(m["summoner_name"] + "  -   " + str(m["kills"]) + "/" + str(m["deaths"]) + "/"+ str(m["assists"]))
+    # it is building the tables correctly
+    # for m in summoner_match_rows[1]:
+    #     print(m["summoner_name"] + "  -   " + str(m["kills"]) + "/" + str(m["deaths"]) + "/"+ str(m["assists"]))
 
     # now iterate through each summoner's table, and each match inside it to build the kda
     for match_table in summoner_match_rows:
@@ -86,6 +86,8 @@ def group_plot_kda(sql_match_rows, summoners):
 
             deaths = deaths if deaths > 0 else 1
             kda = (kills + assists) / deaths
+            if kda > 6:
+                print("adding kda for " + summoner + "  " + str(kda))
             list_index = list(summoners).index(summoner)
             # I am adding the match date without the hours/minutes. So is that screwing something up?
             match_date = str(match["date_created"]).split(' ')[0]
@@ -117,6 +119,8 @@ def group_plot_kda(sql_match_rows, summoners):
         # get first element (match_date) in the kda_list tuple (match_date, kda)
         kda_dates = [kda_date[0] for kda_date in kda_list]
         kdas =  [kda_date[1] for kda_date in kda_list]
+
+#TODO: Indices are screwed up. But it seems no one has over 6 kda?
         print("summoner  = " + summoners[i])
         for k in kdas:
             print(str(k))

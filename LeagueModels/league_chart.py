@@ -90,11 +90,22 @@ def group_plot_kda(sql_match_rows, summoners):
 
 
     x = list(match_dates)
+    x.sort()
     y_values = []
     for kda_list in kda_points:  # add the kda_list for each summoner to the y_values list
-        y_values.append(np.array(kda_list))
+        # take into account differing # of matches per summoner
+        y = np.full(len(x), np.nan)  # np.nan ensures y values will be filled in to match x-length
+        dates_list = [str(date.date()) for date in x]
+        # now check if this y value match_date matches any dates in x
+        for i, date in enumerate(dates_list):
+            if date in sql_match_rows[i+10]["date_created"]:
+                y[i] = kda_list.pop()
+        y_values.append(y)
+
+        # y_values.append(np.array(kda_list))
 
     fig, ax = pyplot.subplots()
+    # plot each y-value list
     for i, y in enumerate(y_values):
         pyplot.plot(x, y, label=list(summoners)[i])
     ax.legend()

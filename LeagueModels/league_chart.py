@@ -57,8 +57,8 @@ def plot_kda(sql_match_rows):
 #sql_match_rows will include duplicates, each match has rows for each summoner
 def group_plot_kda(sql_match_rows, summoners):
 
-    kda_points = []
-    dates = set()
+    kda_points = [[] for _ in range(len(summoners))]
+    match_dates = set()
     for s in summoners:
         kda_points.append([])
     for i, match in enumerate(sql_match_rows):
@@ -80,28 +80,26 @@ def group_plot_kda(sql_match_rows, summoners):
         match_date = str(evaulate_match["date_created"]).split(' ')[0]
         # match_date = match_date.split('-')[1] + match_date.split('-')[2]
         match_date = datetime.datetime.strptime(match_date, '%Y-%m-%d')
-        match_date = match_date.strftime('%m/%d')
         list_index = list(summoners).index(summoner)
         kda_points[list_index].append(round(kda, 2))
-        dates.add(match_date)
+        match_dates.add(match_date)
 
     # x1, x2, x3, x4 = dates[0], dates[1], dates[2], dates[3]
-    x = list(dates)
-    y1, y2, y3, y4 = kda_points[0], kda_points[1], kda_points[2], kda_points[3]
-    y1mask = np.isinf(y1)
-    y2mask = np.isinf(y2)
-    y3mask = np.isinf(y3)
-    y4mask = np.isinf(y4)
+    x = list(match_dates)
+    y_values = []
+    for kda_list in kda_points:  # add the kda_list for each summoner to the y_values list
+        y_values.append(np.array(kda_list))
 
-    pyplot.plot(x[y1mask], y1[y1mask])
-    pyplot.plot(x[y2mask], y2[y2mask])
-    pyplot.plot(x[y3mask], y3[y3mask])
-    pyplot.plot(x[y4mask], y4[y4mask])
+    fig, ax = pyplot.subplots()
+    for i, y in enumerate(y_values):
+        pyplot.plot(x, y, label=list(summoners)[i])
+    ax.legend()
     # reduce # of ticks for dates
-    pyplot.xticks(x1[::5], rotation="vertical")
-    pyplot.xticks(x2[::5])
-    pyplot.xticks(x3[::5])
-    pyplot.xticks(x4[::5])
+    locator = dates.DayLocator(interval=7)
+    formatter = dates.DateFormatter('%m/%d')
+    ax.xaxis.set_major_locator(locator)
+    ax.xaxis.set_major_formatter(formatter)
+    ax.xaxis.set_tick_params(rotation=90)
     pyplot.title("KDA last 100 matches")
     chart_file = "kda_chart.png"
     pyplot.savefig(chart_file) # could pass in dpi to savefig as chart's dpi to increase resolution

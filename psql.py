@@ -44,7 +44,7 @@ class PSQL:
                             "GROUP BY match_id, date_created "
                             " HAVING COUNT(match_id)>2 ORDER BY date_created DESC LIMIT 110")
         records = self.cursor.fetchall()[::-1] # reverse the results
-        print("found " + str(len(records)) + "  records.")
+        print("found " + str(len(records)) + "  records w/ 3+ summoners.")
         list_records = ""
         for row in records:
             list_records += "'" + str(row["match_id"]) + "',"
@@ -53,7 +53,8 @@ class PSQL:
         # now pull all rows for each member that match those match_id's
         self.open_connection()
         # gives the matches in chronological order
-
+        print("SELECT * FROM match_history WHERE match_id IN (" + list_records + ") "
+                                                                    " ORDER BY date_created;")
         self.cursor.execute("SELECT * FROM match_history WHERE match_id IN (" + list_records + ") "
                                                                     " ORDER BY date_created;")
         records = self.cursor.fetchall()

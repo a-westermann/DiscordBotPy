@@ -93,6 +93,7 @@ def group_plot_kda(sql_match_rows, summoners):
             match_dates.add(match_date)
 
 
+    print(match_dates)
     # get a list of all dates between the first and last matches
     dates_list = list(match_dates)
     dates_list.sort()

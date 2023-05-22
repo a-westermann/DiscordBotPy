@@ -120,6 +120,8 @@ def group_plot_kda(sql_match_rows, summoners):
                 matching_dates_count += 1
                 index = kda_dates.index(date)
                 y.append(kda_list[index][1])
+                print(" adding kda = " + str(kda_list[index][1]) +
+                      " on date " + str(date) + " for " + str(summoners[i]))
             else:  # no match on this date, append a nan
                 y.append(np.nan)
             # for k, m_date in enumerate(kda_dates):

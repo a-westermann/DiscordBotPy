@@ -85,7 +85,7 @@ def group_plot_kda(sql_match_rows, summoners):
         list_index = list(summoners).index(summoner)
         match_date = str(evaulate_match["date_created"]).split(' ')[0]
         match_date = datetime.datetime.strptime(match_date, '%Y-%m-%d')
-        kda_points[list_index].append(tuple((match_date, round(kda, 2))))
+        kda_points[list_index].append((match_date, round(kda, 2)))
         match_dates.add(match_date)
 
 
@@ -96,12 +96,14 @@ def group_plot_kda(sql_match_rows, summoners):
     for i, kda_list in enumerate(kda_points):  # add the kda_list for each summoner to the y_values list
         # y = np.full(len(x), np.nan)  # np.nan fill in values = to # of x values. We will replace them w/ Y values
         # create a mask instead to fill in missing points
-        print(kda_list[0])
         mask = np.ones(len(x), dtype=bool)
         # iterate through dates AND the kda match history for this summoner & fill in matches that match the date
+        # reverse it so latest game played on that date is first for the match
+        kda_list.reverse()
+        # get first element (match_date) in the kda_list tuple (match_date, kda)
+        kda_dates = [kda_date[0] for kda_date in kda_list]
         for j, date in enumerate(dates_list):
-            for k, m_date in enumerate(kda_list[0].reverse()):
-                # reverse it so latest game played on that date is first for the match
+            for k, m_date in enumerate(kda_dates):
                 m_date = str(m_date).split(' ')[0]
                 if date == m_date:
                     mask[j] = False # turn off mask, found match for this point

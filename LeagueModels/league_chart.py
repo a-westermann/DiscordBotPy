@@ -98,7 +98,7 @@ def group_plot_kda(sql_match_rows, summoners):
         dates_list = [str(date.date()) for date in x]
         # now check if this y value match_date matches any dates in x
         for i, date in enumerate(dates_list):
-            if date in str(sql_match_rows[i+10]["date_created"]):
+            if date in str(sql_match_rows[i+10]["date_created"]) and len(kda_list) > 0:
                 y[i] = kda_list.pop()
         y_values.append(y)
 

@@ -120,7 +120,6 @@ def group_plot_kda(sql_match_rows, summoners):
         kda_dates = [kda_date[0] for kda_date in kda_list]
         kdas =  [kda_date[1] for kda_date in kda_list]
 
-#TODO: Indices are screwed up. But it seems no one has over 6 kda?
         print("summoner  = " + summoners[i])
         for k in kdas:
             print(str(k))

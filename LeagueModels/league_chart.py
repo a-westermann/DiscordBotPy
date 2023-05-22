@@ -125,8 +125,8 @@ def group_plot_kda(sql_match_rows, summoners):
             #     if date == m_date:
             #         mask[j] = False # turn off mask, found match for this point
 
-        kda_scores = [kda_score[1] for kda_score in kda_list]
-        y = np.array(kda_scores)
+        # kda_scores = [kda_score[1] for kda_score in kda_list]
+        y = np.array(y)
         y = np.insert(y, 0, np.nan)
         y = np.insert(y, len(y), np.nan)
         # fill in missing values with the mask

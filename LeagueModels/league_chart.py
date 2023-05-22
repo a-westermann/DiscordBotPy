@@ -14,13 +14,13 @@ def plot_kda(sql_match_rows):
     match_dates = []
     for i, match in enumerate(sql_match_rows):
         # pull 110 matches from db, but only use the first 10 to add to the average of the early games
-        if i < 10:
+        if i < len(summoner_match_rows) - 100:
             continue
         # for each match, look at the last 10 and create the kda average
         kills, deaths, assists = 0, 0, 0
         for j in range(10):
-            if j > i:
-                break  # ensures for the first 10 games in the list we don't try to go negative i
+        #     if j > i + :
+        #         break  # NO LONGER NEEDED since pulling 110
             evaulate_match = sql_match_rows[i - j]
             kills += evaulate_match["kills"]
             deaths +=  evaulate_match["deaths"]
@@ -66,20 +66,20 @@ def group_plot_kda(sql_match_rows, summoners):
             if s == str(match["summoner_name"]):
                 summoner_match_rows[i].append(match)
 
-    for x in summoner_match_rows[0]:
-        print(str(x["match_id"]))
+    print(str(len(summoner_match_rows[0])) +  " matches for Vierce")
 
+    # now iterate through each summoner's table, and each match inside it
     for match_table in summoner_match_rows:
         summoner = str(match_table[0]["summoner_name"])
         for i, match in enumerate(match_table):
             # pull 110 matches from db, but only use the first 10 to add to the average of the early games
-            if i < 10:
+            if i < summoner_match_rows - 100:
                 continue
             # for each match, look at the last 10 and create the kda average
             kills, deaths, assists = 0, 0, 0
             for j in range(10):
-                if j > i:
-                    break  # ensures for the first 10 games in the list we don't try to go negative i
+            #     if j > i:
+            #         break  # NO LONGER NEEDED since pulling 110
                 evaulate_match = sql_match_rows[i - j]
                 kills += evaulate_match["kills"]
                 deaths +=  evaulate_match["deaths"]

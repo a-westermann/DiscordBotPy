@@ -64,8 +64,8 @@ def group_plot_kda(sql_match_rows, summoners):
     # datetime.datetime.strptime(last_date, '%Y-%m-%d')
     # date_range = [first_date, last_date]
     match_dates = set()
-    for s in summoners:
-        kda_points.append([])
+    # for s in summoners:
+    #     kda_points.append([])
     for i, match in enumerate(sql_match_rows):
         summoner = str(match["summoner_name"])
         # pull 110 matches from db, but only use the first 10 to add to the average of the early games
@@ -106,7 +106,6 @@ def group_plot_kda(sql_match_rows, summoners):
 
     fig, ax = pyplot.subplots()
     # plot each y-value list
-    print(len(y_values))
     for i, y in enumerate(y_values):
         pyplot.plot(x, y, label=list(summoners)[i])
     ax.legend()

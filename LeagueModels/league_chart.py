@@ -106,7 +106,6 @@ def group_plot_kda(sql_match_rows, summoners):
 
     fig, ax = pyplot.subplots()
     # plot each y-value list
-    print(len(y_values))
     for i, y in enumerate(y_values):
         pyplot.plot(x, y, label=list(summoners)[i])
     ax.legend()

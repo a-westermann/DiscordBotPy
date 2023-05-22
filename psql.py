@@ -31,7 +31,7 @@ class PSQL:
         self.open_connection()
         self.cursor.execute("SELECT * FROM match_history WHERE summoner_name = '{0}' \
                              ORDER BY date_created DESC LIMIT 100;".format(summoner_name))
-        records = self.cursor.fetchall()
+        records = self.cursor.fetchall()[::-1] # reverse the results
         self.connection.close()
         return records
 
@@ -43,7 +43,7 @@ class PSQL:
         self.cursor.execute("select match_id FROM match_history "
                             "GROUP BY match_id, date_created "
                             " HAVING COUNT(match_id)>2 ORDER BY date_created DESC LIMIT 100")
-        records = self.cursor.fetchall()
+        records = self.cursor.fetchall()[::-1] # reverse the results
         list_records = ""
         for row in records:
             list_records += "'" + str(row["match_id"]) + "',"

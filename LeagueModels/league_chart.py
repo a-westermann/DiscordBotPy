@@ -48,8 +48,8 @@ def plot_kda(sql_match_rows):
     #     locator = pyplot.MultipleLocator(base=7)
     #     formatter = pyplot.DateFormatter('%m/%d')
     # else:
-    locator = pyplot.DayLocator()
-    formatter = pyplot.DateFormatter('%m/%d')
+    locator = matplotlib.dates.DayLocator()
+    formatter = matplotlib.dates.DateFormatter('%m/%d')
     ax.xaxis.set_major_locator(locator)
     ax.xaxis.set_major_formatter(formatter)
     ax.xaxis.set_tick_params(rotation=90)

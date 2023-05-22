@@ -85,7 +85,7 @@ def group_plot_kda(sql_match_rows, summoners):
         list_index = list(summoners).index(summoner)
         match_date = str(evaulate_match["date_created"]).split(' ')[0]
         match_date = datetime.datetime.strptime(match_date, '%Y-%m-%d')
-        kda_points[list_index].append(tuple(match_date, round(kda, 2)))
+        kda_points[list_index].append(tuple((match_date, round(kda, 2))))
         match_dates.add(match_date)
 
 

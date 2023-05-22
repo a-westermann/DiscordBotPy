@@ -109,6 +109,8 @@ def group_plot_kda(sql_match_rows, summoners):
                     mask[j] = False # turn off mask, found match for this point
                     # y[j] = kda_list[k]
         kda_scores = [kda_score[1] for kda_score in kda_list]
+        for k in kda_scores:
+            print(str(k))
         y = np.array(kda_scores[1])
         y = np.insert(y, 0, np.nan)
         # I need to reduce the length of y to be equal to x, doesn't allow mismatch axis lengths

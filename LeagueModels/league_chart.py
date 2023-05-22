@@ -73,7 +73,7 @@ def group_plot_kda(sql_match_rows, summoners):
         summoner = str(match_table[0]["summoner_name"])
         for i, match in enumerate(match_table):
             # for each match, look at the last 10 and create the kda average
-            print(match["date_created"] + " \n\n")
+            print(str(match["date_created"]) + " \n\n")
 
             kills, deaths, assists = 0, 0, 0
             for j in range(10):

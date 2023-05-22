@@ -31,6 +31,7 @@ def plot_kda(sql_match_rows):
         kda_points.append(round(kda, 2))
         dates.append(match_date)
 
+    dates = [datetime.datetime.strptime(d, '%Y-%m-%d').date() for d in dates]
     x = dates
     y = kda_points
 
@@ -40,14 +41,6 @@ def plot_kda(sql_match_rows):
     days = (x[-1] - x[0]).days
     fig, ax = pyplot.subplots()
     ax.plot(x, y)
-
-    # set the X-axis tick locator and formatter
-    # locator = pyplot.MultipleLocator(base=30)
-    # formatter = matplotlib.dates.DateFormatter('%m/%d')
-    # elif days > 30:
-    #     locator = pyplot.MultipleLocator(base=7)
-    #     formatter = pyplot.DateFormatter('%m/%d')
-    # else:
     if days > 90:
         locator = dates.MonthLocator()
         formatter = dates.DateFormatter('%m/%d\n%Y')

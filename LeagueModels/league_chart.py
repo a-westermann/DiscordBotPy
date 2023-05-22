@@ -114,9 +114,11 @@ def group_plot_kda(sql_match_rows, summoners):
         kda_list.reverse()
         # get first element (match_date) in the kda_list tuple (match_date, kda)
         kda_dates = [kda_date[0] for kda_date in kda_list]
-        kdas =  [kda_date[0] for kda_date in kda_list]
+        kdas =  [kda_date[1] for kda_date in kda_list]
+        print("summoner  = " + kda_list)
         for k in kdas:
             print(str(k))
+        print("\n\n\n")
 
         y = []
         for j, date in enumerate(dates_list):

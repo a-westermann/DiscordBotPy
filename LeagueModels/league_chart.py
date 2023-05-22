@@ -89,16 +89,15 @@ def group_plot_kda(sql_match_rows, summoners):
         match_dates.add(match_date)
 
 
+    # get a list of all dates between the first and last matches
     dates_list = list(match_dates)
     dates_list.sort()
     start_date = dates_list[0]
     end_date = dates_list[-1]
-    # dates_list = [str(date.date()) for date in x]  # get a list of the dates in the set
     dates_list = []
     while start_date <= end_date:
         dates_list.append(start_date)
         start_date += datetime.timedelta(days=1)
-    print(dates_list)
 
     x = dates_list
     x.sort()
@@ -122,7 +121,7 @@ def group_plot_kda(sql_match_rows, summoners):
         y = np.array(kda_scores)
         y = np.insert(y, 0, np.nan)
         # I need to reduce the length of y to be equal to x, doesn't allow mismatch axis lengths
-        y = np.insert(y, len(y), np.nan)
+        y = np.insert(y, len(x), np.nan)
         # fill in missing values with the mask
         y = np.ma.array(y, mask=mask)
         y_lines.append(y)

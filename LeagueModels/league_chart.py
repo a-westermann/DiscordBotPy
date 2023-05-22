@@ -58,35 +58,36 @@ def plot_kda(sql_match_rows):
 def group_plot_kda(sql_match_rows, summoners):
 
     kda_points = [[] for _ in range(len(summoners))]
-    # first_date = sql_match_rows[0]["date_created"].split(' ')[0]
-    # datetime.datetime.strptime(first_date, '%Y-%m-%d')
-    # last_date = sql_match_rows[-1]["date_created"].split(' ')[0]
-    # datetime.datetime.strptime(last_date, '%Y-%m-%d')
-    # date_range = [first_date, last_date]
     match_dates = set()
-    # for s in summoners:
-    #     kda_points.append([])
-    for i, match in enumerate(sql_match_rows):
-        summoner = str(match["summoner_name"])
-        # pull 110 matches from db, but only use the first 10 to add to the average of the early games
-        if i < 10:
-            continue
-        # for each match, look at the last 10 and create the kda average
-        kills, deaths, assists = 0, 0, 0
-        for j in range(10):
-            if j > i:
-                break  # ensures for the first 10 games in the list we don't try to go negative i
-            evaulate_match = sql_match_rows[i - j]
-            kills += evaulate_match["kills"]
-            deaths +=  evaulate_match["deaths"]
-            assists += evaulate_match["assists"]
-        deaths = deaths if deaths > 0 else 1
-        kda = (kills + assists) / deaths
-        list_index = list(summoners).index(summoner)
-        match_date = str(evaulate_match["date_created"]).split(' ')[0]
-        match_date = datetime.datetime.strptime(match_date, '%Y-%m-%d')
-        kda_points[list_index].append((match_date, round(kda, 2)))
-        match_dates.add(match_date)
+    # first split the row results into one table for each summoner
+    summoner_match_rows = [[] for _ in range(len(summoners))]
+    for i, s in enumerate(summoners):
+        for match in sql_match_rows:
+            if s == str(match["summoner_name"]):
+                summoner_match_rows[i].append(match)
+
+    for match_table in summoner_match_rows:
+        summoner = str(match_table[0]["summoner_name"])
+        for i, match in enumerate(match_table):
+            # pull 110 matches from db, but only use the first 10 to add to the average of the early games
+            if i < 10:
+                continue
+            # for each match, look at the last 10 and create the kda average
+            kills, deaths, assists = 0, 0, 0
+            for j in range(10):
+                if j > i:
+                    break  # ensures for the first 10 games in the list we don't try to go negative i
+                evaulate_match = sql_match_rows[i - j]
+                kills += evaulate_match["kills"]
+                deaths +=  evaulate_match["deaths"]
+                assists += evaulate_match["assists"]
+            deaths = deaths if deaths > 0 else 1
+            kda = (kills + assists) / deaths
+            list_index = list(summoners).index(summoner)
+            match_date = str(evaulate_match["date_created"]).split(' ')[0]
+            match_date = datetime.datetime.strptime(match_date, '%Y-%m-%d')
+            kda_points[list_index].append((match_date, round(kda, 2)))
+            match_dates.add(match_date)
 
 
     # get a list of all dates between the first and last matches

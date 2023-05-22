@@ -89,10 +89,18 @@ def group_plot_kda(sql_match_rows, summoners):
         match_dates.add(match_date)
 
 
-    x = list(match_dates)
+    start_date = match_dates[0]
+    end_date = match_dates[-1]
+    # dates_list = [str(date.date()) for date in x]  # get a list of the dates in the set
+    dates_list = []
+    while start_date <= end_date:
+        dates_list.append(start_date)
+        start_date += 1
+    print(dates_list)
+
+    x = dates_list
     x.sort()
     y_lines = []
-    dates_list = [str(date.date()) for date in x]  # get a list of the dates in the set
     for i, kda_list in enumerate(kda_points):  # add the kda_list for each summoner to the y_values list
         # y = np.full(len(x), np.nan)  # np.nan fill in values = to # of x values. We will replace them w/ Y values
         # create a mask instead to fill in missing points

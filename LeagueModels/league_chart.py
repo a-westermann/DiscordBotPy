@@ -111,6 +111,7 @@ def group_plot_kda(sql_match_rows, summoners):
         kda_list.reverse()
         # get first element (match_date) in the kda_list tuple (match_date, kda)
         kda_dates = [kda_date[0] for kda_date in kda_list]
+        print(kda_dates)
         y = []
         for j, date in enumerate(dates_list):
             # if there is a match on this date, add the kda on that index
@@ -119,7 +120,6 @@ def group_plot_kda(sql_match_rows, summoners):
                 index = kda_dates.index(date)
                 y.append(kda_list[index][1])
             else:  # no match on this date, append a nan
-                print(str(date) + " not in list \n")
                 y.append(np.nan)
             # for k, m_date in enumerate(kda_dates):
             #     m_date = str(m_date).split(' ')[0]

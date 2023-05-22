@@ -1,8 +1,8 @@
 import helpers
+import matplotlib.dates
 import pylab
 import numpy as np
-from matplotlib import pyplot
-import matplotlib
+from matplotlib import pyplot, dates
 import discord
 import discord.ext
 import helpers

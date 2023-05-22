@@ -1,7 +1,8 @@
 import helpers
+import matplotlib.dates
 import pylab
 import numpy as np
-import matplotlib.pyplot as pyplot
+from matplotlib import pyplot, dates
 import discord
 import discord.ext
 import helpers
@@ -42,7 +43,7 @@ def plot_kda(sql_match_rows):
 
     # set the X-axis tick locator and formatter
     locator = pyplot.MultipleLocator(base=30)
-    formatter = pyplot.DateFormatter('%m/%d')
+    formatter = matplotlib.dates.DateFormatter('%m/%d')
     # elif days > 30:
     #     locator = pyplot.MultipleLocator(base=7)
     #     formatter = pyplot.DateFormatter('%m/%d')

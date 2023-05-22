@@ -108,7 +108,7 @@ def group_plot_kda(sql_match_rows, summoners):
         # mask = np.ones(len(x), dtype=bool)
         # iterate through dates AND the kda match history for this summoner & fill in matches that match the date
         # reverse it so latest game played on that date is first for the match
-        kda_list = kda_list.reverse()
+        # kda_list.reverse()
         # get first element (match_date) in the kda_list tuple (match_date, kda)
         kda_dates = [kda_date[0] for kda_date in kda_list]
         print(kda_dates[0])

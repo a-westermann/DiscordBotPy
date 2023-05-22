@@ -119,6 +119,7 @@ def group_plot_kda(sql_match_rows, summoners):
                 index = kda_dates.index(date)
                 y.append(kda_list[index][1])
             else:  # no match on this date, append a nan
+                print(str(date) + " not in list \n")
                 y.append(np.nan)
             # for k, m_date in enumerate(kda_dates):
             #     m_date = str(m_date).split(' ')[0]

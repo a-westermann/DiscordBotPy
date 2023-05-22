@@ -89,8 +89,8 @@ def group_plot_kda(sql_match_rows, summoners):
         match_dates.add(match_date)
 
 
-    start_date = match_dates[0]
-    end_date = match_dates[-1]
+    start_date = list(match_dates).sort()[0]
+    end_date = list(match_dates).sort()[-1]
     # dates_list = [str(date.date()) for date in x]  # get a list of the dates in the set
     dates_list = []
     while start_date <= end_date:

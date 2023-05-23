@@ -153,8 +153,9 @@ def group_plot_kda(sql_match_rows, summoners):
         # y = np.insert(y, 0, np.nan)
         # y = np.insert(y, len(y), np.nan)
         # fill in missing values with the mask
-        mask = np.isnan(y)
-        y = np.ma.array(y, mask=mask)
+        # mask = np.isnan(y)
+        y = np.ma.masked_equal(y, np.nan)
+        y = np.ma.array(y)
         print(y)
         y_lines.append(y)
 

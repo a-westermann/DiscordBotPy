@@ -167,7 +167,7 @@ def group_plot_kda(sql_match_rows, summoners):
 
     fig, ax = pyplot.subplots()
     # plot each y-value list
-    colors = ['#333399', 'black', 'green', 'red']
+    colors = ['#000000', '#14213d', '#fca311', '#e5e5e5']
     for i, y in enumerate(y_lines):
         pyplot.plot(x, y, label=list(summoners)[i], color=colors[i])
     ax.legend()

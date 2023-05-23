@@ -79,15 +79,13 @@ def group_plot_kda(sql_match_rows, summoners):
             for j in range(10):
                 if j > i:
                     break
-                evaulate_match = sql_match_rows[i - j]
+                evaulate_match = match_table[i - j]
                 kills += evaulate_match["kills"]
                 deaths +=  evaulate_match["deaths"]
                 assists += evaulate_match["assists"]
 
             deaths = deaths if deaths > 0 else 1
             kda = (kills + assists) / deaths
-            if kda > 6:
-                print("adding kda for " + summoner + "  " + str(kda))
             list_index = list(summoners).index(summoner)
             # I am adding the match date without the hours/minutes. So is that screwing something up?
             match_date = str(match["date_created"]).split(' ')[0]

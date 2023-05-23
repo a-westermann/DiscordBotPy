@@ -107,8 +107,9 @@ def group_plot_kda(sql_match_rows, summoners):
         start_date += datetime.timedelta(days=1)
     x = dates_list
     x.sort()
-    x = np.arange(len(x))  # used for interpolation below
+    x_interp = np.arange(len(x))  # used for interpolation below
     y_lines = []
+    mask_counter = 0
     for i, kda_list in enumerate(kda_points):  # add the kda_list for each summoner to the y_values list
         # iterate through dates AND the kda match history for this summoner & fill in matches that match the date
         # reverse it so latest game played on that date is first for the match
@@ -123,18 +124,18 @@ def group_plot_kda(sql_match_rows, summoners):
                 index = kda_dates.index(date)
                 y[j] = kda_list[index][1]
             else:  # no match on this date, leave the nan in place for the mask
-                pass
+                mask_counter += 1
 
-        print("mask count for " + summoners[i] + "  =  " + str(len(np.isnan(y))))
+        print("mask count for " + summoners[i] + "  =  " + str(mask_counter))
         y = np.array(y)
         # fill in missing values (nan) with the mask
         mask = np.isnan(y)
+        print(str(len(dates_list) - mask_counter) + "  matching dates for " + str(summoners[i]) + "\n")
         y = np.ma.array(y, mask=mask)
         print(y)
         # interpolate missing values for charting continuous lines. ~ means to invert the mask
-        y = np.interp(x, x[~mask], y[~mask])
+        y = np.interp(x_interp, x[~mask].astype(int), y[~mask])
         y_lines.append(y)
-        print(str(len(dates_list) - len(np.isnan(y))) + "  matching dates for " + str(summoners[i]) + "\n")
 
 
     fig, ax = pyplot.subplots()

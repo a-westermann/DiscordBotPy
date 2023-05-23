@@ -54,9 +54,7 @@ def plot_kda(sql_match_rows):
 
 
 
-#sql_match_rows will include duplicates, each match has rows for each summoner
 def group_plot_kda(sql_match_rows, summoners):
-
     kda_points = [[] for _ in range(len(summoners))]
     match_dates = set()
     # first split the row results into one table for each summoner
@@ -66,10 +64,6 @@ def group_plot_kda(sql_match_rows, summoners):
             if s == str(match["summoner_name"]):
                 summoner_match_rows[i].append(match)
 
-    # it is building the tables correctly
-    # for m in summoner_match_rows[1]:
-    #     print(m["summoner_name"] + "  -   " + str(m["kills"]) + "/" + str(m["deaths"]) + "/"+ str(m["assists"]))
-
     # now iterate through each summoner's table, and each match inside it to build the kda
     for match_table in summoner_match_rows:
         summoner = str(match_table[0]["summoner_name"])
@@ -77,22 +71,19 @@ def group_plot_kda(sql_match_rows, summoners):
             # for each match, look at the last 10 and create the kda average
             kills, deaths, assists = 0, 0, 0
             for j in range(10):
-                if j > i:
+                if j > i: # j > i means we are looking at the earliest 10 games on the table, so don't go negative i
                     break
                 evaulate_match = match_table[i - j]
                 kills += evaulate_match["kills"]
                 deaths +=  evaulate_match["deaths"]
                 assists += evaulate_match["assists"]
 
-            deaths = deaths if deaths > 0 else 1
+            deaths = deaths if deaths > 0 else 1  # very unlikely safeguard
             kda = (kills + assists) / deaths
             list_index = list(summoners).index(summoner)
-            # I am adding the match date without the hours/minutes. So is that screwing something up?
-            match_date = str(match["date_created"]).split(' ')[0]
-            # match_date = datetime.datetime.strptime(match_date, '%Y-%m-%d')
-            kda_points[list_index].append((match_date, round(kda, 2)))
-            match_dates.add(match_date)
-
+            match_date = str(match["date_created"]).split(' ')[0]  # drop hours/minutes/seconds and stringify
+            kda_points[list_index].append((match_date, round(kda, 2)))  # append a tuple for (date, kda)
+            match_dates.add(match_date)  # add unique match dates to the set for the x-axis
 
     # get a list of all dates between the first and last matches
     dates_list = list(match_dates)
@@ -102,20 +93,19 @@ def group_plot_kda(sql_match_rows, summoners):
     end_date = datetime.datetime.strptime(dates_list[-1], '%Y-%m-%d')
     print("start = " + str(start_date) + "   end = " + str(end_date))
     dates_list = []
-    while start_date <= end_date:
+    while start_date <= end_date:  # build the list of dates between start and end dates to use as x-axis
         dates_list.append(start_date)
         start_date += datetime.timedelta(days=1)
     x = dates_list
     x.sort()
-    y_lines = []
-    mask_counter = 0
-    for i, kda_list in enumerate(kda_points):  # add the kda_list for each summoner to the y_values list
+    y_lines = []  # list of 4 y-value lists
+    for i, kda_list in enumerate(kda_points):
         # iterate through dates AND the kda match history for this summoner & fill in matches that match the date
-        # reverse it so latest game played on that date is first for the match
+        # reverse it so latest game played on that date is the most up-to-date kda for the chart
         kda_list.reverse()
         # get first element (match_date) in the kda_list tuple (match_date, kda)
         kda_dates = [kda_date[0] for kda_date in kda_list]
-
+        mask_counter = 0  # to keep track of how many interpolated points
         y = [np.nan] * len(dates_list) # instantiate a set of nan equal to the # of days in the x-axis set
         for j, date in enumerate(dates_list):
             date = str(date).split(' ')[0]
@@ -125,7 +115,7 @@ def group_plot_kda(sql_match_rows, summoners):
             else:  # no match on this date, leave the nan in place for the mask
                 mask_counter += 1
 
-        print("mask count for " + summoners[i] + "  =  " + str(mask_counter))
+        print("\n\nmask count for " + summoners[i] + "  =  " + str(mask_counter))
         y = np.array(y)
         # fill in missing values (nan) with the mask
         mask = np.isnan(y)

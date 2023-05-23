@@ -73,7 +73,6 @@ def group_plot_kda(sql_match_rows, summoners):
     # now iterate through each summoner's table, and each match inside it to build the kda
     for match_table in summoner_match_rows:
         summoner = str(match_table[0]["summoner_name"])
-        print("\n\nSUmmoner = " + summoner)
         for i, match in enumerate(match_table):
             # for each match, look at the last 10 and create the kda average
             kills, deaths, assists = 0, 0, 0
@@ -87,9 +86,7 @@ def group_plot_kda(sql_match_rows, summoners):
 
             deaths = deaths if deaths > 0 else 1
             kda = (kills + assists) / deaths
-            print(str(kda))
             list_index = list(summoners).index(summoner)
-            print("list index = " + str(list_index))
             # I am adding the match date without the hours/minutes. So is that screwing something up?
             match_date = str(match["date_created"]).split(' ')[0]
             # match_date = datetime.datetime.strptime(match_date, '%Y-%m-%d')
@@ -103,7 +100,7 @@ def group_plot_kda(sql_match_rows, summoners):
     print(str(len(dates_list)) + "  dates with 3+ summoner games")
     start_date = datetime.datetime.strptime(dates_list[0], '%Y-%m-%d')
     end_date = datetime.datetime.strptime(dates_list[-1], '%Y-%m-%d')
-    print("start = " + str(start_date) + "   end = " + str(end_date))
+    print("start = " + str(start_date) + "   end = " + str(end_date) + "\n\n")
     dates_list = []
     while start_date <= end_date:
         dates_list.append(start_date)
@@ -135,8 +132,8 @@ def group_plot_kda(sql_match_rows, summoners):
                 matching_dates_count += 1
                 index = kda_dates.index(date)
                 y.append(kda_list[index][1])
-                print(" adding kda = " + str(kda_list[index][1]) +
-                      " on date " + str(date) + " for " + str(summoners[i]))
+                # print(" adding kda = " + str(kda_list[index][1]) +
+                #       " on date " + str(date) + " for " + str(summoners[i]))
             else:  # no match on this date, append a nan
                 y.append(np.nan)
             # for k, m_date in enumerate(kda_dates):
@@ -160,7 +157,7 @@ def group_plot_kda(sql_match_rows, summoners):
     fig, ax = pyplot.subplots()
     # plot each y-value list
     for i, y in enumerate(y_lines):
-        pyplot.plot(x, y, '-o', label=list(summoners)[i])
+        pyplot.plot(x, y, label=list(summoners)[i])
     ax.legend()
     # reduce # of ticks for dates
     locator = dates.DayLocator(interval=7)

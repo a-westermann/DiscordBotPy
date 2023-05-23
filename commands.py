@@ -60,7 +60,8 @@ class Lol(app_commands.Group):
         chart = self.league_api.group_kda_chart()
         embed = discord.Embed(color=discord.Color.from_str(r"#FFD700"))
         embed.set_image(url="attachment://kda_chart.png")
-        embed.description = "*each point is the kda average from the last 10 games played from that match"
+        embed.description = "*each point is the kda average from the last 10 games played from that match. Only " \
+                            "includes games from matches with 3+ of da boys"
         await interaction.followup.send(embed=embed, file=chart)
 
 

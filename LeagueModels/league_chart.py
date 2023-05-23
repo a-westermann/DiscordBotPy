@@ -155,6 +155,7 @@ def group_plot_kda(sql_match_rows, summoners):
         # fill in missing values with the mask
         mask = np.isnan(y)
         y = np.ma.array(y, mask=mask)
+        print(y)
         y_lines.append(y)
 
         print(str(matching_dates_count) + "  matching dates for " + str(summoners[i]) + "\n")

@@ -134,15 +134,15 @@ def group_plot_kda(sql_match_rows, summoners):
         y = np.ma.array(y, mask=mask)
         print(y)
         # interpolate missing values for charting continuous lines. ~ means to invert the mask
-        y = np.interp(x_interp, x[~mask].astype(int), y[~mask])
-        y_lines.append(y)
+        y_interp = np.interp(x_interp, x[~mask].astype(int), y[~mask])
+        y_lines.append(y_interp)
 
 
     fig, ax = pyplot.subplots()
     # plot each y-value list
     colors = ['#000000', '#98c1d9', '#fca311', '#c01623']
     for i, y in enumerate(y_lines):
-        pyplot.plot(x, y, label=list(summoners)[i], color=colors[i])
+        pyplot.plot(x[x], y, label=list(summoners)[i], color=colors[i])
     ax.legend()
     # reduce # of ticks for dates
     locator = dates.DayLocator(interval=7)

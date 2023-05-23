@@ -167,9 +167,10 @@ def group_plot_kda(sql_match_rows, summoners):
 
     fig, ax = pyplot.subplots()
     # plot each y-value list
+    colors = ['b', 'y', 'p', 'r']
     for i, y in enumerate(y_lines):
-
-        pyplot.plot(x, y, label=list(summoners)[i])
+        line = pyplot.plot(x, y, label=list(summoners)[i])
+        line.set_color(colors[i])
     ax.legend()
     # reduce # of ticks for dates
     locator = dates.DayLocator(interval=7)

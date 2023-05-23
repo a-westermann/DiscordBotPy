@@ -119,7 +119,7 @@ def group_plot_kda(sql_match_rows, summoners):
         y = np.array(y)
         # fill in missing values (nan) with the mask
         mask = np.isnan(y)
-        print(str(len(dates_list) - mask_counter) + "  matching dates for " + str(summoners[i]) + "\n")
+        print(str(len(dates_list) - mask_counter) + "  matching dates for " + str(summoners[i]))
         y = np.ma.array(y, mask=mask)
         print(y)
         # interpolate missing values for charting continuous lines. ~ means to invert the mask

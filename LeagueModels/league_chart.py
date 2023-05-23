@@ -108,6 +108,7 @@ def group_plot_kda(sql_match_rows, summoners):
     print("# of dates = " + str(len(dates_list)) + "\n")
     x = dates_list
     x.sort()
+    x = np.arange(len(x))  # used for interpolation below
     y_lines = []
     for i, kda_list in enumerate(kda_points):  # add the kda_list for each summoner to the y_values list
         matching_dates_count = 0

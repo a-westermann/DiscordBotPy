@@ -100,12 +100,12 @@ def group_plot_kda(sql_match_rows, summoners):
     print(str(len(dates_list)) + "  dates with 3+ summoner games")
     start_date = datetime.datetime.strptime(dates_list[0], '%Y-%m-%d')
     end_date = datetime.datetime.strptime(dates_list[-1], '%Y-%m-%d')
-    print("start = " + str(start_date) + "   end = " + str(end_date) + "\n\n")
+    print("start = " + str(start_date) + "   end = " + str(end_date))
     dates_list = []
     while start_date <= end_date:
         dates_list.append(start_date)
         start_date += datetime.timedelta(days=1)
-    print("# of dates = " + str(len(dates_list)))
+    print("# of dates = " + str(len(dates_list)) + "\n")
     x = dates_list
     x.sort()
     y_lines = []
@@ -137,7 +137,6 @@ def group_plot_kda(sql_match_rows, summoners):
                 #       " on date " + str(date) + " for " + str(summoners[i]))
             else:  # no match on this date, append a nan
                 y.append(np.nan)
-                print("adding mask")
                 mask_counter += 1
             # for k, m_date in enumerate(kda_dates):
             #     m_date = str(m_date).split(' ')[0]
@@ -151,7 +150,7 @@ def group_plot_kda(sql_match_rows, summoners):
         # y = np.insert(y, len(y), np.nan)
         # fill in missing values with the mask
         mask = np.isnan(y)
-        y = np.ma.array(y, mask=mask)
+        y = np.ma.array(y) #, mask=mask)
         y_lines.append(y)
 
         print(str(matching_dates_count) + "  matching dates for " + str(summoners[i]) + "\n")
@@ -161,7 +160,7 @@ def group_plot_kda(sql_match_rows, summoners):
     fig, ax = pyplot.subplots()
     # plot each y-value list
     for i, y in enumerate(y_lines):
-        pyplot.plot(x, y, label=list(summoners)[i])
+        pyplot.plot(x, y, "-o", label=list(summoners)[i])
     ax.legend()
     # reduce # of ticks for dates
     locator = dates.DayLocator(interval=7)

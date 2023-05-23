@@ -73,6 +73,7 @@ def group_plot_kda(sql_match_rows, summoners):
     # now iterate through each summoner's table, and each match inside it to build the kda
     for match_table in summoner_match_rows:
         summoner = str(match_table[0]["summoner_name"])
+        print("\n\nSUmmoner = " + summoner)
         for i, match in enumerate(match_table):
             # for each match, look at the last 10 and create the kda average
             kills, deaths, assists = 0, 0, 0
@@ -86,7 +87,9 @@ def group_plot_kda(sql_match_rows, summoners):
 
             deaths = deaths if deaths > 0 else 1
             kda = (kills + assists) / deaths
+            print(str(kda))
             list_index = list(summoners).index(summoner)
+            print("list index = " + str(list_index))
             # I am adding the match date without the hours/minutes. So is that screwing something up?
             match_date = str(match["date_created"]).split(' ')[0]
             # match_date = datetime.datetime.strptime(match_date, '%Y-%m-%d')
@@ -118,10 +121,10 @@ def group_plot_kda(sql_match_rows, summoners):
         kda_dates = [kda_date[0] for kda_date in kda_list]
         kdas =  [kda_date[1] for kda_date in kda_list]
 
-        print("summoner  = " + summoners[i])
-        for k in kdas:
-            print(str(k))
-        print("\n\n\n")
+        # print("summoner  = " + summoners[i])
+        # for k in kdas:
+        #     print(str(k))
+        # print("\n\n\n")
 
         y = []
         for j, date in enumerate(dates_list):

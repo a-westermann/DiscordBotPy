@@ -124,7 +124,7 @@ def group_plot_kda(sql_match_rows, summoners):
         # print("\n\n\n")
 
         # y = []
-        y = [np.nan] * len(kda_list)
+        y = [np.nan] * len(dates_list)
         mask_counter = 0
         mask = np.isnan(y)
         for j, date in enumerate(dates_list):

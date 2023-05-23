@@ -105,71 +105,43 @@ def group_plot_kda(sql_match_rows, summoners):
     while start_date <= end_date:
         dates_list.append(start_date)
         start_date += datetime.timedelta(days=1)
-    print("# of dates = " + str(len(dates_list)) + "\n")
     x = dates_list
     x.sort()
-    x = np.arange(len(x))  # used for interpolation below
+    x_interp = np.arange(len(x))  # used for interpolation below
     y_lines = []
     for i, kda_list in enumerate(kda_points):  # add the kda_list for each summoner to the y_values list
-        matching_dates_count = 0
         # iterate through dates AND the kda match history for this summoner & fill in matches that match the date
         # reverse it so latest game played on that date is first for the match
         kda_list.reverse()
         # get first element (match_date) in the kda_list tuple (match_date, kda)
         kda_dates = [kda_date[0] for kda_date in kda_list]
-        # kdas =  [kda_date[1] for kda_date in kda_list]
 
-        # print("summoner  = " + summoners[i])
-        # for k in kdas:
-        #     print(str(k))
-        # print("\n\n\n")
-
-        # y = []
-        y = [np.nan] * len(dates_list)
-        mask_counter = 0
-        # mask = np.isnan(y)
+        y = [np.nan] * len(dates_list) # instantiate a set of nan equal to the # of days in the x-axis set
         for j, date in enumerate(dates_list):
-            # if there is a match on this date, add the kda on that index
-            # (note it will be ONE of the matches on that date)
             date = str(date).split(' ')[0]
-            if date in kda_dates:
-                matching_dates_count += 1
+            if date in kda_dates:  # found 1+ matches on this date. Update y value = kda from the last match that day
                 index = kda_dates.index(date)
-                # y.append(kda_list[index][1])
                 y[j] = kda_list[index][1]
-                # print(" adding kda = " + str(kda_list[index][1]) +
-                #       " on date " + str(date) + " for " + str(summoners[i]))
-            else:  # no match on this date, append a nan
-                # y.append(np.nan)
-                # mask = np.logical_or(mask, np.isnan(y))
-                mask_counter += 1
-            # for k, m_date in enumerate(kda_dates):
-            #     m_date = str(m_date).split(' ')[0]
-            #     if date == m_date:
-            #         mask[j] = False # turn off mask, found match for this point
+            else:  # no match on this date, leave the nan in place for the mask
+                pass
 
-        print("mask count for " + summoners[i] + "  =  " + str(mask_counter))
-        # kda_scores = [kda_score[1] for kda_score in kda_list]
+        print("mask count for " + summoners[i] + "  =  " + str(len(np.isnan(y))))
         y = np.array(y)
-        # y = np.insert(y, 0, np.nan)
-        # y = np.insert(y, len(y), np.nan)
-        # fill in missing values with the mask
+        # fill in missing values (nan) with the mask
         mask = np.isnan(y)
         y = np.ma.array(y, mask=mask)
         print(y)
-        # interpolate missing values
-        y = np.interp(x, x[~mask], y[~mask])
+        # interpolate missing values for charting continuous lines. ~ means to invert the mask
+        y = np.interp(x_interp, x[~mask], y[~mask])
         y_lines.append(y)
+        print(str(len(dates_list) - len(np.isnan(y))) + "  matching dates for " + str(summoners[i]) + "\n")
 
-        print(str(matching_dates_count) + "  matching dates for " + str(summoners[i]) + "\n")
-
-        # y_values.append(np.array(kda_list))
 
     fig, ax = pyplot.subplots()
     # plot each y-value list
     colors = ['#000000', '#98c1d9', '#fca311', '#c01623']
     for i, y in enumerate(y_lines):
-        pyplot.plot(x, y, label=list(summoners)[i], color=colors[i])
+        pyplot.plot(x[x_interp], y, label=list(summoners)[i], color=colors[i])
     ax.legend()
     # reduce # of ticks for dates
     locator = dates.DayLocator(interval=7)

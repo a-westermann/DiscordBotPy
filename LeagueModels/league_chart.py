@@ -156,6 +156,8 @@ def group_plot_kda(sql_match_rows, summoners):
         mask = np.isnan(y)
         y = np.ma.array(y, mask=mask)
         print(y)
+        # interpolate missing values
+        y = np.interp(x, x[~mask], y[~mask])
         y_lines.append(y)
 
         print(str(matching_dates_count) + "  matching dates for " + str(summoners[i]) + "\n")
@@ -165,7 +167,8 @@ def group_plot_kda(sql_match_rows, summoners):
     fig, ax = pyplot.subplots()
     # plot each y-value list
     for i, y in enumerate(y_lines):
-        pyplot.plot(x, y, "-o", label=list(summoners)[i], interpolate=True)
+
+        pyplot.plot(x, y, "-o", label=list(summoners)[i])
     ax.legend()
     # reduce # of ticks for dates
     locator = dates.DayLocator(interval=7)

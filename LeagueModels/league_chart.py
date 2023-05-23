@@ -132,8 +132,8 @@ def group_plot_kda(sql_match_rows, summoners):
         y = np.ma.array(y, mask=mask)
         print(y)
         # interpolate missing values for charting continuous lines. ~ means to invert the mask
-        y = np.interp(x_interp, x[~mask], y[~mask])
-        y_lines.append(y)
+        y_interp = np.interp(x_interp, x[~mask], y[~mask])
+        y_lines.append(y_interp)
         print(str(len(dates_list) - len(np.isnan(y))) + "  matching dates for " + str(summoners[i]) + "\n")
 
 

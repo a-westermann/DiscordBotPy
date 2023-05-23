@@ -105,7 +105,7 @@ def group_plot_kda(sql_match_rows, summoners):
     while start_date <= end_date:
         dates_list.append(start_date)
         start_date += datetime.timedelta(days=1)
-
+    print("# of dates = " + str(len(dates_list)))
     x = dates_list
     x.sort()
     y_lines = []

@@ -125,6 +125,7 @@ def group_plot_kda(sql_match_rows, summoners):
 
         y = []
         mask_counter = 0
+        mask = np.isnan(y)
         for j, date in enumerate(dates_list):
             # if there is a match on this date, add the kda on that index
             # (note it will be ONE of the matches on that date)
@@ -132,11 +133,13 @@ def group_plot_kda(sql_match_rows, summoners):
             if date in kda_dates:
                 matching_dates_count += 1
                 index = kda_dates.index(date)
-                y.append(kda_list[index][1])
+                # y.append(kda_list[index][1])
+                y[j] = kda_list[index][1]
                 # print(" adding kda = " + str(kda_list[index][1]) +
                 #       " on date " + str(date) + " for " + str(summoners[i]))
             else:  # no match on this date, append a nan
-                y.append(np.nan)
+                # y.append(np.nan)
+                mask = np.logical_or(mask, np.isnan(y))
                 mask_counter += 1
             # for k, m_date in enumerate(kda_dates):
             #     m_date = str(m_date).split(' ')[0]
@@ -149,8 +152,8 @@ def group_plot_kda(sql_match_rows, summoners):
         # y = np.insert(y, 0, np.nan)
         # y = np.insert(y, len(y), np.nan)
         # fill in missing values with the mask
-        mask = np.isnan(y)
-        y = np.ma.array(y) #, mask=mask)
+        # mask = np.isnan(y)
+        y = np.ma.array(y, mask=mask)
         y_lines.append(y)
 
         print(str(matching_dates_count) + "  matching dates for " + str(summoners[i]) + "\n")

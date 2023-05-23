@@ -116,7 +116,7 @@ def group_plot_kda(sql_match_rows, summoners):
         kda_list.reverse()
         # get first element (match_date) in the kda_list tuple (match_date, kda)
         kda_dates = [kda_date[0] for kda_date in kda_list]
-        kdas =  [kda_date[1] for kda_date in kda_list]
+        # kdas =  [kda_date[1] for kda_date in kda_list]
 
         # print("summoner  = " + summoners[i])
         # for k in kdas:
@@ -124,6 +124,7 @@ def group_plot_kda(sql_match_rows, summoners):
         # print("\n\n\n")
 
         y = []
+        mask_counter = 0
         for j, date in enumerate(dates_list):
             # if there is a match on this date, add the kda on that index
             # (note it will be ONE of the matches on that date)
@@ -136,11 +137,14 @@ def group_plot_kda(sql_match_rows, summoners):
                 #       " on date " + str(date) + " for " + str(summoners[i]))
             else:  # no match on this date, append a nan
                 y.append(np.nan)
+                print("adding mask")
+                mask_counter += 1
             # for k, m_date in enumerate(kda_dates):
             #     m_date = str(m_date).split(' ')[0]
             #     if date == m_date:
             #         mask[j] = False # turn off mask, found match for this point
 
+        print("mask count for " + summoners[i] + "  =  " + str(mask_counter))
         # kda_scores = [kda_score[1] for kda_score in kda_list]
         y = np.array(y)
         # y = np.insert(y, 0, np.nan)

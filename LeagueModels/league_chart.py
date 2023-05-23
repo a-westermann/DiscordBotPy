@@ -107,7 +107,7 @@ def group_plot_kda(sql_match_rows, summoners):
         start_date += datetime.timedelta(days=1)
     x = dates_list
     x.sort()
-    x_interp = np.arange(len(x))  # used for interpolation below
+    x = np.arange(len(x))  # used for interpolation below
     y_lines = []
     for i, kda_list in enumerate(kda_points):  # add the kda_list for each summoner to the y_values list
         # iterate through dates AND the kda match history for this summoner & fill in matches that match the date
@@ -132,8 +132,8 @@ def group_plot_kda(sql_match_rows, summoners):
         y = np.ma.array(y, mask=mask)
         print(y)
         # interpolate missing values for charting continuous lines. ~ means to invert the mask
-        y_interp = np.interp(x_interp, x[~mask], y[~mask])
-        y_lines.append(y_interp)
+        y = np.interp(x, x[~mask], y[~mask])
+        y_lines.append(y)
         print(str(len(dates_list) - len(np.isnan(y))) + "  matching dates for " + str(summoners[i]) + "\n")
 
 

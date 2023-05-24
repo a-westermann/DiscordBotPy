@@ -1,5 +1,5 @@
 from googlesearch import search
-from datetime import datetime
+from datetime import datetime, timedelta
 import discord
 
 
@@ -93,11 +93,11 @@ def get_dates_list_between_dates(date_list):
     # fills a list of all dates. Takes a list/set with missing dates
     dates_list = list(date_list)
     dates_list.sort()
-    start_date = datetime.datetime.strptime(dates_list[0], '%Y-%m-%d')
-    end_date = datetime.datetime.strptime(dates_list[-1], '%Y-%m-%d')
+    start_date = datetime.strptime(dates_list[0], '%Y-%m-%d')
+    end_date = datetime.strptime(dates_list[-1], '%Y-%m-%d')
     print("start = " + str(start_date) + "   end = " + str(end_date))
     dates_list = []
     while start_date <= end_date:  # build the list of dates between start and end dates to use as x-axis
         dates_list.append(start_date)
-        start_date += datetime.timedelta(days=1)
+        start_date += timedelta(days=1)
     return dates_list

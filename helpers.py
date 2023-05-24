@@ -67,3 +67,24 @@ def get_summoner_name_from_first_letter(letter: str):
     if letter.lower() == "c": return "ComradeGiraffe"
     if letter.lower() == "g": return "Gold Force"
 
+
+def split_sql_matches_summoners(sql_match_rows, summoners: list):
+    summoner_match_rows = [[] for _ in range(len(summoners))]
+    for i, s in enumerate(summoners):
+        for match in sql_match_rows:
+            if s == str(match["summoner_name"]):
+                summoner_match_rows[i].append(match)
+
+    return summoner_match_rows
+
+
+def calculate_kda(matches):
+    kills, deaths, assists = 0, 0, 0
+    for match in matches:
+        kills += match["kills"]
+        deaths += match["deaths"]
+        assists += match["assists"]
+
+    deaths = deaths if deaths > 0 else 1  # safeguard
+    kda = (kills + assists) / deaths
+    return kda

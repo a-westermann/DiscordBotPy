@@ -17,16 +17,23 @@ def plot_kda(sql_match_rows):
         if i < len(sql_match_rows) - 100:
             continue
         # for each match, look at the last 10 and create the kda average
-        kills, deaths, assists = 0, 0, 0
+        # kills, deaths, assists = 0, 0, 0
+        # for j in range(10):
+        #     if j > i:
+        #         break
+        #     evaulate_match = sql_match_rows[i - j]
+        #     kills += evaulate_match["kills"]
+        #     deaths +=  evaulate_match["deaths"]
+        #     assists += evaulate_match["assists"]
+        # deaths = deaths if deaths > 0 else 1
+        # kda = (kills + assists) / deaths
+        eval_matches = [match]
         for j in range(10):
-            if j > i:
+            if j > i:  # j > i means we are looking at the earliest 10 games on the table, so don't go negative i
                 break
-            evaulate_match = sql_match_rows[i - j]
-            kills += evaulate_match["kills"]
-            deaths +=  evaulate_match["deaths"]
-            assists += evaulate_match["assists"]
-        deaths = deaths if deaths > 0 else 1
-        kda = (kills + assists) / deaths
+            eval_matches.append(match_table[i - j])
+
+        kda = helpers.calculate_kda(eval_matches)
         match_date = str(evaulate_match["date_created"]).split(' ')[0]
         match_date = datetime.datetime.strptime(match_date, '%Y-%m-%d')
         kda_points.append(round(kda, 2))
@@ -71,22 +78,8 @@ def group_plot_kda(sql_match_rows, summoners):
                 if j > i: # j > i means we are looking at the earliest 10 games on the table, so don't go negative i
                     break
                 eval_matches.append(match_table[i-j])
+
             kda = helpers.calculate_kda(eval_matches)
-
-
-            # kills, deaths, assists = 0, 0, 0
-            # for j in range(10):
-            #     if j > i: # j > i means we are looking at the earliest 10 games on the table, so don't go negative i
-            #         break
-            #     evaulate_match = match_table[i - j]
-            #     kills += evaulate_match["kills"]
-            #     deaths +=  evaulate_match["deaths"]
-            #     assists += evaulate_match["assists"]
-            #
-            # deaths = deaths if deaths > 0 else 1  # very unlikely safeguard
-            # kda = (kills + assists) / deaths
-
-
             match_date = str(match["date_created"]).split(' ')[0]  # drop hours/minutes/seconds and stringify
             kda_points[list_index].append((match_date, round(kda, 2)))  # append a tuple for (date, kda)
             match_dates.add(match_date)  # add unique match dates to the set for the x-axis

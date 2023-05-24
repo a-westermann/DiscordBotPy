@@ -31,7 +31,7 @@ def plot_kda(sql_match_rows):
         for j in range(10):
             if j > i:  # j > i means we are looking at the earliest 10 games on the table, so don't go negative i
                 break
-            eval_matches.append(match_table[i - j])
+            eval_matches.append(sql_match_rows[i - j])
 
         kda = helpers.calculate_kda(eval_matches)
         match_date = str(evaulate_match["date_created"]).split(' ')[0]

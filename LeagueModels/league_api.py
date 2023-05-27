@@ -38,7 +38,7 @@ class LeagueAPI:
 
     def get_item(self, item_id: int):
         items = cass.get_items(cass.Region.north_america)
-        item_to_find = cass.Item(id=item_id)
+        item_to_find = cass.Item(id=item_id, region=cass.Region.north_america)
         return items.find(item=item_to_find)
 
         # for item in items:

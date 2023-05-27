@@ -25,13 +25,11 @@ class Lol(app_commands.Group):
 
 
     @app_commands.command(name="test")
-    async def test(self, interaction: discord.Interaction):
+    async def test(self, interaction: discord.Interaction, start: int, count: int, summoner_name: str):
         if self.token == "":
             await interaction.response.send_message("token invalid")
             return
-        item = self.league_api.get_item(3161)
-        print(str(item))
-        print(str(item.name))
+        helpers.backfill_match_items(start, count, self.league_api.get_puuid(summoner_name), self.league_api)
         # summoner = self.league_api.get_summoner("Vierce")
         # self.psql.get_summoner_matches("Vierce")
         # await interaction.response.send_message(str(summoner))

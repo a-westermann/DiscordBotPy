@@ -1,6 +1,9 @@
 from googlesearch import search
 from datetime import datetime, timedelta
 import discord
+from riotwatcher import LolWatcher, ApiError
+from LeagueModels.league_api import LeagueAPI
+from psql import PSQL
 
 
 users = { 322164425002057728:"Vierce" , 879464051267223572:"Naiyvara",
@@ -61,6 +64,14 @@ def get_used_babies(user: str, top: bool, number: int, include_score: bool):
     return sorted_list
 
 
+def get_matching_participant(puuid: str, match):
+    participants = match["info"]["participants"]
+    for participant in participants:
+        if participant["puuid"] == puuid:
+            return participant
+
+
+
 def get_summoner_name_from_first_letter(letter: str):
     if letter.lower() == "v": return "Vierce"
     if letter.lower() == "t": return "The Great Ratsby"
@@ -101,3 +112,22 @@ def get_dates_list_between_dates(date_list):
         dates_list.append(start_date)
         start_date += timedelta(days=1)
     return dates_list
+
+
+def backfill_match_items(start: int, count: int, puuid: str, api: LeagueAPI):
+    match_list = api.lol_watcher.match.matchlist_by_puuid(region=api.region, puuid=puuid, start=start, count=count)
+    psql = PSQL()
+    item_keys = [f"item{item_index}" for item_index in range(6)]
+    for i, match in enumerate(match_list):
+        match_id = match["metadata"]["matchId"]
+        participant = get_matching_participant(puuid=puuid, match=match)
+        query_result = psql.query(f"select item_0, item_1, item_2, item_3, item_4, item_5 from match_history"
+                                  f" where summoner_name = '{participant['summonerName']}' and match_id = '{match_id}'")
+        if len(query_result) > 0:
+            continue
+        # create the sql SET statement containing all the "item_0 = ABC123, etc..."
+        participant_items = ", ".join([f"item_{item_key[-1]} = '{participant[item_key]}'" for item_key in item_keys])
+        update_result = psql.command(f"UPDATE match_history SET {participant_items} "
+                     f"WHERE match_id = '{match_id}' AND summoner_name = '{participant['summonerName']}'")
+        print(f"match index {i} ... {update_result}")
+

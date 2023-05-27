@@ -1,13 +1,14 @@
 from riotwatcher import LolWatcher, ApiError
+
+import helpers
 from LeagueModels import summoner_history as s_history, league_chart
 import psql
 from datetime import datetime
 import cassiopeia as cass
 
 
-region = 'na1'
-
 class LeagueAPI:
+    region = 'na1'
     def __init__(self, api_token, psql: psql.PSQL):
         self.token = api_token
         self.lol_watcher = LolWatcher(api_key=self.token)
@@ -15,7 +16,7 @@ class LeagueAPI:
 
 # helpers
     def get_summoner(self, summoner_name):
-        return self.lol_watcher.summoner.by_name(region, summoner_name)
+        return self.lol_watcher.summoner.by_name(self.region, summoner_name)
 
 
     def get_puuid(self, summoner_name):
@@ -28,11 +29,11 @@ class LeagueAPI:
         return puuid
 
     def get_recent_matches(self, puuid, count):
-        match_ids = self.lol_watcher.match.matchlist_by_puuid(region=region, puuid=puuid, count=count)
+        match_ids = self.lol_watcher.match.matchlist_by_puuid(region=self.region, puuid=puuid, count=count)
         return match_ids
 
     def build_match(self, match_id: str):
-        match = self.lol_watcher.match.by_id(region, match_id)
+        match = self.lol_watcher.match.by_id(self.region, match_id)
         # print("test " + match['metadata']['dataVersion'])  # <-- access nested elements like this
         return match
 
@@ -114,14 +115,13 @@ class LeagueAPI:
         summoner_history = s_history.SummonerHistory(summoner_name)
         puuid = self.get_puuid(summoner_name)
         for match in matches:
-            participant = None
-            participants = match["info"]["participants"]
-            for i in range(len(participants)):
-                if participants[i]["puuid"] == puuid:
-                    participant = participants[i]
-                    break
-            summoner_history.add_match_score(participant["kills"], participant["deaths"], participant["assists"],
-                        participant["doubleKills"], participant["tripleKills"], participant["quadraKills"],
+            participant = helpers.get_matching_participant(puuid, match)
+            summoner_history.add_match_score(participant["kills"],
+                                             participant["deaths"],
+                                             participant["assists"],
+                                             participant["doubleKills"],
+                                             participant["tripleKills"],
+                                             participant["quadraKills"],
                                              participant["pentaKills"])
         print(str(summoner_history.kills) + "/" + str(summoner_history.deaths) + "/" + str(summoner_history.assists))
         return summoner_history

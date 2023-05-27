@@ -29,7 +29,7 @@ class Lol(app_commands.Group):
         if self.token == "":
             await interaction.response.send_message("token invalid")
             return
-        helpers.backfill_match_items(start, count, self.league_api.get_puuid(summoner_name), self.league_api)
+        helpers.backfill_match_items(start, count, puuid=self.league_api.get_puuid(summoner_name), api=self.league_api)
         # summoner = self.league_api.get_summoner("Vierce")
         # self.psql.get_summoner_matches("Vierce")
         # await interaction.response.send_message(str(summoner))

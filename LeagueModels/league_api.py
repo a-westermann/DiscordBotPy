@@ -37,7 +37,7 @@ class LeagueAPI:
         return match
 
     def get_item(self, item_id: int):
-        items = cass.get_items()
+        items = cass.get_items(cass.Region.north_america)
         item_to_find = cass.Item(id=item_id)
         return items.find(item=item_to_find)
 

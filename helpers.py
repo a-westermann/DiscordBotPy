@@ -78,7 +78,7 @@ def split_sql_matches_summoners(sql_match_rows, summoners: list):
     return summoner_match_rows
 
 
-def calculate_kda(matches: list):
+def calculate_kda(matches: list): # pass in any list of sql match rows
     kills, deaths, assists = 0, 0, 0
     for match in matches:
         kills += match["kills"]

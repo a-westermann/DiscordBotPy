@@ -119,6 +119,7 @@ def backfill_match_items(start: int, count: int, puuid: str, api: LeagueAPI):
     psql = PSQL()
     item_keys = [f"item{item_index}" for item_index in range(6)]
     for i, match in enumerate(match_list):
+        print(str(match))
         match_id = match["metadata"]["matchId"]
         participant = get_matching_participant(puuid=puuid, match=match)
         query_result = psql.query(f"select item_0, item_1, item_2, item_3, item_4, item_5 from match_history"

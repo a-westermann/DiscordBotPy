@@ -29,8 +29,11 @@ class Lol(app_commands.Group):
         if self.token == "":
             await interaction.response.send_message("token invalid")
             return
+        item = self.league_api.get_item(3161)
+        print(str(item))
+        print(str(item.name))
         # summoner = self.league_api.get_summoner("Vierce")
-        self.psql.get_summoner_matches("Vierce")
+        # self.psql.get_summoner_matches("Vierce")
         # await interaction.response.send_message(str(summoner))
 
 
@@ -66,6 +69,7 @@ class Lol(app_commands.Group):
 
 
 
+ # https://cassiopeia.readthedocs.io/en/latest/cassiopeia/item.html
     # @app_commands.command(name="recap", description="Get a recap of your history with a champ")
     # async def recap(self, interaction: discord.Interaction):
     #     if self.token == "":

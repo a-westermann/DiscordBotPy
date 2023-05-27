@@ -2,6 +2,7 @@ from riotwatcher import LolWatcher, ApiError
 from LeagueModels import summoner_history as s_history, league_chart
 import psql
 from datetime import datetime
+import cassiopeia as cass
 
 
 region = 'na1'
@@ -35,6 +36,13 @@ class LeagueAPI:
         # print("test " + match['metadata']['dataVersion'])  # <-- access nested elements like this
         return match
 
+    def get_item(self, item_id: int):
+        items = cass.get_items(region)
+        item_to_find = cass.Item(id=item_id)
+        return items.find(item=item_to_find)
+
+        # for item in items:
+        #     return item if
 
 
 

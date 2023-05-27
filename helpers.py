@@ -115,12 +115,11 @@ def get_dates_list_between_dates(date_list):
 
 
 def backfill_match_items(start: int, count: int, puuid: str, api: LeagueAPI):
-    match_list = api.lol_watcher.match.matchlist_by_puuid(region=api.region, puuid=puuid, start=start, count=count)
+    match_id_list = api.lol_watcher.match.matchlist_by_puuid(region=api.region, puuid=puuid, start=start, count=count)
     psql = PSQL()
     item_keys = [f"item{item_index}" for item_index in range(6)]
-    for i, match in enumerate(match_list):
-        print(str(match))
-        match_id = match["metadata"]["matchId"]
+    for i, match_id in enumerate(match_id_list):
+        match = api.lol_watcher.match.by_id(region=api.region, match_id=match_id)
         participant = get_matching_participant(puuid=puuid, match=match)
         query_result = psql.query(f"select item_0, item_1, item_2, item_3, item_4, item_5 from match_history"
                                   f" where summoner_name = '{participant['summonerName']}' and match_id = '{match_id}'")

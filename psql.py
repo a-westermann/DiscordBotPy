@@ -15,6 +15,24 @@ class PSQL:
         self.cursor = self.connection.cursor()
 
 
+    def query(self, query: str):
+        self.open_connection()
+        self.cursor.execute(query)
+        results = self.cursor.fetchall()
+        self.connection.close()
+        return results
+
+    def command(self, statement: str):
+        self.open_connection()
+        self.cursor.execute(statement)
+        success = False
+        if self.cursor.rowcount > 0:
+            success = True
+        self.connection.commit()
+        self.connection.close()
+        return success
+
+
     def insert_match(self, match_id, summoner_name, kills, deaths, assists, doubles,
                      triples, quadras, pentas, date_created):
         self.open_connection()

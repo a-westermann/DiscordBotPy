@@ -51,7 +51,7 @@ def plot_kda(sql_match_rows):
 
 
 def group_plot_kda(sql_match_rows, summoners):
-    kda_points = [[] for _ in range(len(summoners))]
+    kda_points = [[] for _ in summoners]
     match_dates = set()
     # first split the row results into one table for each summoner
     summoner_match_rows = helpers.split_sql_matches_summoners(sql_match_rows, summoners)
@@ -59,12 +59,12 @@ def group_plot_kda(sql_match_rows, summoners):
     # now iterate through each summoner's table, and each match inside it to build the kda
     for match_table in summoner_match_rows:
         summoner = str(match_table[0]["summoner_name"])
-        list_index = list(summoners).index(summoner)
+        list_index = summoners.index(summoner)
         for i, match in enumerate(match_table):
             # for each match, look at the last 10 and create the kda average
             eval_matches = [match]
             for j in range(10):
-                if j > i: # j > i means we are looking at the earliest 10 games on the table, so don't go negative i
+                if j > i:  # j > i means we are looking at the earliest 10 games on the table, so don't go negative i
                     break
                 eval_matches.append(match_table[i-j])
 

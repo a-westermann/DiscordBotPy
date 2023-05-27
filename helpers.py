@@ -125,10 +125,10 @@ def backfill_match_items(start: int, count: int, puuid: str, api: LeagueAPI):
         print('next match... ' + str(i))
         match = api.lol_watcher.match.by_id(region=api.region, match_id=match_id)
         participant = get_matching_participant(puuid=puuid, match=match)
-        query_result = psql.query(f"select item_0, item_1, item_2, item_3, item_4, item_5 from match_history"
-                                  f" where summoner_name = '{participant['summonerName']}' and match_id = '{match_id}'")
-        if len(query_result) > 0:
-            continue
+        # query_result = psql.query(f"select item_0, item_1, item_2, item_3, item_4, item_5 from match_history"
+        #                           f" where summoner_name = '{participant['summonerName']}' and match_id = '{match_id}'")
+        # if len(query_result) > 0:
+        #     continue
         # create the sql SET statement containing all the "item_0 = ABC123, etc..."
         participant_items = ", ".join([f"item_{item_key[-1]} = '{participant[item_key]}'" for item_key in item_keys])
         update_result = psql.command(f"UPDATE match_history SET {participant_items} "

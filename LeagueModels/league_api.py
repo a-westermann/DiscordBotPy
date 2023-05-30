@@ -42,9 +42,6 @@ class LeagueAPI:
         item_to_find = cass.Item(id=item_id, region=cass.Region.north_america)
         return items.find(item=item_to_find)
 
-        # for item in items:
-        #     return item if
-
 
 
 # major methods

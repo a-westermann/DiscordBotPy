@@ -25,7 +25,7 @@ class Lol(app_commands.Group):
 
 
     @app_commands.command(name="test")
-    async def test(self, interaction: discord.Interaction, start: int, count: int, summoner_name: str, champid: int):
+    async def test(self, interaction: discord.Interaction, start: int, count: int, summoner_name: str):
         if self.token == "":
             await interaction.response.send_message("token invalid", ephemeral=True)
             return

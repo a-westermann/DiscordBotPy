@@ -131,8 +131,12 @@ def backfill_match_items(start: int, count: int, puuid: str, api: LeagueAPI):
 def backfill_match_champs(start: int, count: int, puuid: str, api: LeagueAPI):
     match_id_list = api.lol_watcher.match.matchlist_by_puuid(region=api.region, puuid=puuid, start=start, count=count)
     psql = PSQL()
-    for match_id in match_id_list:
+    for i, match_id in enumerate(match_id_list):
         match = api.lol_watcher.match.by_id(region=api.region, match_id=match_id)
         participant = get_matching_participant(puuid=puuid, match=match)
-        # champ =
+        champ = participant["championId"]
+        update_result = psql.command(f"UPDATE match_history SET champion_id = {champ} "
+                                     f"WHERE match_id = '{match_id}' "
+                                     f"AND summoner_name = '{participant['summonerName']}'; ")
+        print(f"updated db for match index {i} ... champ = {participant['championName']}")
 

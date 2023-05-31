@@ -47,11 +47,8 @@ class LeagueAPI:
         for champ in champs:
             if champ.id == champ_id:
                 return champ
-
-        # return cass.get_champion(region=cass.Region.north_america, key=lambda champs: champs[champ_id])
-        # return cass.Champions.find(id=champ_id)
-
-        # return cass.get_champion(key=champ_id, region=cass.Region.north_america)
+        # note cass has get_champions. But what is they key arg? It's not ID.
+        # probably have to pass in some function that compares champ.id to champ_id
 
 
 

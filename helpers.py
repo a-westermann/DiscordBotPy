@@ -134,5 +134,5 @@ def backfill_match_champs(start: int, count: int, puuid: str, api: LeagueAPI):
     for match_id in match_id_list:
         match = api.lol_watcher.match.by_id(region=api.region, match_id=match_id)
         participant = get_matching_participant(puuid=puuid, match=match)
-        champ =
+        # champ =
 

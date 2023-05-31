@@ -115,23 +115,24 @@ def get_dates_list_between_dates(date_list):
 
 
 def backfill_match_items(start: int, count: int, puuid: str, api: LeagueAPI):
-    print('region = ' + api.region)
     match_id_list = api.lol_watcher.match.matchlist_by_puuid(region=api.region, puuid=puuid, start=start, count=count)
-    print('got match_id list ' + str(match_id_list[0]) + "  " + str(len(match_id_list)))
     psql = PSQL()
+    # build the string for the sql statement
     item_keys = [f"item{item_index}" for item_index in range(6)]
-    print("item keys created")
     for i, match_id in enumerate(match_id_list):
-        print('next match... ' + str(i))
         match = api.lol_watcher.match.by_id(region=api.region, match_id=match_id)
         participant = get_matching_participant(puuid=puuid, match=match)
-        # query_result = psql.query(f"select item_0, item_1, item_2, item_3, item_4, item_5 from match_history"
-        #                           f" where summoner_name = '{participant['summonerName']}' and match_id = '{match_id}'")
-        # if len(query_result) > 0:
-        #     continue
-        # create the sql SET statement containing all the "item_0 = ABC123, etc..."
+        # create the sql SET statement containing all the "item_0 = ABC123, etc...". Just take -1 for the last digit
         participant_items = ", ".join([f"item_{item_key[-1]} = '{participant[item_key]}'" for item_key in item_keys])
         update_result = psql.command(f"UPDATE match_history SET {participant_items} "
                      f"WHERE match_id = '{match_id}' AND summoner_name = '{participant['summonerName']}'")
-        print(f"match index {i} ... {update_result}")
+        print(f"updated db for match index {i} ... {update_result}")
+
+def backfill_match_champs(start: int, count: int, puuid: str, api: LeagueAPI):
+    match_id_list = api.lol_watcher.match.matchlist_by_puuid(region=api.region, puuid=puuid, start=start, count=count)
+    psql = PSQL()
+    for match_id in match_id_list:
+        match = api.lol_watcher.match.by_id(region=api.region, match_id=match_id)
+        participant = get_matching_participant(puuid=puuid, match=match)
+        # champ =
 

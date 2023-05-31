@@ -42,8 +42,8 @@ class LeagueAPI:
         item_to_find = cass.Item(id=item_id, region=cass.Region.north_america)
         return items.find(item=item_to_find)
 
-        # for item in items:
-        #     return item if
+    def get_champ(self, champ_id, int):
+        return cass.get_champion(key=champ_id, region=cass.Region.north_america)
 
 
 

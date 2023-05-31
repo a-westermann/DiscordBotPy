@@ -62,8 +62,6 @@ class LeagueAPI:
     def individual_kda_chart(self, summoner_name):
         # first fill the psql table with new matches
         matches = self.get_matches(summoner_name, match_count=60)
-        for match in matches:
-            self.fill_match_table(match, summoner_name)
         # now build out the kda averages over time. Each point is the cumulative kda average of the last 10 games
         sql_match_rows = self.psql.get_summoner_matches(summoner_name)
         print("found " + str(len(sql_match_rows)) + " matches.")
@@ -77,21 +75,19 @@ class LeagueAPI:
         summoners = ["Vierce", "The Great Ratsby", "ComradeGiraffe", "Gold Force"]
         for summoner in summoners:
             matches = self.get_matches(summoner, match_count=60)
-            for match in matches:
-                self.fill_match_table(match, summoner)
         # now build out the kda averages over time. Each point is the cumulative kda average of the last 10 games
         sql_match_rows = self.psql.get_recent_100_matches()
         print("found " + str(len(sql_match_rows)) + " rows.")
         chart = league_chart.group_plot_kda(sql_match_rows, summoners)
         return chart
 
-# this gives 100 rows , seems wrong? Or just coincidence??
-    #select match_id FROM match_history GROUP BY match_id HAVING COUNT(match_id)>2
 
+
+    def get_recap_history(self, summoner_name:str):
+        pass
 
 
 # Every request should probably start with get_matches to fill recent matches
-# this includes adding recap later
     def get_matches(self, summoner_name, match_count: int):
         puuid = self.get_puuid(summoner_name)
         # print("puuid for " + summoner_name + " " + puuid)
@@ -104,6 +100,8 @@ class LeagueAPI:
             results = self.psql.get_specific_match(match_id, summoner_name)
             if len(results) > 0: break  # stop looking - hit the most current recorded match
             matches.append(self.build_match(match_id))
+        for match in matches:
+            self.fill_match_table(match, summoner)
         return matches
 
 

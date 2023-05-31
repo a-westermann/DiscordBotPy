@@ -72,13 +72,18 @@ class Lol(app_commands.Group):
 
 
 
- # https://cassiopeia.readthedocs.io/en/latest/cassiopeia/item.html
-    # @app_commands.command(name="recap", description="Get a recap of your history with a champ")
-    # async def recap(self, interaction: discord.Interaction):
-    #     if self.token == "":
-    #         await interaction.response.send_message("token invalid")
-    #         return
-    #     await interaction.response.send_message("in development")
+    @app_commands.command(name="recap", description="Get a recap of your history with a champ")
+    @app_commands.choices(option=[
+        app_commands.Choice(name="Vierce", value="Vierce"),
+        app_commands.Choice(name="The Great Ratsby", value="The Great Ratsby"),
+        app_commands.Choice(name="GoldForce", value="GoldForce"),
+        app_commands.Choice(name="ComradeGiraffe", value="ComradeGiraffe")
+    ])
+    async def recap(self, interaction: discord.Interaction, option: app_commands.Choice[str]):
+        if self.token == "":
+            await interaction.response.send_message("token invalid")
+            return
+        await interaction.response.send_message("in development")
 
 
     # @app_commands.command(name="chart", description="See a chart of recent match history for the boys")

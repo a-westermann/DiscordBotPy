@@ -85,6 +85,7 @@ class Lol(app_commands.Group):
         if self.token == "":
             await interaction.response.send_message("token invalid")
             return
+        print(f"summoner_name = {summoner_name}")
         self.league_api.get_recap_history(summoner_name=summoner_name)
         await interaction.response.send_message("in development")
 

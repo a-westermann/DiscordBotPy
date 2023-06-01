@@ -29,8 +29,7 @@ class LeagueAPI:
         return puuid
 
     def get_recent_matches(self, puuid, count: int, start_index: int = 0):
-        match_ids = self.lol_watcher.match.matchlist_by_puuid(region=self.region, puuid=puuid, count=count,
-                                                              start=start_index)
+        match_ids = self.lol_watcher.match.matchlist_by_puuid(region=self.region, puuid=puuid, count=count)
         return match_ids
 
     def build_match(self, match_id: str):

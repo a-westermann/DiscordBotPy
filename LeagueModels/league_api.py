@@ -28,8 +28,9 @@ class LeagueAPI:
                 break
         return puuid
 
-    def get_recent_matches(self, puuid, count):
-        match_ids = self.lol_watcher.match.matchlist_by_puuid(region=self.region, puuid=puuid, count=count)
+    def get_recent_matches(self, puuid, count: int, start_index: int = 0):
+        match_ids = self.lol_watcher.match.matchlist_by_puuid(region=self.region, puuid=puuid, count=count,
+                                                              start=start_index)
         return match_ids
 
     def build_match(self, match_id: str):
@@ -88,10 +89,10 @@ class LeagueAPI:
 
 
 # Every request should probably start with get_matches to fill recent matches
-    def get_matches(self, summoner_name, match_count: int):
+    def get_matches(self, summoner_name, match_count: int, start_index: int = 0):
         puuid = self.get_puuid(summoner_name)
         # print("puuid for " + summoner_name + " " + puuid)
-        match_ids = self.get_recent_matches(puuid=puuid, count=match_count)
+        match_ids = self.get_recent_matches(puuid=puuid, count=match_count, start=start_index)
         matches = []
 #TODO: change the sql to an IN() statement contianing all matches, then do a python compare to determine
 #TODO: which ones need to be added. That will cut down on query time when dealing with lots of new matches
@@ -109,16 +110,22 @@ class LeagueAPI:
         id = match["metadata"]["matchId"]
         game_timestamp = datetime.utcfromtimestamp(int(match["info"]["gameCreation"])/1000.0)
         summoner_history = self.build_summoner_history(summoner_name, [match])
+        participant = helpers.get_matching_participant(self.get_puuid(summoner_name), match)
         self.psql.insert_match(id, summoner_name, summoner_history.kills, summoner_history.deaths,
                                summoner_history.assists, summoner_history.doubles, summoner_history.triples,
-                               summoner_history.quadras, summoner_history.pentas, game_timestamp)
+                               summoner_history.quadras, summoner_history.pentas, game_timestamp,
+                               participant['item0'], participant['item1'], participant['item2'],
+                               participant['item3'], participant['item4'], participant['item5'],
+                               participant['championId'])
 
 
+# actually only pass in one match at a time right now. Could update it to only accept one match
     def build_summoner_history(self, summoner_name, matches: list):
         summoner_history = s_history.SummonerHistory(summoner_name)
         puuid = self.get_puuid(summoner_name)
         for match in matches:
             participant = helpers.get_matching_participant(puuid, match)
+
             summoner_history.add_match_score(participant["kills"],
                                              participant["deaths"],
                                              participant["assists"],

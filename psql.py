@@ -34,11 +34,12 @@ class PSQL:
 
 
     def insert_match(self, match_id, summoner_name, kills, deaths, assists, doubles,
-                     triples, quadras, pentas, date_created):
+                     triples, quadras, pentas, date_created, item_0, item_1, item_2, item_3, item_4, item_5,
+                     champion_id):
         self.open_connection()
-        sql_text = "INSERT INTO match_history VALUES('{0}', '{1}', {2}, {3}, {4}, {5}, {6}, {7}, {8}, '{9}')"
-        sql_text = sql_text.format(match_id, summoner_name, str(kills), str(deaths), str(assists), str(doubles),
-                                   str(triples), str(quadras), str(pentas), str(date_created))
+        sql_text = f"INSERT INTO match_history VALUES('{match_id}', '{summoner_name}', {kills}, {deaths}, {assists}, " \
+                   f"{doubles}, {triples}, {quadras}, {pentas}, '{date_created}', {item_0}, {item_1}, {item_2}, " \
+                   f"{item_3}, {item_4}, {item_5}, {champion_id})"
         self.cursor.execute(sql_text)
         self.connection.commit()
         self.connection.close()

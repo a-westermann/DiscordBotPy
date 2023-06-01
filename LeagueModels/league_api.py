@@ -85,6 +85,7 @@ class LeagueAPI:
 
 
     def get_recap_history(self, summoner_name:str):
+        matches = self.get_matches(summoner_name=summoner_name, match_count=60, start_index=0)
         pass
 
 

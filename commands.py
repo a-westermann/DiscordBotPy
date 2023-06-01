@@ -73,6 +73,7 @@ class Lol(app_commands.Group):
 
 
 
+
     @app_commands.command(name="recap", description="Get a recap of your history with a champ")
     @app_commands.choices(option=[
         app_commands.Choice(name="Vierce", value="Vierce"),
@@ -80,11 +81,10 @@ class Lol(app_commands.Group):
         app_commands.Choice(name="GoldForce", value="GoldForce"),
         app_commands.Choice(name="ComradeGiraffe", value="ComradeGiraffe")
     ])
-    async def recap(self, interaction: discord.Interaction, summoner: app_commands.Choice[str]):
+    async def recap(self, interaction: discord.Interaction, option: app_commands.Choice[str]):
         if self.token == "":
             await interaction.response.send_message("token invalid")
             return
-        
         await interaction.response.send_message("in development")
 
 

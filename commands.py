@@ -31,7 +31,8 @@ class Lol(app_commands.Group):
             return
         await interaction.response.send_message("working...", ephemeral=True)
         puuid = self.league_api.get_puuid(summoner_name)
-        helpers.backfill_match_champs(start=start, count=count, puuid=puuid, api=self.league_api)
+        # helpers.backfill_match_champs(start=start, count=count, puuid=puuid, api=self.league_api)
+        self.league_api.get_matches(summoner_name=summoner_name, match_count=count, start_index=start)
         await interaction.followup.send("done", ephemeral=True)
         # helpers.backfill_match_items(start=start, count=count,
         #                              puuid=puuid, api=self.league_api)
@@ -79,10 +80,11 @@ class Lol(app_commands.Group):
         app_commands.Choice(name="GoldForce", value="GoldForce"),
         app_commands.Choice(name="ComradeGiraffe", value="ComradeGiraffe")
     ])
-    async def recap(self, interaction: discord.Interaction, option: app_commands.Choice[str]):
+    async def recap(self, interaction: discord.Interaction, summoner: app_commands.Choice[str]):
         if self.token == "":
             await interaction.response.send_message("token invalid")
             return
+        
         await interaction.response.send_message("in development")
 
 

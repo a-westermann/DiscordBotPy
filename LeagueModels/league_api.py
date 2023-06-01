@@ -99,8 +99,11 @@ class LeagueAPI:
         for match_id in match_ids:
             # only build match if it's not on table for summoner
             results = self.psql.get_specific_match(match_id, summoner_name)
-            if len(results) > 0: break  # stop looking - hit the most current recorded match
+            if len(results) > 0:
+                print("hit a recorded match.")
+                break  # stop looking - hit the most current recorded match
             matches.append(self.build_match(match_id))
+            print(f"adding match... {match_id}")
         for match in matches:
             self.fill_match_table(match, summoner)
         return matches

@@ -105,7 +105,7 @@ class LeagueAPI:
             matches.append(self.build_match(match_id))
             print(f"adding match... {match_id}")
         for match in matches:
-            self.fill_match_table(match, summoner)
+            self.fill_match_table(match, summoner_name)
         return matches
 
 

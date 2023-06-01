@@ -16,7 +16,7 @@ class LeagueAPI:
 
 # helpers
     def get_summoner(self, summoner_name):
-        return self.lol_watcher.summoner.by_name(region, summoner_name)
+        return self.lol_watcher.summoner.by_name(self.region, summoner_name)
 
 
     def get_puuid(self, summoner_name):
@@ -29,12 +29,13 @@ class LeagueAPI:
         return puuid
 
     def get_recent_matches(self, puuid, count: int, start_index: int = 0):
-        match_ids = self.lol_watcher.match.matchlist_by_puuid(region=region, puuid=puuid, count=count,
+        print(self.region)
+        match_ids = self.lol_watcher.match.matchlist_by_puuid(region=self.region, puuid=puuid, count=count,
                                                               start=start_index)
         return match_ids
 
     def build_match(self, match_id: str):
-        match = self.lol_watcher.match.by_id(region, match_id)
+        match = self.lol_watcher.match.by_id(self.region, match_id)
         # print("test " + match['metadata']['dataVersion'])  # <-- access nested elements like this
         return match
 

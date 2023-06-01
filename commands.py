@@ -78,7 +78,7 @@ class Lol(app_commands.Group):
     @app_commands.choices(summoner_name=[
         app_commands.Choice(name="Vierce", value="Vierce"),
         app_commands.Choice(name="The Great Ratsby", value="The Great Ratsby"),
-        app_commands.Choice(name="GoldForce", value="GoldForce"),
+        app_commands.Choice(name="Gold Force", value="Gold Force"),
         app_commands.Choice(name="ComradeGiraffe", value="ComradeGiraffe")
     ])
     async def recap(self, interaction: discord.Interaction, summoner_name: app_commands.Choice[str]):

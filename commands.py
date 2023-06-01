@@ -88,10 +88,6 @@ class Lol(app_commands.Group):
         await interaction.response.send_message("in development")
 
 
-    # @app_commands.command(name="chart", description="See a chart of recent match history for the boys")
-
-
-
 
 
 # Other

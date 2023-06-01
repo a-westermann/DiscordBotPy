@@ -92,7 +92,7 @@ class LeagueAPI:
     def get_matches(self, summoner_name, match_count: int, start_index: int = 0):
         puuid = self.get_puuid(summoner_name)
         # print("puuid for " + summoner_name + " " + puuid)
-        match_ids = self.get_recent_matches(puuid=puuid, count=match_count, start=start_index)
+        match_ids = self.get_recent_matches(puuid=puuid, count=match_count, start_index=start_index)
         matches = []
 #TODO: change the sql to an IN() statement contianing all matches, then do a python compare to determine
 #TODO: which ones need to be added. That will cut down on query time when dealing with lots of new matches

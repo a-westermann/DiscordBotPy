@@ -139,6 +139,7 @@ class LeagueAPI:
             f"{items[3]}  \n{items[4]}  \n{items[5]}"
 
 #TODO: Add Win rate (would need to update the table. What else?
+# TODO: Add % of all recorded games played with the champ. Another sql query
         embed.description = description_string
         return embed
 

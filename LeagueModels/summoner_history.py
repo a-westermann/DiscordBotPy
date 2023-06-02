@@ -14,13 +14,13 @@ class SummonerHistory:
         self.quadras = 0
         self.pentas = 0
 
-        # below only used for the best game in recap. Create a separate summoner history class instance
-        self.item_0 = 0
-        self.item_1 = 0
-        self.item_2 = 0
-        self.item_3 = 0
-        self.item_4 = 0
-        self.item_5 = 0
+        # # below only used for the best game in recap. Create a separate summoner history class instance
+        # self.item_0 = 0
+        # self.item_1 = 0
+        # self.item_2 = 0
+        # self.item_3 = 0
+        # self.item_4 = 0
+        # self.item_5 = 0
 
 
     def add_match_score(self, kills, deaths, assists, doubles, triples, quadras, pentas):

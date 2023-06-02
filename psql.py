@@ -86,3 +86,6 @@ class PSQL:
         records = self.cursor.fetchall()
         self.connection.close()
         return records
+
+
+    def get_champ_history(self, summoner_name: str, champion_name: str):

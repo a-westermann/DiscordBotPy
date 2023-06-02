@@ -81,12 +81,14 @@ class Lol(app_commands.Group):
         app_commands.Choice(name="Gold Force", value="Gold Force"),
         app_commands.Choice(name="ComradeGiraffe", value="ComradeGiraffe")
     ])
-    async def recap(self, interaction: discord.Interaction, summoner_name: app_commands.Choice[str]):
+    async def recap(self, interaction: discord.Interaction, summoner_name: app_commands.Choice[str],
+                    champ_name_partial: str):
         if self.token == "":
             await interaction.response.send_message("token invalid")
             return
         print(f"summoner_name = {summoner_name.value}")
-        embed = self.league_api.get_recap_history(summoner_name=summoner_name.value)
+        embed = self.league_api.get_recap_history(summoner_name=summoner_name.value,
+                                                  champ_name_partial=champ_name_partial)
         await interaction.response.send_message(embed=embed)
 
 

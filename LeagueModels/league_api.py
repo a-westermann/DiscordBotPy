@@ -124,9 +124,12 @@ class LeagueAPI:
         kda = round((float(kills) + float(assists)) / float(deaths), 2)
         multi_kills = f"DTQP: {best_game[0]['doubles']} / {best_game[0]['triples']} / {best_game[0]['quadras']}" \
                       f" / {best_game[0]['pentas']}"
-        description_string += f"\n\nBest game ({best_game[0]['date_created']}):\n" \
+        best_game_date = str(best_game[0]['date_created']).split(' ')[0]
+        description_string += f"\n\nBest game ({best_game_date}):\n" \
             f"KDA:  **{kda}** ({kills}/{deaths}/{assists})\n" \
-            f"{multi_kills}"
+            f"{multi_kills}" \ 
+            f"{best_game[0]['item_0']}  {best_game[0]['item_1']}  {best_game[0]['item_2']}\n" \
+            f"{best_game[0]['item_3']}  {best_game[0]['item_4']}  {best_game[0]['item_5']}"
 
 
         embed.description = description_string

@@ -89,7 +89,7 @@ class PSQL:
         return records
 
 
-    def get_champ_history(self, summoner_name: str, champion: cassiopeia.Champion) -> list(cassiopeia.Champion):
+    def get_champ_history(self, summoner_name: str, champion: cassiopeia.Champion):
         self.open_connection()
         # first get average of all scores
         self.cursor.execute(f"SELECT SUM(kills) kills, SUM(deaths) deaths, SUM(assists) assists, SUM(doubles) doubles, "

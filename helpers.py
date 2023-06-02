@@ -147,5 +147,5 @@ def get_champ_by_partial_string(partial_name: str):
     matching_champs = []
     for champ in champs:
         if champ.name.__contains__(partial_name):
-            matching_champs.append(champ.name)
+            matching_champs.append(champ)
     return matching_champs

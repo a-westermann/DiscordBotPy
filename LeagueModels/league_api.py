@@ -111,9 +111,12 @@ class LeagueAPI:
         kda = round((float(kills) + float(assists)) / float(deaths), 2)
         multi_kills = f"DTQP: {match_rows[0]['doubles']} / {match_rows[0]['triples']} / {match_rows[0]['quadras']}" \
                       f" / {match_rows[0]['pentas']}"
-        embed.description = f"KDA:  ({kills}/{deaths}/{assists})" \
+        embed.description = f"**{summoner_name}** - **{champ.name}**\n\n"\
+                            f"KDA:  **{kda}** ({kills}/{deaths}/{assists})" \
                             f"\n{multi_kills}" \
                             f"\n\n{match_rows[0]['match_count']} matches"
+        # Add win rate ?
+
         # summoner_history = s_history.SummonerHistory(summoner_name)
         # summoner_history.add_match_score(kills=match_rows[0]["kills"], deaths=match_rows[0]["deaths"],
         #                                  assists=match_rows[0]["assists"], doubles=match_rows[0]["doubles"],

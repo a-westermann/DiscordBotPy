@@ -93,7 +93,8 @@ class PSQL:
         self.open_connection()
         # first get average of all scores
         self.cursor.execute(f"SELECT SUM(kills) kills, SUM(deaths) deaths, SUM(assists) assists, SUM(doubles) doubles, "
-                            f"SUM(triples) triples, SUM(quadras) quadras, SUM(pentas) pentas "
+                            f"SUM(triples) triples, SUM(quadras) quadras, SUM(pentas) pentas, "
+                            f"COUNT(match_id) match_count "
                             f"FROM match_history "
                             f"WHERE summoner_name = '{summoner_name}' AND champion_id = {champion.id} "
                             f"GROUP BY champion_id;")

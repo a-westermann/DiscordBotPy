@@ -135,8 +135,8 @@ class LeagueAPI:
         description_string += f"\n\nBest game ({best_game_date}):\n" \
             f"KDA:  **{kda}** ({kills}/{deaths}/{assists})\n" \
             f"{multi_kills}\n" \
-            f"{items[0]}  {items[1]}  {items[2]}\n" \
-            f"{items[3]}  {items[4]}  {items[5]}"
+            f"{items[0]}  \t  {items[1]}  \t  {items[2]}\n" \
+            f"{items[3]}  \t  {items[4]}  \t  {items[5]}"
 
         # Add win rate ?
         embed.description = description_string

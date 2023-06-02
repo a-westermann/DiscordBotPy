@@ -42,7 +42,7 @@ class LeagueAPI:
         # print("test " + match['metadata']['dataVersion'])  # <-- access nested elements like this
         return match
 
-    def get_item(self, item_id: int):
+    def get_item(self, item_id: int) -> cass.Item:
         items = cass.get_items(cass.Region.north_america)
         item_to_find = cass.Item(id=item_id, region=cass.Region.north_america)
         return items.find(item=item_to_find)
@@ -125,23 +125,21 @@ class LeagueAPI:
         multi_kills = f"DTQP: {best_game[0]['doubles']} / {best_game[0]['triples']} / {best_game[0]['quadras']}" \
                       f" / {best_game[0]['pentas']}"
         best_game_date = str(best_game[0]['date_created']).split(' ')[0]
+        items = []
+        for i in range(6):
+            item_id = best_game[0][f'item_{i}']
+            if item_id == 0:
+                items.append("")
+            else:
+                items.append(self.get_item(item_id).name)
         description_string += f"\n\nBest game ({best_game_date}):\n" \
             f"KDA:  **{kda}** ({kills}/{deaths}/{assists})\n" \
-            f"{multi_kills}" \
-            f"{best_game[0]['item_0']}  {best_game[0]['item_1']}  {best_game[0]['item_2']}\n" \
-            f"{best_game[0]['item_3']}  {best_game[0]['item_4']}  {best_game[0]['item_5']}"
+            f"{multi_kills}\n" \
+            f"{items[0]}  {items[2]}  {items[3]}\n" \
+            f"{items[4]}  {items[5]}  {items[6]}"
 
-
-        embed.description = description_string
         # Add win rate ?
-
-        # summoner_history = s_history.SummonerHistory(summoner_name)
-        # summoner_history.add_match_score(kills=match_rows[0]["kills"], deaths=match_rows[0]["deaths"],
-        #                                  assists=match_rows[0]["assists"], doubles=match_rows[0]["doubles"],
-        #                                  triples=match_rows[0]["triples"], quadras=match_rows[0]["quadras"],
-        #                                  pentas=match_rows[0]["pentas"])
-
-
+        embed.description = description_string
         return embed
 
 

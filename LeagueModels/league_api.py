@@ -95,10 +95,7 @@ class LeagueAPI:
         colors = {'Vierce': '#000000', 'The Great Ratsby': '#98c1d9', 'ComradeGiraffe': '#fca311',
                   'Gold Force': '#c01623'}
         embed = discord.Embed(color=discord.Color.from_str(colors[summoner_name]))
-        # champ_pic_file = open("champ_pic.png", "wb")
-        # champ_pic_file.write()
-        embed.set_image(url= champ.image.url) # "attachment://champ_pic.png")
-        # embed.set_thumbnail(champ.image)
+        embed.set_thumbnail(url= champ.image.url)
         return embed
 
 

@@ -148,9 +148,9 @@ def get_champ_by_partial_string(partial_name: str):
     for champ in champs:
         if champ.name.__contains__(partial_name):
             matching_champs.append(champ.name)
-    if matching_champs.count() > 1:
+    if len(matching_champs) > 1:
         return "That matches more than one champion. Be more specific."
-    elif matching_champs.count() == 0:
+    elif len(matching_champs) == 0:
         return "That doesn't match any champions."
     else:
         return matching_champs[0]

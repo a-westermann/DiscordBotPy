@@ -107,14 +107,29 @@ class LeagueAPI:
                   'Gold Force': '#c01623'}
         embed = discord.Embed(color=discord.Color.from_str(colors[summoner_name]))
         embed.set_thumbnail(url=champ.image.url)
+
+        # Totals stats
         kills, deaths, assists = match_rows[0]['kills'], match_rows[0]['deaths'], match_rows[0]['assists']
         kda = round((float(kills) + float(assists)) / float(deaths), 2)
         multi_kills = f"DTQP: {match_rows[0]['doubles']} / {match_rows[0]['triples']} / {match_rows[0]['quadras']}" \
                       f" / {match_rows[0]['pentas']}"
-        embed.description = f"**{summoner_name}** - **{champ.name}**\n\n"\
-                            f"KDA:  **{kda}** ({kills}/{deaths}/{assists})" \
-                            f"\n{multi_kills}" \
-                            f"\n\n{match_rows[0]['match_count']} matches"
+        description_string = f"**{summoner_name}** - **{champ.name}**\n\n"\
+            f"Totals ({match_rows[0]['match_count']} matches):\n" \
+            f"KDA:  **{kda}** ({kills}/{deaths}/{assists})\n" \
+            f"{multi_kills}"
+
+        # Best game stats
+        best_game = self.psql.get_best_match(summoner_name=summoner_name, champion=champ)
+        kills, deaths, assists = best_game[0]['kills'], best_game[0]['deaths'], best_game[0]['assists']
+        kda = round((float(kills) + float(assists)) / float(deaths), 2)
+        multi_kills = f"DTQP: {best_game[0]['doubles']} / {best_game[0]['triples']} / {best_game[0]['quadras']}" \
+                      f" / {best_game[0]['pentas']}"
+        description_string += f"\n\nBest game ({best_game[0]['date_created']}):\n" \
+            f"KDA:  **{kda}** ({kills}/{deaths}/{assists})\n" \
+            f"{multi_kills}"
+
+
+        embed.description = description_string
         # Add win rate ?
 
         # summoner_history = s_history.SummonerHistory(summoner_name)

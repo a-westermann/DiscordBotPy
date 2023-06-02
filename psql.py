@@ -103,4 +103,12 @@ class PSQL:
         return records
 
 
-    # def get_best_match(self, summoner_name: str, champion: cassiopeia.Champion):
+    def get_best_match(self, summoner_name: str, champion: cassiopeia.Champion):
+        self.open_connection()
+        self.cursor.execute(f"SELECT kills, deaths, assists, doubles, triples, quadras, pentas, date_created, "
+                            f"item_0, item_1, item_2, item_3, item_4, item_5 "
+                            f"WHERE summoner_name = '{summoner_name}' AND champion_id = {champion.id} "
+                            f"ORDER BY (kills + assists) / deaths DESC LIMIT 1;")
+        records = self.cursor.fetchall()
+        self.connection.close()
+        return records

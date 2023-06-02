@@ -86,8 +86,8 @@ class Lol(app_commands.Group):
             await interaction.response.send_message("token invalid")
             return
         print(f"summoner_name = {summoner_name.value}")
-        self.league_api.get_recap_history(summoner_name=summoner_name.value)
-        await interaction.response.send_message("in development")
+        embed = self.league_api.get_recap_history(summoner_name=summoner_name.value)
+        await interaction.response.send_message(embed=embed)
 
 
 
@@ -162,10 +162,6 @@ class OtherCommands(app_commands.Group):
 
     @app_commands.command(name="baby_name_summary", description="get the top rated names")
     async def baby_name_summary(self, interaction: discord.Interaction):
-        # embed = discord.Embed(color=discord.Color.from_str(r"#FFD700"), title="Top choices",
-        #                       description="This is a test embed" )
-        # embed.set_thumbnail(url="http://clipart-library.com/img/1751191.png")
-        # await interaction.response.send_message(embed=embed)
         chart = baby_chart.get_baby_venn()
         embed = discord.Embed(color=discord.Color.from_str(r"#FFD700"))
         embed.set_image(url="attachment://names_diagram.png")

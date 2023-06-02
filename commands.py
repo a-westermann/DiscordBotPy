@@ -88,7 +88,7 @@ class Lol(app_commands.Group):
             return
         print(f"summoner_name = {summoner_name.value}")
         embed = self.league_api.get_recap_history(summoner_name=summoner_name.value,
-                                                  champ_name_partial=champ_name_partial)
+                                                  champ_partial_name=champ_name_partial)
         await interaction.response.send_message(embed=embed)
 
 

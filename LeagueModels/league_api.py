@@ -90,7 +90,7 @@ class LeagueAPI:
 
     def get_recap_history(self, summoner_name:str):  #-> discord.Embed: Not working?
         matches = self.get_matches(summoner_name=summoner_name, match_count=60, start_index=0)
-        champ = self.get_champ()
+        champ = self.get_champ(1)
         # build an embed. Show champ pic + name, (avg k/d/a, kda, total d/t/q/p), date of best match + kda d/t/q/p
         colors = {'Vierce': '#000000', 'The Great Ratsby': '#98c1d9', 'ComradeGiraffe': '#fca311',
                   'Gold Force': '#c01623'}

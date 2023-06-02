@@ -89,3 +89,4 @@ class PSQL:
 
 
     def get_champ_history(self, summoner_name: str, champion_name: str):
+        pass

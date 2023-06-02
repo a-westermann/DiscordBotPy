@@ -32,8 +32,8 @@ class Lol(app_commands.Group):
         await interaction.response.send_message("working...", ephemeral=True)
         puuid = self.league_api.get_puuid(summoner_name)
         # helpers.backfill_match_champs(start=start, count=count, puuid=puuid, api=self.league_api)
-        self.league_api.get_matches(summoner_name=summoner_name, match_count=count, start_index=start)
-        await interaction.followup.send("done", ephemeral=True)
+        matches = self.league_api.get_matches(summoner_name=summoner_name, match_count=count, start_index=start)
+        await interaction.followup.send(f"filled {str(len(matches))} matches", ephemeral=True)
         # helpers.backfill_match_items(start=start, count=count,
         #                              puuid=puuid, api=self.league_api)
         # summoner = self.league_api.get_summoner("Vierce")

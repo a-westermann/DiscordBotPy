@@ -24,7 +24,7 @@ class Lol(app_commands.Group):
         self.bot = bot
 
 
-    @app_commands.command(name="test")
+    @app_commands.command(name="fill matches")
     async def test(self, interaction: discord.Interaction, start: int, count: int, summoner_name: str):
         if self.token == "":
             await interaction.response.send_message("token invalid", ephemeral=True)

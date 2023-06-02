@@ -132,11 +132,11 @@ class LeagueAPI:
                 items.append("")
             else:
                 items.append(self.get_item(item_id).name)
-        description_string += f"\n\nBest game ({best_game_date}):\n" \
+        description_string += f"\n\n**Best game** ({best_game_date}):\n" \
             f"KDA:  **{kda}** ({kills}/{deaths}/{assists})\n" \
             f"{multi_kills}\n" \
-            f"{items[0]}  \t  {items[1]}  \t  {items[2]}\n" \
-            f"{items[3]}  \t  {items[4]}  \t  {items[5]}"
+            f"{items[0]}  \n{items[1]}  \n{items[2]}  \n" \
+            f"{items[3]}  \n{items[4]}  \n{items[5]}"
 
         # Add win rate ?
         embed.description = description_string

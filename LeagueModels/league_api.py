@@ -158,6 +158,7 @@ class LeagueAPI:
                 break  # stop looking - hit the most current recorded match
             matches.append(self.build_match(match_id))
             print(f"adding match... {match_id}")
+        print(f"match list complete. Filling {str(len(matches))} matches.")
         for match in matches:
             self.fill_match_table(match, summoner_name)
         return matches
@@ -190,5 +191,5 @@ class LeagueAPI:
                                              participant["tripleKills"],
                                              participant["quadraKills"],
                                              participant["pentaKills"])
-        print(str(summoner_history.kills) + "/" + str(summoner_history.deaths) + "/" + str(summoner_history.assists))
+        # print(str(summoner_history.kills) + "/" + str(summoner_history.deaths) + "/" + str(summoner_history.assists))
         return summoner_history

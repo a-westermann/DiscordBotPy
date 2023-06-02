@@ -2,6 +2,7 @@ from googlesearch import search
 from datetime import datetime, timedelta
 import discord
 from riotwatcher import LolWatcher, ApiError
+import cassiopeia as cass
 from LeagueModels.league_api import LeagueAPI
 from psql import PSQL
 
@@ -140,3 +141,17 @@ def backfill_match_champs(start: int, count: int, puuid: str, api: LeagueAPI):
                                      f"AND summoner_name = '{participant['summonerName']}'; ")
         print(f"updated db for match index {i} ... champ = {participant['championName']}")
 
+
+def get_champ_by_partial_string(partial_name: str):
+    champs = cass.get_champions(region=cass.Region.north_america)
+    matching_champs = []
+    for champ in champs:
+        champ = cass.Champion(champ)
+        if champ.name.__contains__(partial_name):
+            matching_champs.append(champ.name)
+    if matching_champs.count() > 1:
+        return "That matches more than one champion. Be more specific."
+    elif matching_champs.count() == 0:
+        return "That doesn't match any champions."
+    else:
+        return matching_champs[0]

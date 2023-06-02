@@ -1,10 +1,13 @@
 from riotwatcher import LolWatcher, ApiError
-
 import helpers
 from LeagueModels import summoner_history as s_history, league_chart
 import psql
 from datetime import datetime
 import cassiopeia as cass
+import discord
+import discord.ext
+from discord.ext import commands
+from discord import app_commands
 
 
 class LeagueAPI:
@@ -44,7 +47,7 @@ class LeagueAPI:
         item_to_find = cass.Item(id=item_id, region=cass.Region.north_america)
         return items.find(item=item_to_find)
 
-    def get_champ(self, champ_id: int):
+    def get_champ(self, champ_id: int) -> cass.Champion:
         champs = cass.get_champions(region=cass.Region.north_america)
         for champ in champs:
             if champ.id == champ_id:
@@ -85,9 +88,15 @@ class LeagueAPI:
 
 
 
-    def get_recap_history(self, summoner_name:str):
+    def get_recap_history(self, summoner_name:str):  #-> discord.Embed: Not working?
         matches = self.get_matches(summoner_name=summoner_name, match_count=60, start_index=0)
-        pass
+        champ = self.get_champ()
+        # build an embed. Show champ pic + name, (avg k/d/a, kda, total d/t/q/p), date of best match + kda d/t/q/p
+        colors = {'Vierce': '#000000', 'The Great Ratsby': '#98c1d9', 'ComradeGiraffe': '#fca311',
+                  'Gold Force': '#c01623'}
+        embed = discord.Embed(color=discord.Color.from_str(colors[summoner_name]))
+        embed.set_image(champ.image)
+        return embed
 
 
 # Every request should probably start with get_matches to fill recent matches

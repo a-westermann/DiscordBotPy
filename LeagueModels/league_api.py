@@ -96,11 +96,25 @@ class LeagueAPI:
         elif len(matching_champs) == 0:
             return "No champ matches that string."
         champ = matching_champs[0]
+
+        # pull the match history averages
+        match_rows = self.psql.get_champ_history(summoner_name, champ)
+        # Check that this summoner has played this champ in the recorded games
+        if(len(match_rows) == 0):
+            return "You sure you played that champ recently?"
         # build an embed. Show champ pic + name, (avg k/d/a, kda, total d/t/q/p), date of best match + kda d/t/q/p
         colors = {'Vierce': '#000000', 'The Great Ratsby': '#98c1d9', 'ComradeGiraffe': '#fca311',
                   'Gold Force': '#c01623'}
         embed = discord.Embed(color=discord.Color.from_str(colors[summoner_name]))
-        embed.set_thumbnail(url= champ.image.url)
+        embed.set_thumbnail(url=champ.image.url)
+        embed.description = "test"
+        # summoner_history = s_history.SummonerHistory(summoner_name)
+        # summoner_history.add_match_score(kills=match_rows[0]["kills"], deaths=match_rows[0]["deaths"],
+        #                                  assists=match_rows[0]["assists"], doubles=match_rows[0]["doubles"],
+        #                                  triples=match_rows[0]["triples"], quadras=match_rows[0]["quadras"],
+        #                                  pentas=match_rows[0]["pentas"])
+
+
         return embed
 
 
@@ -127,7 +141,7 @@ class LeagueAPI:
     def fill_match_table(self, match, summoner_name):
         id = match["metadata"]["matchId"]
         game_timestamp = datetime.utcfromtimestamp(int(match["info"]["gameCreation"])/1000.0)
-        summoner_history = self.build_summoner_history(summoner_name, [match])
+        summoner_history = self.build_summoner_history_from_api_matches(summoner_name, [match])
         participant = helpers.get_matching_participant(self.get_puuid(summoner_name), match)
         self.psql.insert_match(id, summoner_name, summoner_history.kills, summoner_history.deaths,
                                summoner_history.assists, summoner_history.doubles, summoner_history.triples,
@@ -138,7 +152,7 @@ class LeagueAPI:
 
 
 # actually only pass in one match at a time right now. Could update it to only accept one match
-    def build_summoner_history(self, summoner_name, matches: list):
+    def build_summoner_history_from_api_matches(self, summoner_name, matches: list):
         summoner_history = s_history.SummonerHistory(summoner_name)
         puuid = self.get_puuid(summoner_name)
         for match in matches:
@@ -153,5 +167,3 @@ class LeagueAPI:
                                              participant["pentaKills"])
         print(str(summoner_history.kills) + "/" + str(summoner_history.deaths) + "/" + str(summoner_history.assists))
         return summoner_history
-
-

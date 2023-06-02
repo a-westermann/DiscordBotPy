@@ -47,7 +47,7 @@ class Lol(app_commands.Group):
                                              f"WHERE summoner_name = '{summoner_name}' "
                                              f"GROUP BY summoner_name;")[0]['count'])
         await interaction.followup.send(f"filled {str(len(matches))} matches."
-                                        f"\nmatch count for summoner = {oldest_match_index}", ephemeral=True)
+                                        f"\nmatch count for {summoner_name} = {oldest_match_index}", ephemeral=True)
         # helpers.backfill_match_items(start=start, count=count,
         #                              puuid=puuid, api=self.league_api)
         # summoner = self.league_api.get_summoner("Vierce")

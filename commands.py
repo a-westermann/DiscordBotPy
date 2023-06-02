@@ -38,7 +38,7 @@ class Lol(app_commands.Group):
             await interaction.response.send_message("token invalid", ephemeral=True)
             return
         await interaction.response.defer()  # ensures bot has enough time to answer
-        await interaction.response.send_message("working...", ephemeral=True)
+        await interaction.followup.send("working...", ephemeral=True)
         summoner_name = summoner_name.value
         puuid = self.league_api.get_puuid(summoner_name)
         # helpers.backfill_match_champs(start=start, count=count, puuid=puuid, api=self.league_api)

@@ -107,8 +107,13 @@ class LeagueAPI:
                   'Gold Force': '#c01623'}
         embed = discord.Embed(color=discord.Color.from_str(colors[summoner_name]))
         embed.set_thumbnail(url=champ.image.url)
-        embed.description = f"K/D/A {match_rows[0]['kills']}/{match_rows[0]['deaths']}/{match_rows[0]['assists']}" \
-                            f"\n{match_rows[0]['match_count']} matches"
+        kills, deaths, assists = match_rows[0]['kills'], match_rows[0]['deaths'], match_rows[0]['assists']
+        kda = round((float(kills) + float(assists)) / float(deaths), 2)
+        multi_kills = f"DTQP: {match_rows[0]['doubles']} / {match_rows[0]['triples']} / {match_rows[0]['quadras']}" \
+                      f" / {match_rows[0]['pentas']}"
+        embed.description = f"KDA:  ({kills}/{deaths}/{assists})" \
+                            f"\n{multi_kills}" \
+                            f"\n\n{match_rows[0]['match_count']} matches"
         # summoner_history = s_history.SummonerHistory(summoner_name)
         # summoner_history.add_match_score(kills=match_rows[0]["kills"], deaths=match_rows[0]["deaths"],
         #                                  assists=match_rows[0]["assists"], doubles=match_rows[0]["doubles"],

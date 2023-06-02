@@ -24,13 +24,21 @@ class Lol(app_commands.Group):
         self.bot = bot
 
 
-#TODO: Add a response that says the oldest match index on fill-matches
+
     @app_commands.command(name="fill-matches", description="be careful to insert matches with no gaps")
-    async def test(self, interaction: discord.Interaction, start: int, count: int, summoner_name: str):
+    @app_commands.choices(summoner_name=[
+        app_commands.Choice(name="Vierce", value="Vierce"),
+        app_commands.Choice(name="The Great Ratsby", value="The Great Ratsby"),
+        app_commands.Choice(name="Gold Force", value="Gold Force"),
+        app_commands.Choice(name="ComradeGiraffe", value="ComradeGiraffe")
+    ])
+    async def test(self, interaction: discord.Interaction, start: int, count: int,
+                   summoner_name: app_commands.Choice[str]):
         if self.token == "":
             await interaction.response.send_message("token invalid", ephemeral=True)
             return
         await interaction.response.send_message("working...", ephemeral=True)
+        summoner_name = summoner_name.value
         puuid = self.league_api.get_puuid(summoner_name)
         # helpers.backfill_match_champs(start=start, count=count, puuid=puuid, api=self.league_api)
         matches = self.league_api.get_matches(summoner_name=summoner_name, match_count=count, start_index=start)

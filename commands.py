@@ -25,6 +25,7 @@ class Lol(app_commands.Group):
 
 
 
+#TODO: See league_api.get_matches. Need to update that function to allow filling in gaps
     @app_commands.command(name="fill-matches", description="be careful to insert matches with no gaps")
     @app_commands.choices(summoner_name=[
         app_commands.Choice(name="Vierce", value="Vierce"),

@@ -149,7 +149,8 @@ class LeagueAPI:
         match_ids = self.get_recent_matches(puuid=puuid, count=match_count, start_index=start_index)
         matches = []
 #TODO: change the sql to an IN() statement contianing all matches, then do a python compare to determine
-#TODO: which ones need to be added. That will cut down on query time when dealing with lots of new matches
+#TODO: which ones need to be added. This will allow me to not worry about the match index. It will add ones
+#TODO: inside gaps.
         for match_id in match_ids:
             # only build match if it's not on table for summoner
             results = self.psql.get_specific_match(match_id, summoner_name)

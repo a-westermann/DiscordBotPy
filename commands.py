@@ -37,6 +37,7 @@ class Lol(app_commands.Group):
         if self.token == "":
             await interaction.response.send_message("token invalid", ephemeral=True)
             return
+        await interaction.response.defer()  # ensures bot has enough time to answer
         await interaction.response.send_message("working...", ephemeral=True)
         summoner_name = summoner_name.value
         puuid = self.league_api.get_puuid(summoner_name)

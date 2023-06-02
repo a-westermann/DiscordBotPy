@@ -138,7 +138,7 @@ class LeagueAPI:
             f"{items[0]}  \n{items[1]}  \n{items[2]}  \n" \
             f"{items[3]}  \n{items[4]}  \n{items[5]}"
 
-        # Add win rate ?
+#TODO: Add Win rate (would need to update the table. What else?
         embed.description = description_string
         return embed
 

@@ -107,7 +107,7 @@ class LeagueAPI:
                   'Gold Force': '#c01623'}
         embed = discord.Embed(color=discord.Color.from_str(colors[summoner_name]))
         embed.set_thumbnail(url=champ.image.url)
-        embed.description = "test"
+        embed.description = f"K{match_rows[0]['kills']}/D{match_rows[0]['deaths']}/A{match_rows[0]['assists']}"
         # summoner_history = s_history.SummonerHistory(summoner_name)
         # summoner_history.add_match_score(kills=match_rows[0]["kills"], deaths=match_rows[0]["deaths"],
         #                                  assists=match_rows[0]["assists"], doubles=match_rows[0]["doubles"],

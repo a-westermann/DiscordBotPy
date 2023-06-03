@@ -159,7 +159,7 @@ class OtherCommands(app_commands.Group):
         if helpers.check_user(interaction, [ "Vierce", "Naiyvara"]) is False:
             await interaction.response.send_message("Unauthorized")
             return
-        # await interaction.response.defer()  # ensures bot has enough time to answer
+        await interaction.response.defer()  # ensures bot has enough time to answer
         self.baby.backup_used_names()  # back up the file first
         name, got_new_name = await self.baby.get_todays_name()
         print(str(name).strip() + " = name")
@@ -171,7 +171,7 @@ class OtherCommands(app_commands.Group):
             search_results = "google rejected the search"
         regave_name = "" if got_new_name else " (this name was already chosen) "
         message_content = "Name: " + name + regave_name + "\n" + search_results
-        await interaction.response.send_message(message_content)
+        await interaction.followup.send(message_content)
         if got_new_name:
             await asyncio.sleep(1)
             view = Baby.baby_view.BabyView(self.baby, str(name).strip(), "Ashley", interaction)

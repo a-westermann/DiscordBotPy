@@ -146,6 +146,6 @@ def get_champ_by_partial_string(partial_name: str) -> list[cass.Champion]:
     champs = cass.get_champions(region=cass.Region.north_america)
     matching_champs = []
     for champ in champs:
-        if champ.name.__contains__(partial_name):
+        if champ.name.lower().__contains__(partial_name.lower()):
             matching_champs.append(champ)
     return matching_champs

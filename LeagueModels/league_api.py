@@ -114,7 +114,7 @@ class LeagueAPI:
         kda = round((float(kills) + float(assists)) / float(deaths), 2)
         multi_kills = f"DTQP: {match_rows[0]['doubles']} / {match_rows[0]['triples']} / {match_rows[0]['quadras']}" \
                       f" / {match_rows[0]['pentas']}"
-        play_rate = str((self.psql.percent_played_champ(summoner_name, champ)["play_percent"] * 100))
+        play_rate = str(round((self.psql.percent_played_champ(summoner_name, champ)["play_percent"] * 100), 2))
 
         description_string = f"**{summoner_name}** - **{champ.name}**\n(play-rate: {play_rate}%)\n\n"\
             f"Totals ({match_rows[0]['match_count']} matches):\n" \

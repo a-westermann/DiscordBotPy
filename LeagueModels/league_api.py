@@ -115,7 +115,8 @@ class LeagueAPI:
         multi_kills = f"DTQP: {match_rows[0]['doubles']} / {match_rows[0]['triples']} / {match_rows[0]['quadras']}" \
                       f" / {match_rows[0]['pentas']}"
         play_rate = str((self.psql.percent_played_champ(summoner_name, champ)["play_percent"] * 100))
-        description_string = f"**{summoner_name}** - **{champ.name}**\n(play-rate: {play_rate}%)\n\n"\
+
+        description_string = f"""**{summoner_name}** - **{champ.name}**\n(play-rate: {play_rate}%)\n\n"\
             f"Totals ({match_rows[0]['match_count']} matches):\n" \
             f"KDA:  **{kda}** ({kills}/{deaths}/{assists})\n" \
             f"{multi_kills}"
@@ -139,7 +140,7 @@ class LeagueAPI:
             f"KDA:  **{kda}** ({kills}/{deaths}/{assists})\n" \
             f"{multi_kills}\n" \
             f"```css\n    {items[0]}  \n    {items[1]}  \n    {items[2]}  \n" \
-            f"    {items[3]}  \n    {items[4]}  \n    {items[5]}```"
+            f"    {items[3]}  \n    {items[4]}  \n    {items[5]}```"""
 #TODO: Add Win rate (would need to update the table. What else?
         embed.add_field(name='', value=description_string, inline=False) # inline only affects Name, so doesn't work
         return embed

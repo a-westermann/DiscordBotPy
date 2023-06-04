@@ -142,7 +142,8 @@ class LeagueAPI:
 
 #TODO: Add Win rate (would need to update the table. What else?
 # TODO: Add % of all recorded games played with the champ. Another sql query
-        embed.description = description_string
+        embed.add_field(name='', value=description_string, inline=False)
+        # embed.description = description_string
         return embed
 
 

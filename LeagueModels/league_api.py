@@ -138,8 +138,8 @@ class LeagueAPI:
         description_string += f"\n\n**Best game** ({best_game_date}):\n" \
             f"KDA:  **{kda}** ({kills}/{deaths}/{assists})\n" \
             f"{multi_kills}\n" \
-            f"'''css\n    {items[0]}  \n    {items[1]}  \n    {items[2]}  \n" \
-            f"    {items[3]}  \n    {items[4]}  \n    {items[5]}\n'''"
+            f"```css\n    {items[0]}  \n    {items[1]}  \n    {items[2]}  \n" \
+            f"    {items[3]}  \n    {items[4]}  \n    {items[5]}```"
 #TODO: Add Win rate (would need to update the table. What else?
         embed.add_field(name='', value=description_string, inline=False) # inline only affects Name, so doesn't work
         return embed

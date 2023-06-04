@@ -137,8 +137,8 @@ class LeagueAPI:
         description_string += f"\n\n**Best game** ({best_game_date}):\n" \
             f"KDA:  **{kda}** ({kills}/{deaths}/{assists})\n" \
             f"{multi_kills}\n" \
-            f"\t\t{items[0]}  \n\t\t{items[1]}  \n\t\t{items[2]}  \n" \
-            f"\t\t{items[3]}  \n\t\t{items[4]}  \n\t\t{items[5]}"
+            f"    {items[0]}  \n    {items[1]}  \n    {items[2]}  \n" \
+            f"    {items[3]}  \n    {items[4]}  \n    {items[5]}"
 
 #TODO: Add Win rate (would need to update the table. What else?
 # TODO: Add % of all recorded games played with the champ. Another sql query

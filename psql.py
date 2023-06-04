@@ -118,9 +118,9 @@ class PSQL:
     def percent_played_champ(self, summoner_name: str, champion: cassiopeia.Champion):
         self.open_connection()
         self.cursor.execute(f"SELECT ROUND((ROUND((SELECT COUNT(match_id) count from match_history "
-                            f"WHERE summoner_name = '{summoner_name}' AND champion_id = {champion.id}), 2)) / "
+                            f"WHERE summoner_name = '{summoner_name}' AND champion_id = {champion.id}), 4)) / "
                             f"ROUND((SELECT COUNT(match_id) count from match_history "
-                            f"WHERE summoner_name = '{summoner_name}'), 2), 2) AS play_percent")
+                            f"WHERE summoner_name = '{summoner_name}'), 4), 4) AS play_percent")
         records = self.cursor.fetchall()
         self.connection.close()
         return records[0]  # only return 1 row

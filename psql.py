@@ -110,7 +110,7 @@ class PSQL:
                             f"FROM match_history "
                             f"WHERE summoner_name = '{summoner_name}' AND champion_id = {champion.id} "
                             f"ORDER BY (kills + assists) / "
-                            f"CASE(WHEN deaths = 0 THEN 1 ELSE deaths) DESC LIMIT 1;")
+                            f" (CASE WHEN deaths = 0 THEN 1 ELSE deaths END) DESC LIMIT 1;")
         records = self.cursor.fetchall()
         self.connection.close()
         return records

@@ -40,6 +40,8 @@ class Lol(app_commands.Group):
             await interaction.response.send_message("token invalid", ephemeral=True)
             return
         await interaction.response.defer()  # ensures bot has enough time to answer
+        choices = [champ.name for champ in cass.get_champions(region=cass.Region.north_america)]
+        print(choices)
         await interaction.followup.send("working...", ephemeral=True)
         summoner_name = summoner_name.value
         puuid = self.league_api.get_puuid(summoner_name)

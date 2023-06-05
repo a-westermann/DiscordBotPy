@@ -110,7 +110,7 @@ class Lol(app_commands.Group):
         await interaction.response.defer()
         print(f"summoner_name = {summoner_name.value}")
         embed = self.league_api.get_recap_history(summoner_name=summoner_name.value,
-                                                  champ_partial_name=champ_name_partial)
+                                                  champ_partial_name=champ)
         if isinstance(embed, str): # got 0 or 2+ champs with the partial name, or no games logged.
             await interaction.followup.send(embed, ephemeral=True)
         else:  # got one champ & have games logged with it

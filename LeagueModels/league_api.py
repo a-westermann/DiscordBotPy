@@ -99,7 +99,7 @@ class LeagueAPI:
         # build an embed. Show champ pic + name, (avg k/d/a, kda, total d/t/q/p), date of best match + kda d/t/q/p
         colors = {'Vierce': '#000000', 'The Great Ratsby': '#98c1d9', 'ComradeGiraffe': '#fca311',
                   'Gold Force': '#c01623'}
-        # embed = discord.Embed(color=discord.Color.from_str(colors[summoner_name]))
+        embed = discord.Embed(color=discord.Color.from_str(colors[summoner_name]))
         # summoner = cass.Summoner(region=cass.Region.north_america,
         #                                id=summoner_name)
         # print(summoner.name + "  " + summoner.level)

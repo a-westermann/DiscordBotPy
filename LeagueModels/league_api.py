@@ -124,20 +124,20 @@ class LeagueAPI:
                       f" / {best_game[0]['pentas']}"
         best_game_date = str(best_game[0]['date_created']).split(' ')[0]
         items = []
-        print(cass.get_items(region=cass.Region.north_america)[0].included_data)
         for i in range(6):
             item_id = best_game[0][f'item_{i}']
             if item_id == 0:
                 items.append("")
             else:
                 item = self.get_item(item_id)
-                items.append(f"**{item.name}**  *{item.image}*")
+                items.append(f"**{item.name}**  *{item.tags[0]} {items.tags[1]}*")
         description_string += f"\n\n**Best game** ({best_game_date}):\n" \
             f"KDA:  **{kda}** ({kills}/{deaths}/{assists})\n" \
             f"{multi_kills}\n" \
             f"\n    {items[0]}  \n    {items[1]}  \n    {items[2]}  \n" \
             f"    {items[3]}  \n    {items[4]}  \n    {items[5]}"
 #TODO: Add Win rate (would need to update the table. What else?
+#TODO: Could set the Image for the embed to the champ, then the thumbnail to the Mythic item
         embed.add_field(name='', value=description_string, inline=False) # inline only affects Name, so doesn't work
         return embed
 

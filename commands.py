@@ -89,9 +89,9 @@ class Lol(app_commands.Group):
 
     async def champ_name_autocomplete(self, interaction: discord.Interaction,
                                       current: str)->list[app_commands.Choice[str]]:
-        champ = ['Leona', 'Katarina', 'Volibear']
+        choices = ['Leona', 'Katarina', 'Volibear']
         return [app_commands.Choice(name=champ, value=champ)
-                for selected_champ in champ if current.lower() in selected_champ.lower()]
+                for choice in choices if current.lower() in choice.lower()]
 
 
     @app_commands.command(name="recap", description="Get a recap of your history with a champ")

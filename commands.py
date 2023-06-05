@@ -2,6 +2,7 @@ import datetime
 import asyncio
 import Baby.baby_view
 import LeagueModels.league_api
+import cassiopeia as cass
 import discord
 from discord.ext import commands
 from discord import app_commands
@@ -33,7 +34,7 @@ class Lol(app_commands.Group):
         app_commands.Choice(name="Gold Force", value="Gold Force"),
         app_commands.Choice(name="ComradeGiraffe", value="ComradeGiraffe")
     ])
-    async def test(self, interaction: discord.Interaction, start: int, count: int,
+    async def fill_matches(self, interaction: discord.Interaction, start: int, count: int,
                    summoner_name: app_commands.Choice[str]):
         if self.token == "":
             await interaction.response.send_message("token invalid", ephemeral=True)
@@ -89,7 +90,7 @@ class Lol(app_commands.Group):
 
     async def champ_name_autocomplete(self, interaction: discord.Interaction,
                                       current: str)->list[app_commands.Choice[str]]:
-        choices = ['Leona', 'Katarina', 'Volibear']
+        choices = [champ.name for champ in cass.Champions]
         return [app_commands.Choice(name=choice, value=choice)
                 for choice in choices if current.lower() in choice.lower()]
 

@@ -91,7 +91,7 @@ class Lol(app_commands.Group):
                                       current: str)->list[app_commands.Choice[str]]:
         champ = ['Leona', 'Katarina', 'Volibear']
         return [app_commands.Choice(name=champ, value=champ)
-                for selected_champ in champ if current.lower() in choice.lower()]
+                for selected_champ in champ if current.lower() in selected_champ.lower()]
 
 
     @app_commands.command(name="recap", description="Get a recap of your history with a champ")
@@ -101,7 +101,7 @@ class Lol(app_commands.Group):
         app_commands.Choice(name="Gold Force", value="Gold Force"),
         app_commands.Choice(name="ComradeGiraffe", value="ComradeGiraffe")
     ])
-    @app_commands.autocomplete(choices=champ_name_autocomplete)
+    @app_commands.autocomplete(champ=champ_name_autocomplete)
     async def recap(self, interaction: discord.Interaction, summoner_name: app_commands.Choice[str],
                     champ: str):
         if self.token == "":

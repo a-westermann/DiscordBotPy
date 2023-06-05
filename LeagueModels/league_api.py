@@ -88,15 +88,9 @@ class LeagueAPI:
 
 
 
-    def get_recap_history(self, summoner_name:str, champ_partial_name: str):  #-> discord.Embed: Not working?
+    def get_recap_history(self, summoner_name:str, champ_name: str):  #-> discord.Embed: Not working?
         matches = self.get_matches(summoner_name=summoner_name, match_count=60, start_index=0)
-        matching_champs = helpers.get_champ_by_partial_string(champ_partial_name)
-        if len(matching_champs) > 1:
-            return "More than one champ matches that string. Be more specific."
-        elif len(matching_champs) == 0:
-            return "No champ matches that string."
-        champ = matching_champs[0]
-
+        champ = helpers.get_champ_by_partial_string(champ_name)[0]
         # pull the match history averages
         match_rows = self.psql.get_champ_history(summoner_name, champ)
         # Check that this summoner has played this champ in the recorded games

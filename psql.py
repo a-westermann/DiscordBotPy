@@ -120,7 +120,8 @@ class PSQL:
         self.cursor.execute(f"SELECT ROUND((ROUND((SELECT COUNT(match_id) count from match_history "
                             f"WHERE summoner_name = '{summoner_name}' AND champion_id = {champion.id}), 4)) / "
                             f"ROUND((SELECT COUNT(match_id) count from match_history "
-                            f"WHERE summoner_name = '{summoner_name}'), 4), 4) AS play_percent")
+                            f"WHERE summoner_name = '{summoner_name}'), 4), 41"
+                            f") AS play_percent")
         records = self.cursor.fetchall()
         self.connection.close()
         return records[0]  # only return 1 row

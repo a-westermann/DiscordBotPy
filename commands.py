@@ -87,6 +87,11 @@ class Lol(app_commands.Group):
         await interaction.followup.send(embed=embed, file=chart)
 
 
+    async def champ_name_autocomplete(self, interaction: discord.Interaction,
+                                      current: str)->List[app_commands.Choice[str]]:
+        choices = ['Leona', 'Katarina', 'Volibear']
+        return [app_commands.Choice(name=choice, value=choice)
+                for choice in choices if current.lower() in choice.lower()]
 
 
     @app_commands.command(name="recap", description="Get a recap of your history with a champ")
@@ -96,8 +101,9 @@ class Lol(app_commands.Group):
         app_commands.Choice(name="Gold Force", value="Gold Force"),
         app_commands.Choice(name="ComradeGiraffe", value="ComradeGiraffe")
     ])
+    @app_commands.autocomplete(choices=champ_name_autocomplete)
     async def recap(self, interaction: discord.Interaction, summoner_name: app_commands.Choice[str],
-                    champ_name_partial: str):
+                    choices: str):
         if self.token == "":
             await interaction.response.send_message("token invalid")
             return

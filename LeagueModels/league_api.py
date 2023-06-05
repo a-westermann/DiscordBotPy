@@ -124,7 +124,7 @@ class LeagueAPI:
                       f" / {best_game[0]['pentas']}"
         best_game_date = str(best_game[0]['date_created']).split(' ')[0]
         items = []
-        print(cass.get_items(region=cass.Region.north_america)[0].group)
+        print(cass.get_items(region=cass.Region.north_america)[0].included_data)
         for i in range(6):
             item_id = best_game[0][f'item_{i}']
             if item_id == 0:

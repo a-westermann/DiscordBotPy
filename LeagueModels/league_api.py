@@ -130,7 +130,8 @@ class LeagueAPI:
                 items.append("")
             else:
                 item = self.get_item(item_id)
-                items.append(f"**{item.name}** *{item.description}*")
+                items.append(f"**{item.name}** *{item.name}*")
+                print(item.description)
         description_string += f"\n\n**Best game** ({best_game_date}):\n" \
             f"KDA:  **{kda}** ({kills}/{deaths}/{assists})\n" \
             f"{multi_kills}\n" \

@@ -39,7 +39,6 @@ class Lol(app_commands.Group):
         if self.token == "":
             await interaction.response.send_message("token invalid", ephemeral=True)
             return
-        print(cass.get_champions(region=cass.Region.north_america)[0].name + "   name")
         await interaction.response.defer()  # ensures bot has enough time to answer
         await interaction.followup.send("working...", ephemeral=True)
         summoner_name = summoner_name.value
@@ -91,7 +90,7 @@ class Lol(app_commands.Group):
 
     async def champ_name_autocomplete(self, interaction: discord.Interaction,
                                       current: str)->list[app_commands.Choice[str]]:
-        choices = [champ.name for champ in cass.Champions]
+        choices = [champ.name for champ in cass.get_champions(region=cass.Region.north_america)]
         return [app_commands.Choice(name=choice, value=choice)
                 for choice in choices if current.lower() in choice.lower()]
 

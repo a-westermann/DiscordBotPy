@@ -93,9 +93,8 @@ class Lol(app_commands.Group):
         choices = [champ.name for champ in cass.get_champions(region=cass.Region.north_america)]
         options = [app_commands.Choice(name=choice, value=choice)
                 for choice in choices if current.lower() in choice.lower()]
-        options = options[:15]
-        # if len(options) > 25:
-        #     options
+        if len(options) > 10:
+            options = options[:9]
         return
 
 

@@ -90,7 +90,7 @@ class Lol(app_commands.Group):
     async def champ_name_autocomplete(self, interaction: discord.Interaction,
                                       current: str)->list[app_commands.Choice[str]]:
         choices = ['Leona', 'Katarina', 'Volibear']
-        return [app_commands.Choice(name=choices, value=choices)
+        return [app_commands.Choice(name=choice, value=choice)
                 for choice in choices if current.lower() in choice.lower()]
 
 
@@ -101,9 +101,9 @@ class Lol(app_commands.Group):
         app_commands.Choice(name="Gold Force", value="Gold Force"),
         app_commands.Choice(name="ComradeGiraffe", value="ComradeGiraffe")
     ])
-    @app_commands.autocomplete(champion=champ_name_autocomplete)
+    @app_commands.autocomplete(champ=champ_name_autocomplete)
     async def recap(self, interaction: discord.Interaction, summoner_name: app_commands.Choice[str],
-                    champion: str):
+                    champ: str):
         if self.token == "":
             await interaction.response.send_message("token invalid")
             return

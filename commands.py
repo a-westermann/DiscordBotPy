@@ -90,7 +90,7 @@ class Lol(app_commands.Group):
     async def champ_name_autocomplete(self, interaction: discord.Interaction,
                                       current: str)->list[app_commands.Choice[str]]:
         choices = ['Leona', 'Katarina', 'Volibear']
-        return [app_commands.Choice(name=champ, value=champ)
+        return [app_commands.Choice(name=choices, value=choices)
                 for choice in choices if current.lower() in choice.lower()]
 
 

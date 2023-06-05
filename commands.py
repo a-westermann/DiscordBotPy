@@ -91,8 +91,12 @@ class Lol(app_commands.Group):
     async def champ_name_autocomplete(self, interaction: discord.Interaction,
                                       current: str)->list[app_commands.Choice[str]]:
         choices = [champ.name for champ in cass.get_champions(region=cass.Region.north_america)]
-        return [app_commands.Choice(name=choice, value=choice)
+        options = [app_commands.Choice(name=choice, value=choice)
                 for choice in choices if current.lower() in choice.lower()]
+        options = options[:25]
+        # if len(options) > 25:
+        #     options
+        return
 
 
     @app_commands.command(name="recap", description="Get a recap of your history with a champ")

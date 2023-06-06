@@ -102,7 +102,7 @@ class LeagueAPI:
         embed = discord.Embed(color=discord.Color.from_str(colors[summoner_name]))
         summoner = cass.Summoner(region=cass.Region.north_america,
                                        name=summoner_name)
-
+        print("SUmmoner retrieved:  " + summoner.name)
         profile_id = summoner.profile_icon.id
         profile_pic = cass.get_profile_icons(profile_id)
         embed.set_thumbnail(url=champ.image.url)

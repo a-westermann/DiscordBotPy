@@ -138,6 +138,7 @@ class LeagueAPI:
             else:
                 item = self.get_item(item_id)
                 tags = f"{item.tags[0]} / {item.tags[1]}" if len(item.tags) > 1 else f"{item.tags[0]}"
+                print(item.group)
                 items.append(f"**{item.name}** ---> *{tags}*")
         description_string += f"\n\n**Best game** ({best_game_date}):\n" \
             f"KDA:  **{kda}** ({kills}/{deaths}/{assists})\n" \

@@ -116,8 +116,8 @@ class LeagueAPI:
         multi_kills = f"DTQP: {match_rows[0]['doubles']} / {match_rows[0]['triples']} / {match_rows[0]['quadras']}" \
                       f" / {match_rows[0]['pentas']}"
         play_rate = str(round((self.psql.percent_played_champ(summoner_name, champ)["play_percent"] * 100), 2))
-
-        description_string = f"**{summoner_name}** - **{champ.name}**\n(play-rate: {play_rate}%)\n\n"\
+        embed.set_footer(text=f"\n(play-rate: {play_rate}%)")
+        description_string = f"**{summoner_name}** - **{champ.name}**\n\n"\
             f"Totals ({match_rows[0]['match_count']} matches):\n" \
             f"KDA:  **{kda}** ({kills}/{deaths}/{assists})\n" \
             f"{multi_kills}"

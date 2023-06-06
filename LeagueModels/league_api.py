@@ -101,8 +101,7 @@ class LeagueAPI:
         colors = {'Vierce': '#000000', 'The Great Ratsby': '#98c1d9', 'ComradeGiraffe': '#fca311',
                   'Gold Force': '#c01623'}
         embed = discord.Embed(color=discord.Color.from_str(colors[summoner_name]))
-        summoner = cass.Summoner(region=cass.Region.north_america,
-                                       name=summoner_name)
+        summoner = cass.Summoner(name=summoner_name)
         print("SUmmoner retrieved:  " + summoner.name)
         profile_id = summoner.profile_icon.id
         profile_pic = cass.get_profile_icons(profile_id)

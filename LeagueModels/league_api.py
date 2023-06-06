@@ -104,7 +104,7 @@ class LeagueAPI:
         summoner = cass.Summoner(region=cass.Region.north_america, name=summoner_name)
         print("SUmmoner retrieved:  " + summoner.name)
         profile_id = summoner.profile_icon.id
-        print("Profile icon id = " + profile_id)
+        print("Profile icon id = " + str(profile_id))
         profile_pic = cass.get_profile_icons(profile_id)
         embed.set_thumbnail(url=champ.image.url)
         embed.image = profile_pic

@@ -137,7 +137,6 @@ class LeagueAPI:
                 items.append("")
             else:
                 item = self.get_item(item_id)
-                item_data = cass.get_item_data()
                 print(item.keywords)
                 tags = f"{item.tags[0]} / {item.tags[1]}" if len(item.tags) > 1 else f"{item.tags[0]}"
                 items.append(f"**{item.name}** ---> *{tags}*")

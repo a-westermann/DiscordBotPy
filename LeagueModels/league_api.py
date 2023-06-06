@@ -106,8 +106,8 @@ class LeagueAPI:
         profile_id = summoner.profile_icon.id
         print("Profile icon id = " + str(profile_id))
         profile_pic = cass.get_profile_icons(region=cass.Region.north_america).find(item=profile_id)
-        embed.set_thumbnail(url=champ.image.url)
-        embed.set_image(url=profile_pic.url)
+        embed.set_image(url=champ.image.url)
+        embed.set_thumbnail(url=profile_pic.url)
 
         # Totals stats
         kills, deaths, assists = match_rows[0]['kills'], match_rows[0]['deaths'], match_rows[0]['assists']

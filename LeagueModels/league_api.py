@@ -15,6 +15,7 @@ class LeagueAPI:
     def __init__(self, api_token, psql: psql.PSQL):
         self.token = api_token
         self.lol_watcher = LolWatcher(api_key=self.token)
+        cass.set_riot_api_key(self.token)
         self.psql = psql
 
 # helpers

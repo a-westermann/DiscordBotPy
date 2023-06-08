@@ -143,11 +143,10 @@ class LeagueAPI:
         # sort items putting Mythic at top and adding a blank line after
         sorted_items = []
         for item in items:
-            # sorted_items.append(f"{item}\n" if 'Mythic' in item else '')
+            # sorted_items.append(f"{item}\n" if 'Mythic' in item else '') # breaks the following loop??
             if 'Mythic' in item:
-                sorted_items.append(item)
+                sorted_items.append(f"{item}\n")
         for item in items:
-            print(item)
             if 'Mythic' not in item:
                 sorted_items.append(item)
 

@@ -142,14 +142,14 @@ class LeagueAPI:
                 items.append(f"{category}**{item.name}** ---> *{tags}*")
         # sort items putting Mythic at top and adding a blank line after
         sorted_items = []
-        sorted_items.append([f"{item}\n\n" for item in items if 'Mythic' in item])
+        sorted_items.append([f"{item}\n" for item in items if 'Mythic' in item])
         sorted_items.append([item for item in items if 'Mythic' not in item])
 
         description_string += f"\n\n**Best game** ({best_game_date}):\n" \
             f"KDA:  **{kda}** ({kills}/{deaths}/{assists})\n" \
             f"{multi_kills}\n" \
-            f"\n    {items[0]}  \n    {items[1]}  \n    {items[2]}  \n" \
-            f"    {items[3]}  \n    {items[4]}  \n    {items[5]}"
+            f"\n    {sorted_items[0]}  \n    {sorted_items[1]}  \n    {sorted_items[2]}  \n" \
+            f"    {sorted_items[3]}  \n    {sorted_items[4]}  \n    {sorted_items[5]}"
 #TODO: Add Win rate (would need to update the table. What else?
 #TODO: Could set the Image for the embed to the champ, then the thumbnail to the Mythic item.
         embed.add_field(name='', value=description_string, inline=False) # inline only affects Name, so doesn't work

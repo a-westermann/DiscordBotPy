@@ -138,12 +138,12 @@ class LeagueAPI:
             else:
                 item = self.get_item(item_id)
                 tags = f"{item.tags[0]} / {item.tags[1]}" if len(item.tags) > 1 else f"{item.tags[0]}"
-                category = '**Mythic**\n' if 'Mythic' in item.description else ''
+                category = '---**Mythic**---\n' if 'Mythic' in item.description else ''
                 items.append(f"{category}**{item.name}** ---> *{tags}*")
         # sort items putting Mythic at top and adding a blank line after
-        sorted_items = []
-        sorted_items.append([item for item in items if 'Mythic' in item])
-        print(sorted_items)
+        sorted_items = set()
+        sorted_items.add([f"{item}\n" for item in items if 'Mythic' in item])
+        sorted_items.add([item for item in items])
 
         description_string += f"\n\n**Best game** ({best_game_date}):\n" \
             f"KDA:  **{kda}** ({kills}/{deaths}/{assists})\n" \

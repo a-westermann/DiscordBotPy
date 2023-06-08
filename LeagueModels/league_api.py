@@ -141,9 +141,8 @@ class LeagueAPI:
                 category = '---**Mythic**---\n' if 'Mythic' in item.description else ''
                 items.append(f"{category}**{item.name}** ---> *{tags}*")
         # sort items putting Mythic at top and adding a blank line after
-        sorted_items = ''
+        sorted_items = '\n'
         for item in items:
-            # sorted_items.append(f"{item}\n" if 'Mythic' in item else '') # breaks the following loop??
             if 'Mythic' in item:
                 sorted_items += (f"{item}\n\n")
         for item in items:

@@ -145,8 +145,9 @@ class LeagueAPI:
         for item in items:
             sorted_items.append(f"{item}\n" if 'Mythic' in item else '')
         for item in items:
-            sorted_items.append(item if 'Mythic' not in item else '')
-        print(sorted_items)
+            print(item)
+            if 'Mythic' not in item:
+                sorted_items.append(item)
 
         description_string += f"\n\n**Best game** ({best_game_date}):\n" \
             f"KDA:  **{kda}** ({kills}/{deaths}/{assists})\n" \

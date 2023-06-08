@@ -141,20 +141,19 @@ class LeagueAPI:
                 category = '---**Mythic**---\n' if 'Mythic' in item.description else ''
                 items.append(f"{category}**{item.name}** ---> *{tags}*")
         # sort items putting Mythic at top and adding a blank line after
-        sorted_items = []
+        sorted_items = ''
         for item in items:
             # sorted_items.append(f"{item}\n" if 'Mythic' in item else '') # breaks the following loop??
             if 'Mythic' in item:
-                sorted_items.append(f"{item}\n")
+                sorted_items += (f"{item}\n\n")
         for item in items:
             if 'Mythic' not in item and item != '':
-                sorted_items.append(item)
+                sorted_items += (f"{item}\n")
 
         description_string += f"\n\n**Best game** ({best_game_date}):\n" \
             f"KDA:  **{kda}** ({kills}/{deaths}/{assists})\n" \
             f"{multi_kills}\n" \
-            f"\n    {sorted_items[0]}  \n    {sorted_items[1]}  \n    {sorted_items[2]}  \n" \
-            f"    {sorted_items[3]}  \n    {sorted_items[4]}  \n    {sorted_items[5]}"
+            f"{sorted_items}"
 #TODO: Add Win rate (would need to update the table. What else?
 #TODO: Could set the Image for the embed to the champ, then the thumbnail to the Mythic item.
         embed.add_field(name='', value=description_string, inline=False) # inline only affects Name, so doesn't work

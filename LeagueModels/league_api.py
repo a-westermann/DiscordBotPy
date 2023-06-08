@@ -137,7 +137,8 @@ class LeagueAPI:
                 items.append("")
             else:
                 item = self.get_item(item_id)
-                # print(item.group)
+                print(item.description)
+                print('\n'+item.sanitized_description)
                 tags = f"{item.tags[0]} / {item.tags[1]}" if len(item.tags) > 1 else f"{item.tags[0]}"
                 items.append(f"**{item.name}** ---> *{tags}*")
         description_string += f"\n\n**Best game** ({best_game_date}):\n" \
@@ -146,7 +147,7 @@ class LeagueAPI:
             f"\n    {items[0]}  \n    {items[1]}  \n    {items[2]}  \n" \
             f"    {items[3]}  \n    {items[4]}  \n    {items[5]}"
 #TODO: Add Win rate (would need to update the table. What else?
-#TODO: Could set the Image for the embed to the champ, then the thumbnail to the Mythic item
+#TODO: Could set the Image for the embed to the champ, then the thumbnail to the Mythic item.
         embed.add_field(name='', value=description_string, inline=False) # inline only affects Name, so doesn't work
         return embed
 

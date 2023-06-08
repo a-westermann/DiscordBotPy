@@ -143,8 +143,7 @@ class LeagueAPI:
         # sort items putting Mythic at top and adding a blank line after
         sorted_items = []
         sorted_items.append([f"{item}\n" for item in items if 'Mythic' in item])
-        sorted_items = set(sorted_items)
-        sorted_items.add([item for item in items])
+        sorted_items.append([item for item in items if 'Mythic' not in item])
 
         description_string += f"\n\n**Best game** ({best_game_date}):\n" \
             f"KDA:  **{kda}** ({kills}/{deaths}/{assists})\n" \

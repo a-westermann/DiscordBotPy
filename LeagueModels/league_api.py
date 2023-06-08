@@ -147,7 +147,7 @@ class LeagueAPI:
             if 'Mythic' in item:
                 sorted_items.append(f"{item}\n")
         for item in items:
-            if 'Mythic' not in item:
+            if 'Mythic' not in item and item != '':
                 sorted_items.append(item)
 
         description_string += f"\n\n**Best game** ({best_game_date}):\n" \

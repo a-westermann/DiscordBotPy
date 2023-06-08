@@ -142,10 +142,8 @@ def backfill_match_champs(start: int, count: int, puuid: str, api: LeagueAPI):
         print(f"updated db for match index {i} ... champ = {participant['championName']}")
 
 
-def get_champ_by_partial_string(partial_name: str) -> list[cass.Champion]:
+def get_champ_by_name(name: str) -> list[cass.Champion]:
     champs = cass.get_champions(region=cass.Region.north_america)
-    matching_champs = []
     for champ in champs:
-        if champ.name.lower().__contains__(partial_name.lower()):
-            matching_champs.append(champ)
-    return matching_champs
+        if champ.name.lower() == name.lower():
+            return champ

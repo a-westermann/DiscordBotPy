@@ -58,7 +58,7 @@ def get_used_babies(user: str, top: bool, number: int, include_score: bool):
     sorted_list = sorted(name_list, key=lambda tuple: tuple[1])
     sorted_list.reverse()
 
-    # remove the non-top ranks
+    # now just get the top ranks, preserving any ties that go > 10 names
     top_list = []
     while len(top_list) < 10:
         score = sorted_list[0][1]
@@ -66,19 +66,7 @@ def get_used_babies(user: str, top: bool, number: int, include_score: bool):
         top_list.extend(same_scores)
         # 'pop' the ones we added
         sorted_list = [line for line in sorted_list if line not in same_scores]
-    # last_score = 0
-    # current_score = -1
-    # i = 0
-    # while last_score == current_score or i < 10:
-    #     last_score = current_score
-    #     current_score = sorted_list[0][1]
-    #     if current_score != last_score and i >= 10:
-    #         break
-    #     top_list.append(sorted_list.pop(0))
-    #     i += 1
 
-    # for i in range(len(sorted_list) - number):
-    #     sorted_list.pop(0)
     for s in top_list:
         print(s)
     if not include_score:

@@ -25,7 +25,7 @@ class Lol(app_commands.Group):
         self.bot = bot
 
 
-    @app_commands(name="test")
+    @app_commands.command(name="test")
     async def test(self, interaction: discord.Interaction):
         await interaction.response.defer()
         records = self.psql.test_remote()

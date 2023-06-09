@@ -52,17 +52,29 @@ def get_used_babies(user: str, top: bool, number: int, include_score: bool):
     for line in used_names_text[2:]:
         index = 1 if user == "Ashley" else 2
         name = line.split(';')[0]
+        # append the name and score to the list
         name_list.append((name, int(line.split(';')[index].strip())))
     # sort list by score
     sorted_list = sorted(name_list, key=lambda tuple: tuple[1])
-    for i in range(len(sorted_list) - number):
-        sorted_list.pop(0)
-    for s in sorted_list:
+
+    # remove the non-top ranks
+    last_score = 0
+    current_score = -1
+    i = 0
+    top_list = []
+    while last_score == current_score or i < 10:
+        last_score = current_score
+        top_list.append(sorted_list.pop(0))
+        current_score = top_list[-1][1]
+
+    # for i in range(len(sorted_list) - number):
+    #     sorted_list.pop(0)
+    for s in top_list:
         print(s)
     if not include_score:
-        for i in range(len(sorted_list)):
-            sorted_list[i] = sorted_list[i][0]
-    return sorted_list
+        for i in range(len(top_list)):
+            top_list[i] = top_list[i][0]
+    return top_list
 
 
 def get_matching_participant(puuid: str, match):

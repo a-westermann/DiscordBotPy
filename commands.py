@@ -25,6 +25,13 @@ class Lol(app_commands.Group):
         self.bot = bot
 
 
+    @app_commands(name="test")
+    async def test(self, interaction: discord.Interaction):
+        await interaction.response.defer()
+        records = self.psql.test_remote()
+        await interaction.followup.send(str(records), ephemeral=True)
+
+
 
 #TODO: See league_api.get_matches. Need to update that function to allow filling in gaps
     @app_commands.command(name="fill-matches", description="be careful to insert matches with no gaps")

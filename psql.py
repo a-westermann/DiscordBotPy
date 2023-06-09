@@ -6,6 +6,14 @@ username="andweste"
 password="apostria1"
 hostname="localhost"
 port=5432
+
+remote_database="league"
+remote_user="Vierce1"
+remote_password=open("/home/andweste/Tokens/secret_creds_repo/supabase_api_key.txt").read()
+remote_host=open("/home/andweste/Tokens/secret_creds_repo/supabase_host.txt").read()
+remote_port=3333
+
+
 from psycopg2.extras import RealDictCursor
 
 
@@ -14,6 +22,12 @@ class PSQL:
         self.connection = psycopg2.connect(database=database, user=username, password=password,
                                       host=hostname, port=port, cursor_factory=RealDictCursor)
         self.cursor = self.connection.cursor()
+
+    def open_remote_connection(self):
+        self.connection = psycopg2.connect(database=remote_database, user=remote_user, password=remote_password,
+                                           host=remote_host, port=remote_port, cursor_factory=RealDictCursor)
+        self.cursor = self.connection.cursor()
+
 
 
     def query(self, query: str):
@@ -32,6 +46,17 @@ class PSQL:
         self.connection.commit()
         self.connection.close()
         return success
+
+
+
+    def test_remote(self):
+        self.open_remote_connection()
+        self.cursor.execute("SELECT * FROM match_history WHERE summoner_name = '{0}' \
+                             ORDER BY date_created DESC LIMIT 110;".format(summoner_name))
+        print(self.cursor.fetchall()[0])
+        self.connection.close()
+        return records
+
 
 
     def insert_match(self, match_id, summoner_name, kills, deaths, assists, doubles,

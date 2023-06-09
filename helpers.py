@@ -64,8 +64,6 @@ def get_used_babies(user: str, top: bool, number: int, include_score: bool):
     i = 0
     top_list = []
     while last_score == current_score or i < 10:
-        if i >= 10 and last_score != current_score:
-            break
         last_score = current_score
         top_list.append(sorted_list.pop(0))
         current_score = top_list[-1][1]

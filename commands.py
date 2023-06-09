@@ -28,7 +28,7 @@ class Lol(app_commands.Group):
     @app_commands.command(name="test")
     async def test(self, interaction: discord.Interaction):
         await interaction.response.defer()
-        records = self.psql.test_remote()
+        records = self.psql.update_remote()
         await interaction.followup.send(str(records), ephemeral=True)
 
 

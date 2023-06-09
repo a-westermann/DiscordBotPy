@@ -1,7 +1,9 @@
 import psycopg2
-import urllib3 as u3
-from requests.auth import HTTPBasicAuth as auths
-import json
+# import urllib3 as u3
+# from requests.auth import HTTPBasicAuth as auths
+# import json
+import supabase
+from supabase import create_client, Client
 import cassiopeia
 
 database="league"
@@ -35,20 +37,20 @@ class PSQL:
         self.connection = psycopg2.connect(database=database, user=username, password=password,
                                             host=hostname, port=port, cursor_factory=RealDictCursor)
         self.cursor = self.connection.cursor()
-        # headers = u3.make_headers(basic_auth=)
-        print('url = ' + db_url)
-        auth = auths(remote_key, 'secret')
-        response = http.request(method='GET', url=db_url, headers={'Authorization': remote_key})
-        data = json.loads(response.data.decode('utf-8'))
+
         print(str(data))
 
 
     def test_remote(self):
-        self.open_remote_connection()
-        self.cursor.execute("SELECT * FROM match_history WHERE summoner_name = '{0}' \
-                             ORDER BY date_created DESC LIMIT 110;".format(summoner_name))
-        print(self.cursor.fetchall()[0])
-        self.connection.close()
+        self.supabase_client = create_client(db_url, remote_key)
+        data = self.supabase_client.table('match_history').select('*').eq('summoner_name', 'Vierce')\
+            .order('date_created', True).limit(110).execute()
+        print(data)
+        # self.open_remote_connection()
+        # self.cursor.execute("SELECT * FROM match_history WHERE summoner_name = '{0}' \
+        #                      ORDER BY date_created DESC LIMIT 110;".format(summoner_name))
+        # print(self.cursor.fetchall()[0])
+        # self.connection.close()
         return records
 
 

@@ -38,7 +38,7 @@ class PSQL:
         # if self.supabase_client:
         #     return  # need to open a new one each time?
         # self.supabase_client = create_client(db_url, remote_key)
-        headers = {'Authorization' : f"ApiKey {remote_key}"}
+        headers = {'Authorization' : f"Bearer  {remote_key}"}
         request = requests.get(url=db_url, headers=headers)
         print(request)
         return request

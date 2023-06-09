@@ -31,29 +31,24 @@ class PSQL:
                                       host=hostname, port=port, cursor_factory=RealDictCursor)
         self.cursor = self.connection.cursor()
 
-    def open_remote_connection(self):
+    def open_remote_connection(self, table_name: str)-> (str, dict[str, str]):
         headers = {'apikey': f"{remote_key}", 'Authorization' : f"Bearer {remote_key}"}
-        json_response = requests.get(url=f"{db_url}/rest/v1/match_history", headers=headers).json()
-        print(json_response)
-        return request
+        url, headers = f"{db_url}/rest/v1/{table_name}", headers
+        return url, headers
 
 
 
     def update_remote(self):
-        self.open_remote_connection()
-        data = self.supabase_client.table('match_history').insert()
+        url, headers = self.open_remote_connection()
+        params = "Insert into match_history COLUMNS (match_id) VALUES ('test')"
+        json_response = requests.post(url=url, headers=headers,params=params)
+
 
 
     def test_remote(self):
         return self.open_remote_connection()
-        # data = self.supabase_client.table('match_history').select('*').eq('summoner_name', 'Vierce')\
-        #     .order(column='date_created', desc=True).limit(110).execute()
-        # print(data)
-        # self.open_remote_connection()
-        # self.cursor.execute("SELECT * FROM match_history WHERE summoner_name = '{0}' \
-        #                      ORDER BY date_created DESC LIMIT 110;".format(summoner_name))
-        # print(self.cursor.fetchall()[0])
-        # self.connection.close()
+        json_response = requests.get(url=f"{db_url}/rest/v1/match_history", headers=headers).json()
+
 
 
 

@@ -1,9 +1,10 @@
 import psycopg2
-# import urllib3 as u3
-# from requests.auth import HTTPBasicAuth as auths
+import urllib3 as u3
+from requests.auth import HTTPBasicAuth as auths
+import requests
 # import json
-import supabase
-from supabase import create_client, Client
+# import supabase
+# from supabase import create_client, Client
 import cassiopeia
 
 database="league"
@@ -32,26 +33,31 @@ class PSQL:
         self.cursor = self.connection.cursor()
 
     def open_remote_connection(self):
-        # self.connection = psycopg2.connect(database=remote_database, user=remote_user, password=remote_password,
-        #                                    host=remote_host, port=remote_port, cursor_factory=RealDictCursor)
-        self.connection = psycopg2.connect(database=database, user=username, password=password,
-                                            host=hostname, port=port, cursor_factory=RealDictCursor)
-        self.cursor = self.connection.cursor()
+        # if self.supabase_client:
+        #     return  # need to open a new one each time?
+        # self.supabase_client = create_client(db_url, remote_key)
+        headers = {'Authorization' : 'Bearer  ' + remote_key}
+        authz = auths(remote_key, '123secret')
+        request = requests.get(db_url, headers=headers)
 
-        print(str(data))
+
+
+    def update_remote(self):
+        self.open_remote_connection()
+        data = self.supabase_client.table('match_history').insert()
 
 
     def test_remote(self):
-        self.supabase_client = create_client(db_url, remote_key)
-        data = self.supabase_client.table('match_history').select('*').eq('summoner_name', 'Vierce')\
-            .order(column='date_created', desc=True).limit(110).execute()
-        print(data)
+        self.open_remote_connection()
+        # data = self.supabase_client.table('match_history').select('*').eq('summoner_name', 'Vierce')\
+        #     .order(column='date_created', desc=True).limit(110).execute()
+        # print(data)
         # self.open_remote_connection()
         # self.cursor.execute("SELECT * FROM match_history WHERE summoner_name = '{0}' \
         #                      ORDER BY date_created DESC LIMIT 110;".format(summoner_name))
         # print(self.cursor.fetchall()[0])
         # self.connection.close()
-        return records
+
 
 
 

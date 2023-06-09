@@ -44,7 +44,7 @@ class BabyView(discord.ui.View):
             return
         self.score = 2
         print("scored 2")
-        button.callback = await self.baby.submit_name_score(self.score, self.baby_name, interaction, self.rater)
+        button.callback = await self.baby.callback(self.score, self.baby_name, interaction, self.rater)
         self.stop()
 
     @discord.ui.button(label="3", style=discord.ButtonStyle.red)
@@ -55,7 +55,7 @@ class BabyView(discord.ui.View):
             return
         self.score = 3
         print("scored 3")
-        button.callback = await self.baby.submit_name_score(self.score, self.baby_name, interaction, self.rater)
+        button.callback = await self.baby.callback(self.score, self.baby_name, interaction, self.rater)
         self.stop()
 
     @discord.ui.button(label="4", style=discord.ButtonStyle.blurple)
@@ -66,7 +66,7 @@ class BabyView(discord.ui.View):
             return
         self.score = 4
         print("scored 4")
-        button.callback = await self.baby.submit_name_score(self.score, self.baby_name, interaction, self.rater)
+        button.callback = await self.baby.callback(self.score, self.baby_name, interaction, self.rater)
         self.stop()
 
     @discord.ui.button(label="5", style=discord.ButtonStyle.blurple)
@@ -77,7 +77,7 @@ class BabyView(discord.ui.View):
             return
         self.score = 5
         print("scored 5")
-        button.callback = await self.baby.submit_name_score(self.score, self.baby_name, interaction, self.rater)
+        button.callback = await self.baby.callback(self.score, self.baby_name, interaction, self.rater)
         self.stop()
 
     @discord.ui.button(label="6", style=discord.ButtonStyle.blurple)
@@ -88,7 +88,7 @@ class BabyView(discord.ui.View):
             return
         self.score = 6
         print("scored 6")
-        button.callback = await self.baby.submit_name_score(self.score, self.baby_name, interaction, self.rater)
+        button.callback = await self.baby.callback(self.score, self.baby_name, interaction, self.rater)
         self.stop()
 
     @discord.ui.button(label="7", style=discord.ButtonStyle.green)
@@ -99,7 +99,7 @@ class BabyView(discord.ui.View):
             return
         self.score = 7
         print("scored 7")
-        button.callback = await self.baby.submit_name_score(self.score, self.baby_name, interaction, self.rater)
+        button.callback = await self.baby.callback(self.score, self.baby_name, interaction, self.rater)
         self.stop()
 
     @discord.ui.button(label="8", style=discord.ButtonStyle.green)
@@ -110,7 +110,7 @@ class BabyView(discord.ui.View):
             return
         self.score = 8
         print("scored 8")
-        button.callback = await self.baby.submit_name_score(self.score, self.baby_name, interaction, self.rater)
+        button.callback = await self.baby.callback(self.score, self.baby_name, interaction, self.rater)
         self.stop()
 
     @discord.ui.button(label="9", style=discord.ButtonStyle.green)
@@ -121,7 +121,7 @@ class BabyView(discord.ui.View):
             return
         self.score = 9
         print("scored 9")
-        button.callback = await self.baby.submit_name_score(self.score, self.baby_name, interaction, self.rater)
+        button.callback = await self.baby.callback(self.score, self.baby_name, interaction, self.rater)
         self.stop()
 
     @discord.ui.button(label="10", style=discord.ButtonStyle.green)
@@ -132,5 +132,5 @@ class BabyView(discord.ui.View):
             return
         self.score = 10
         print("scored 10")
-        button.callback = await self.baby.submit_name_score(self.score, self.baby_name, interaction, self.rater)
+        button.callback = await self.baby.callback(self.score, self.baby_name, interaction, self.rater)
         self.stop()

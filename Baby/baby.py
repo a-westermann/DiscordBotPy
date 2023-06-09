@@ -123,3 +123,5 @@ class BabyStuff:
         char_to_replace = text.find(name) + len(name) + score_index
         text = text[:char_to_replace - 1] + str(score) + "\n" + text[char_to_replace + 1:]
         used_names_file = open("/home/andweste/Scripts/used_names.txt", "w").write(text)
+        await view.response.send_message(rater + "'s " + "score submitted for " + name + " : " + str(score))
+        await view.message.delete()

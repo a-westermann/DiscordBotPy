@@ -51,6 +51,7 @@ class PSQL:
         query = (None, "SELECT * FROM match_history")
         # json_response = requests.post(url=url, headers=headers, data={'match_id' : query})
         json_response = requests.post(url=url, headers=headers, data={'query': query})
+        print(json_response.request)
         print(json_response)
         json_response = json_response.json()
         print(json_response)

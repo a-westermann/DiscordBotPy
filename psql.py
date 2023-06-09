@@ -40,7 +40,7 @@ class PSQL:
 
     def update_remote(self):
         url, headers = self.open_remote_connection(table_name='match_history')
-        params = "Insert into match_history COLUMNS (match_id) VALUES ('test')"
+        params = "Insert into match_history (match_id) VALUES ('test')"
         json_response = requests.post(url=url, headers=headers,params=params)
         print(json_response)
 

@@ -1,5 +1,6 @@
 import psycopg2
 import urllib3 as u3
+import base64
 from requests.auth import HTTPBasicAuth as auths
 import requests
 # import json
@@ -37,7 +38,10 @@ class PSQL:
         # if self.supabase_client:
         #     return  # need to open a new one each time?
         # self.supabase_client = create_client(db_url, remote_key)
-        headers = {'Authorization' : remote_key}
+        auth_string = f"{remote_key}:'123abc'"
+        auth_string = auth_string.encode("ascii")
+        auth_string = base64.b64encode(auth_string)
+        headers = {'Authorization' : f"Basic {auth_string.decode('ascii')}"}
         request = requests.get(url=db_url, headers=headers)
         print(request)
         return request

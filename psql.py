@@ -41,7 +41,8 @@ class PSQL:
         print('url = ' + db_url)
         print('header = ' )
         print(header)
-        response = http.request(method='GET', url=db_url, headers=header)
+        auth = auths(remote_key, 'secret')
+        response = http.request(method='GET', url=db_url, auth=auth)
         data = json.loads(response.data.decode('utf-8'))
         print(str(data))
 

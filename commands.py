@@ -222,7 +222,9 @@ class OtherCommands(app_commands.Group):
         for line in used_names_file[2:]:
             if line.split(';')[score_index] == str(0):
                 rescore_names.append(line.split(';')[0])
-        # now I need to have this method wait on the view to trigger a proceed
 
-        view = Baby.baby_view.BabyView(self.baby, str(name).strip(), users_real_name, interaction)
+        for name in rescore_names:
+            view = Baby.baby_view.BabyView(self.baby, str(name).strip(), users_real_name, interaction)
+            # now I need to have this method wait on the view to trigger a proceed
+            break
 

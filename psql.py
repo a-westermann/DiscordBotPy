@@ -39,6 +39,7 @@ class PSQL:
         headers = {'Authorization' : remote_key}
         request = requests.get(db_url, headers=headers)
         print(request)
+        return request
 
 
 
@@ -48,7 +49,7 @@ class PSQL:
 
 
     def test_remote(self):
-        self.open_remote_connection()
+        return self.open_remote_connection()
         # data = self.supabase_client.table('match_history').select('*').eq('summoner_name', 'Vierce')\
         #     .order(column='date_created', desc=True).limit(110).execute()
         # print(data)

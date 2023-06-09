@@ -41,7 +41,7 @@ class PSQL:
         auth_string = f"{remote_key}:'123abc'"
         auth_string = auth_string.encode("ascii")
         auth_string = base64.b64encode(auth_string)
-        headers = {'Authorization' : f"Basic {auth_string.decode('ascii')}"}
+        headers = {'Authorization' : f"{auth_string.decode('ascii')}"}
         request = requests.get(url=db_url, headers=headers)
         print(request)
         return request

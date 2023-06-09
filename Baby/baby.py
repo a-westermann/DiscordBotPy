@@ -115,7 +115,7 @@ class BabyStuff:
         backup_file.writelines(used_names_file)
 
     async def submit_previous_name_score(self, score: int, name: str, view: discord.Interaction, rater: str):
-        print("Updating score for name: " + name + " to " + str(scroe))
+        print("Updating score for name: " + name + " to " + str(score))
         used_names_file = open("/home/andweste/Scripts/used_names.txt", "r")
         text = used_names_file.read()
         # add 2 or 4 depending on who is rating

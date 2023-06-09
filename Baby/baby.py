@@ -121,5 +121,5 @@ class BabyStuff:
         # add 2 or 4 depending on who is rating
         score_index = 2 if rater == "Ashley" else 4
         char_to_replace = text.find(name) + len(name) + score_index
-        text = text[:char_to_replace] + str(score) + text[char_to_replace + 1:]
+        text = text[:char_to_replace - 1] + str(score) + text[char_to_replace + 1:]
         print(text)

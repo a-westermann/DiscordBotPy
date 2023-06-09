@@ -118,7 +118,7 @@ class BabyStuff:
         used_names_file = open("/home/andweste/Scripts/used_names.txt", "r")
         text = used_names_file.read()
         # add 2 or 4 depending on who is rating
-        score_index = 2 if users_real_name == "Ashley" else 4
+        score_index = 2 if rater == "Ashley" else 4
         char_to_replace = text[text.find(name) + len(name) + score_index]
         text[char_to_replace] = score
         print(text)

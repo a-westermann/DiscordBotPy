@@ -12,7 +12,7 @@ password="apostria1"
 hostname="localhost"
 port=5432
 
-http = u3.PoolManager()
+# http = u3.PoolManager()
 db_url = open("/home/andweste/Tokens/secret_creds_repo/supabase_host.txt").read()
 
 remote_database="league"

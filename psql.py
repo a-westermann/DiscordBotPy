@@ -1,5 +1,6 @@
 import psycopg2
 import urllib3 as u3
+import json
 import cassiopeia
 
 database="league"
@@ -34,7 +35,17 @@ class PSQL:
                                             host=hostname, port=port, cursor_factory=RealDictCursor)
         self.cursor = self.connection.cursor()
         response = http.request(method='GET', url=db_url)
-        print(str(response))
+        data = json.loads(response.data.decode('utf-8'))
+        print(str(data))
+
+
+    def test_remote(self):
+        self.open_remote_connection()
+        self.cursor.execute("SELECT * FROM match_history WHERE summoner_name = '{0}' \
+                             ORDER BY date_created DESC LIMIT 110;".format(summoner_name))
+        print(self.cursor.fetchall()[0])
+        self.connection.close()
+        return records
 
 
 
@@ -56,17 +67,6 @@ class PSQL:
         self.connection.commit()
         self.connection.close()
         return success
-
-
-
-    def test_remote(self):
-        self.open_remote_connection()
-        self.cursor.execute("SELECT * FROM match_history WHERE summoner_name = '{0}' \
-                             ORDER BY date_created DESC LIMIT 110;".format(summoner_name))
-        print(self.cursor.fetchall()[0])
-        self.connection.close()
-        return records
-
 
 
     def insert_match(self, match_id, summoner_name, kills, deaths, assists, doubles,

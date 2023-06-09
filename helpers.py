@@ -59,17 +59,23 @@ def get_used_babies(user: str, top: bool, number: int, include_score: bool):
     sorted_list.reverse()
 
     # remove the non-top ranks
-    last_score = 0
-    current_score = -1
-    i = 0
     top_list = []
-    while last_score == current_score or i < 10:
-        last_score = current_score
-        current_score = sorted_list[0][1]
-        if current_score != last_score and i >= 10:
-            break
-        top_list.append(sorted_list.pop(0))
-        i += 1
+    while len(top_list) < 10:
+        score = sorted_list[0][1]
+        same_scores = [line for line in sorted_list if line[1] == score]
+        top_list.extend(same_scores)
+        # 'pop' the ones we added
+        sorted_list = [line for line in sorted_list if line not in same_scores]
+    # last_score = 0
+    # current_score = -1
+    # i = 0
+    # while last_score == current_score or i < 10:
+    #     last_score = current_score
+    #     current_score = sorted_list[0][1]
+    #     if current_score != last_score and i >= 10:
+    #         break
+    #     top_list.append(sorted_list.pop(0))
+    #     i += 1
 
     # for i in range(len(sorted_list) - number):
     #     sorted_list.pop(0)

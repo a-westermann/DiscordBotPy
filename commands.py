@@ -230,6 +230,6 @@ class OtherCommands(app_commands.Group):
             view = Baby.baby_view.BabyView(self.baby, str(name).strip(), users_real_name, interaction, True)
             await interaction.followup.send(f"{users_real_name}\nRate the name: {name}", view=view)
             # now I need to have this method wait on the view to trigger a proceed
-            while view:
-                pass
+            # while view:
+            #     pass
 

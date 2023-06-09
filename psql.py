@@ -18,7 +18,8 @@ db_url = open("/home/andweste/Tokens/secret_creds_repo/supabase_host.txt").read(
 
 remote_database="league"
 remote_user="Vierce1"
-remote_key=open("/home/andweste/Tokens/secret_creds_repo/supabase_api_key.txt").read()
+# remote_key=open("/home/andweste/Tokens/secret_creds_repo/supabase_api_key.txt").read()
+remote_key=open("/home/andweste/Tokens/secret_creds_repo/supabase_access_token.txt").read()
 remote_host=open("/home/andweste/Tokens/secret_creds_repo/supabase_host.txt").read()
 remote_port=3333
 

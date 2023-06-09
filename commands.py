@@ -29,7 +29,7 @@ class Lol(app_commands.Group):
     async def test(self, interaction: discord.Interaction):
         await interaction.response.defer()
         records = self.psql.test_remote()
-        await interaction.followup.send(str(records), ephemeral=True)
+        await interaction.followup.send(str(records), ephemeral=False)
 
 
 

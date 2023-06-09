@@ -54,7 +54,7 @@ class Lol(app_commands.Group):
         matches = self.league_api.get_matches(summoner_name=summoner_name, match_count=count, start_index=start)
         oldest_match_index = str(self.psql.query("SELECT COUNT(match_id) count FROM match_history "
                                              f"WHERE summoner_name = '{summoner_name}' "
-                                             f"GROUP BY summoner_name;")[0]['count'], False)
+                                             f"GROUP BY summoner_name;")[0]['count'])
         await interaction.followup.send(f"filled {str(len(matches))} matches."
                                         f"\nmatch count for {summoner_name} = {oldest_match_index}", ephemeral=True)
         # helpers.backfill_match_items(start=start, count=count,

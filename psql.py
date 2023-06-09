@@ -19,22 +19,18 @@ remote_port=5432
 
 from psycopg2.extras import RealDictCursor
 
+use_remote_db = False
 
 class PSQL:
     def open_connection(self):
-        self.connection = psycopg2.connect(database=database, user=username, password=password,
+        if use_remote_db:
+            self.connection = psycopg2.connect(database=remote_database, user=remote_user, password=remote_password,
+                                               host=remote_host, port=remote_port, cursor_factory=RealDictCursor)
+        else:
+            self.connection = psycopg2.connect(database=database, user=username, password=password,
                                       host=hostname, port=port, cursor_factory=RealDictCursor)
+
         self.cursor = self.connection.cursor()
-
-    def open_remote_connection(self):
-        self.connection = psycopg2.connect(database=remote_database, user=remote_user, password=remote_password,
-                                      host=remote_host, port=remote_port, cursor_factory=RealDictCursor)
-        self.cursor = self.connection.cursor()
-
-
-
-    # def update_remote(self):
-
 
 
 
@@ -48,11 +44,8 @@ class PSQL:
 
 
 
-    def query(self, query: str, remote: bool):
-        if remote:
-            self.open_remote_connection()
-        else:
-            self.open_connection()
+    def query(self, query: str):
+        self.open_connection()
         self.cursor.execute(query)
         results = self.cursor.fetchall()
         self.connection.close()

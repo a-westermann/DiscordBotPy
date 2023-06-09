@@ -49,7 +49,7 @@ class PSQL:
     def test_remote(self):
         url, headers = self.open_remote_connection(table_name='match_history')
         query = "SELECT * FROM match_history;"
-        json_response = requests.get(url=url, headers=headers, params={'format': 'json', 'q' : query})
+        json_response = requests.get(url=url, headers=headers, params={'q' : query})
         print(json_response)
         json_response = json_response.json()
         print(json_response)

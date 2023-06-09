@@ -40,7 +40,7 @@ class PSQL:
 
     def test_remote(self):
         self.open_remote_connection()
-        records = self.query("Select * FROM match_history")
+        records = self.query("Select * FROM match_history", True)
         print(records)
         return records
 
@@ -49,7 +49,7 @@ class PSQL:
 
 
 
-    def query(self, query: str):
+    def query(self, query: str, remote: bool):
         self.open_connection()
         self.cursor.execute(query)
         results = self.cursor.fetchall()

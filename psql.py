@@ -36,8 +36,7 @@ class PSQL:
                                             host=hostname, port=port, cursor_factory=RealDictCursor)
         self.cursor = self.connection.cursor()
         header = {
-            'Accept' : 'application/json',
-            'Authorization' : remote_key
+            remote_key, 'secret'
         }
         response = http.request(method='GET', url=db_url, headers=header)
         data = json.loads(response.data.decode('utf-8'))

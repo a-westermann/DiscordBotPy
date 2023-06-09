@@ -219,10 +219,11 @@ class OtherCommands(app_commands.Group):
         # find all the 0 names for the user
         score_index = 1 if users_real_name == "Ashley" else 2
         rescore_names = []
+        print('rescore: ')
         for line in used_names_file[2:]:
             if line.split(';')[score_index] == str(0):
                 rescore_names.append(line.split(';')[0])
-
+                print(line.split(';')[0])
         for name in rescore_names:
             view = Baby.baby_view.BabyView(self.baby, str(name).strip(), users_real_name, interaction)
             # now I need to have this method wait on the view to trigger a proceed

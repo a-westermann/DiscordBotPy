@@ -39,6 +39,7 @@ class PSQL:
         headers = {'Authorization' : 'Bearer  ' + remote_key}
         authz = auths(remote_key, '123secret')
         request = requests.get(db_url, headers=headers)
+        print(request)
 
 
 

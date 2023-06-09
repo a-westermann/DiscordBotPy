@@ -1,4 +1,5 @@
 import psycopg2
+import urllib3 as u3
 import cassiopeia
 
 database="league"
@@ -6,6 +7,9 @@ username="andweste"
 password="apostria1"
 hostname="localhost"
 port=5432
+
+http = u3.PoolManager()
+db_url = open("/home/andweste/Tokens/secret_creds_repo/supabase_host.txt").read()
 
 remote_database="league"
 remote_user="Vierce1"
@@ -24,9 +28,15 @@ class PSQL:
         self.cursor = self.connection.cursor()
 
     def open_remote_connection(self):
-        self.connection = psycopg2.connect(database=remote_database, user=remote_user, password=remote_password,
-                                           host=remote_host, port=remote_port, cursor_factory=RealDictCursor)
+        # self.connection = psycopg2.connect(database=remote_database, user=remote_user, password=remote_password,
+        #                                    host=remote_host, port=remote_port, cursor_factory=RealDictCursor)
+        self.connection = psycopg2.connect(database=database, user=username, password=password,
+                                            host=hostname, port=port, cursor_factory=RealDictCursor)
         self.cursor = self.connection.cursor()
+        response = http.request(method='GET', url=db_url)
+        print(str(response))
+
+
 
 
 

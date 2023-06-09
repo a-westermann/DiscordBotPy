@@ -193,9 +193,9 @@ class OtherCommands(app_commands.Group):
         await interaction.followup.send(message_content)
         if got_new_name:
             await asyncio.sleep(1)
-            view = Baby.baby_view.BabyView(self.baby, str(name).strip(), "Ashley", interaction)
+            view = Baby.baby_view.BabyView(self.baby, str(name).strip(), "Ashley", interaction, False)
             await interaction.followup.send("Ashley\nRate the name: ", view=view)
-            view = Baby.baby_view.BabyView(self.baby, str(name).strip(), "Andrew", interaction)
+            view = Baby.baby_view.BabyView(self.baby, str(name).strip(), "Andrew", interaction, False)
             await interaction.followup.send("Andrew\nRate the name: ", view=view)
 
 
@@ -226,7 +226,7 @@ class OtherCommands(app_commands.Group):
                 rescore_names.append(line.split(';')[0])
                 print(line.split(';')[0])
         for name in rescore_names:
-            view = Baby.baby_view.BabyView(self.baby, str(name).strip(), users_real_name, interaction)
+            view = Baby.baby_view.BabyView(self.baby, str(name).strip(), users_real_name, interaction, True)
             await interaction.followup.send(f"{users_real_name}\nRate the name: ", view=view)
             # now I need to have this method wait on the view to trigger a proceed
             break

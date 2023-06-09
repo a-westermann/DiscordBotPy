@@ -7,7 +7,8 @@ from Baby.baby import BabyStuff
 import asyncio
 
 class BabyView(discord.ui.View):
-    def __init__(self, baby: BabyStuff, baby_name: str, rater: str, orig_message: discord.Interaction):
+    def __init__(self, baby: BabyStuff, baby_name: str, rater: str, orig_message: discord.Interaction,
+                 backfilling: bool):
         super().__init__()
         # super().__init__(timeout=5)
         self.score = None
@@ -15,6 +16,8 @@ class BabyView(discord.ui.View):
         self.baby_name = baby_name
         self.rater = rater
         self.orig_message = orig_message
+        self.callback = self.baby.submit_name_score if not backfilling \
+            else self.baby.submit_previous_name_score
 
     async def on_timouet(self):
         print("timeout")
@@ -30,7 +33,7 @@ class BabyView(discord.ui.View):
             return
         self.score = 1
         print("scored 1")
-        button.callback = await self.baby.submit_name_score(self.score, self.baby_name, interaction, self.rater)
+        button.callback = await self.callback(self.score, self.baby_name, interaction, self.rater)
         self.stop()
 
     @discord.ui.button(label="2", style=discord.ButtonStyle.red)

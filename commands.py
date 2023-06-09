@@ -227,6 +227,7 @@ class OtherCommands(app_commands.Group):
                 rescore_names.append(line.split(';')[0])
                 print(line.split(';')[0])
         for name in rescore_names:
+            await interaction.followup.send(f"Rescore name: {name}")
             view = Baby.baby_view.BabyView(self.baby, str(name).strip(), users_real_name, interaction, True)
             await interaction.followup.send(f"{users_real_name}\nRate the name: ", view=view)
             # now I need to have this method wait on the view to trigger a proceed

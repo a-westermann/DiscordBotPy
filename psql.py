@@ -3,9 +3,6 @@ import urllib3 as u3
 import base64
 from requests.auth import HTTPBasicAuth as auths
 import requests
-# import json
-# import supabase
-# from supabase import create_client, Client
 import cassiopeia
 
 database="league"
@@ -35,12 +32,9 @@ class PSQL:
         self.cursor = self.connection.cursor()
 
     def open_remote_connection(self):
-        # if self.supabase_client:
-        #     return  # need to open a new one each time?
-        # self.supabase_client = create_client(db_url, remote_key)
         headers = {'apikey': f"{remote_key}", 'Authorization' : f"Bearer {remote_key}"}
-        request = requests.get(url=f"{db_url}/rest/v1/match_history", headers=headers)
-        print(request)
+        json_response = requests.get(url=f"{db_url}/rest/v1/match_history", headers=headers).json()
+        print(json_response)
         return request
 
 

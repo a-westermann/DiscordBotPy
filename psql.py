@@ -50,7 +50,7 @@ class PSQL:
         url, headers = self.open_remote_connection(table_name='match_history')
         query = (None, "SELECT * FROM match_history")
         # json_response = requests.post(url=url, headers=headers, data={'match_id' : query})
-        json_response = requests.post(url=url, headers=headers, data={'sql': query})
+        json_response = requests.post(url=url, headers=headers, data={'query': query})
         print(json_response)
         json_response = json_response.json()
         print(json_response)

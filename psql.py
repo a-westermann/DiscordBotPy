@@ -1,8 +1,4 @@
 import psycopg2
-import urllib3 as u3
-import base64
-from requests.auth import HTTPBasicAuth as auths
-import requests
 import cassiopeia
 
 database="league"
@@ -11,15 +7,14 @@ password="apostria1"
 hostname="localhost"
 port=5432
 
-# http = u3.PoolManager()
 db_url = open("/home/andweste/Tokens/secret_creds_repo/supabase_host.txt").read()
-
-remote_database="league"
-remote_user="Vierce1"
+remote_database="postgres"
+remote_user="postgres"
+remote_password=open("/home/andweste/Tokens/secret_creds_repo/supabase_pw.txt")
 remote_key=open("/home/andweste/Tokens/secret_creds_repo/supabase_api_key.txt").read()
-# remote_key=open("/home/andweste/Tokens/secret_creds_repo/supabase_access_token.txt").read()
+# user_key=open("/home/andweste/Tokens/secret_creds_repo/supabase_access_token.txt").read()
 remote_host=open("/home/andweste/Tokens/secret_creds_repo/supabase_host.txt").read()
-remote_port=3333
+remote_port=5432
 
 
 from psycopg2.extras import RealDictCursor
@@ -31,36 +26,23 @@ class PSQL:
                                       host=hostname, port=port, cursor_factory=RealDictCursor)
         self.cursor = self.connection.cursor()
 
-    def open_remote_connection(self, table_name: str)-> (str, dict[str, str]):
-        headers = {'apikey': f"{remote_key}", 'Authorization' : f"Bearer {remote_key}"}
-        url, headers = f"{db_url}/rest/v1/{table_name}", headers
-        return url, headers
+    def open_remote_connection(self):
+        self.connection = psycopg2.connect(database=remote_database, user=remote_user, password=remote_password,
+                                      host=remote_host, port=remote_port, cursor_factory=RealDictCursor)
+        self.cursor = self.connection.cursor()
 
 
 
-    def update_remote(self):
-        url, headers = self.open_remote_connection(table_name='match_history')
-        params = {'query' : "Insert into match_history (match_id, summoner_name) VALUES ('test', 'testy');"}
-        json_response = requests.post(url=url, headers=headers,params=params)
-        print(json_response)
+    # def update_remote(self):
+
 
 
 
     def test_remote(self):
-        url, headers = self.open_remote_connection(table_name='match_history')
-        # query = "SELECT * FROM match_history"
-        params = {
-            "match_id":"test"
-        }
-        json_response = requests.get(url=url, headers=headers, params=params)
-
-        # this successfully inserts:
-            # json_response = requests.post(url=url, headers=headers, data=[{'match_id': query, 'summoner_name' : 'tessst'}])
-        print(json_response)
-        json_response = json_response.json()
-        print(json_response)
-        return json_response
-
+        self.open_remote_connection()
+        records = self.query("Select * FROM match_history")
+        print(records)
+        return records
 
 
 

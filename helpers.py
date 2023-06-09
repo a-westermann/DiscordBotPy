@@ -56,6 +56,7 @@ def get_used_babies(user: str, top: bool, number: int, include_score: bool):
         name_list.append((name, int(line.split(';')[index].strip())))
     # sort list by score
     sorted_list = sorted(name_list, key=lambda tuple: tuple[1])
+    sorted_list.reverse()
 
     # remove the non-top ranks
     last_score = 0

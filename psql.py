@@ -44,7 +44,7 @@ class PSQL:
     def test_remote(self):
         self.supabase_client = create_client(db_url, remote_key)
         data = self.supabase_client.table('match_history').select('*').eq('summoner_name', 'Vierce')\
-            .order('date_created', True).limit(110).execute()
+            .order(column='date_created', desc=True).limit(110).execute()
         print(data)
         # self.open_remote_connection()
         # self.cursor.execute("SELECT * FROM match_history WHERE summoner_name = '{0}' \

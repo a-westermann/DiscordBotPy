@@ -122,4 +122,4 @@ class BabyStuff:
         score_index = 2 if rater == "Ashley" else 4
         char_to_replace = text.find(name) + len(name) + score_index
         text = text[:char_to_replace - 1] + str(score) + "\n" + text[char_to_replace + 1:]
-        used_names_file = open("/home/andweste/Scripts/used_names.txt", "w")
+        used_names_file = open("/home/andweste/Scripts/used_names.txt", "w").write(text)

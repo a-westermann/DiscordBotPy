@@ -211,6 +211,7 @@ class OtherCommands(app_commands.Group):
     @app_commands.command(name="backfill_baby_scores", description="fill in any name scores you missed")
     async def backfill_baby_scores(self, interaction: discord.Interaction):
         # pops up a baby_view for one name for the user that commanded, waits for a score, moves on to the next one
+        await interaction.response.defer()
         command_user = helpers.get_user_name(interaction)
         users_real_name = helpers.get_name(command_user)
         # get the used names list as-is. Make a backup first

@@ -115,10 +115,11 @@ class BabyStuff:
         backup_file.writelines(used_names_file)
 
     async def submit_previous_name_score(self, score: int, name: str, view: discord.Interaction, rater: str):
+        print("Updating score for name: " + name + " to " + str(scroe))
         used_names_file = open("/home/andweste/Scripts/used_names.txt", "r")
         text = used_names_file.read()
         # add 2 or 4 depending on who is rating
         score_index = 2 if rater == "Ashley" else 4
         char_to_replace = text[text.find(name) + len(name) + score_index]
-        text[char_to_replace] = score
+        text[char_to_replace] = str(score)
         print(text)

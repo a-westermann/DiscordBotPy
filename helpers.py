@@ -66,6 +66,7 @@ def get_used_babies(user: str, top: bool, number: int, include_score: bool):
         last_score = current_score
         top_list.append(sorted_list.pop(0))
         current_score = top_list[-1][1]
+        i += 1
 
     # for i in range(len(sorted_list) - number):
     #     sorted_list.pop(0)

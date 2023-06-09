@@ -35,14 +35,10 @@ class PSQL:
         self.connection = psycopg2.connect(database=database, user=username, password=password,
                                             host=hostname, port=port, cursor_factory=RealDictCursor)
         self.cursor = self.connection.cursor()
-        header = {
-            'Authorization' : remote_key
-        }
+        # headers = u3.make_headers(basic_auth=)
         print('url = ' + db_url)
-        print('header = ' )
-        print(header)
         auth = auths(remote_key, 'secret')
-        response = http.request(method='GET', url=db_url, auth=auth)
+        response = http.request(method='GET', url=db_url, headers={'Authorization': remote_key})
         data = json.loads(response.data.decode('utf-8'))
         print(str(data))
 

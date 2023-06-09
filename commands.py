@@ -221,7 +221,7 @@ class OtherCommands(app_commands.Group):
         rescore_names = []
         print('rescore: ')
         for line in used_names_file[2:]:
-            print(line)
+            print(line.split(';')[score_index])
             if line.split(';')[score_index] == str(0):
                 rescore_names.append(line.split(';')[0])
                 print(line.split(';')[0])

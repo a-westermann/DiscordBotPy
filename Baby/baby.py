@@ -121,8 +121,8 @@ class BabyStuff:
         # add 2 or 4 depending on who is rating
         score_index = 2 if rater == "Ashley" else 4
         char_to_replace = text.find(name) + len(name) + score_index
-        new_line = '\n' if rater == "Andrew" else ''
-        text = text[:char_to_replace - 1] + str(score) + new_line + text[char_to_replace + 1:]
+        next_char = '\n' if rater == "Andrew" else ';'
+        text = text[:char_to_replace - 1] + str(score) + next_char + text[char_to_replace + 1:]
         used_names_file = open("/home/andweste/Scripts/used_names.txt", "w").write(text)
         await view.response.send_message(rater + "'s " + "score submitted for " + name + " : " + str(score))
         await view.message.delete()

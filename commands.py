@@ -226,9 +226,14 @@ class OtherCommands(app_commands.Group):
             if int(score) == 0:
                 rescore_names.append(line.split(';')[0])
                 print(line.split(';')[0])
+        rerate_count = len(rescore_names)
+        if rerate_count == 0:
+            await interaction.followup.send(f"{users_real_name}\nYou don't have any unscored names.")
+            return
         for name in rescore_names:
             view = Baby.baby_view.BabyView(self.baby, str(name).strip(), users_real_name, interaction, True)
-            await interaction.followup.send(f"{users_real_name}\nRate the name: {name}", view=view)
+            await interaction.followup.send(f"{users_real_name}\nYou have {rerate_count} remaining names to rate."
+                                            f"\n\nRate the name: {name}", view=view)
             # now I need to have this method wait on the view to trigger a proceed
             break
 

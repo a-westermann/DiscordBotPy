@@ -209,7 +209,7 @@ class OtherCommands(app_commands.Group):
 
     @app_commands.command(name="add_a_baby_name", description="fill in a specific name and score")
     async def add_a_baby_name(self, interaction: discord.Interaction, baby_name: str,
-                              score: app_commands.Range(int, 1, 10)):
+                              score: app_commands.Range[int, 1, 10]):
         if helpers.check_user(interaction, ["Vierce", "Naiyvara"]) is False:
             await interaction.response.send_message("Unauthorized")
             return

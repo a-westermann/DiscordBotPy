@@ -179,7 +179,7 @@ class OtherCommands(app_commands.Group):
             await interaction.response.send_message("Unauthorized")
             return
         await interaction.response.defer()  # ensures bot has enough time to answer
-        self.baby.backup_used_names()  # back up the file first
+        self.baby.backup_names(used_file=True)  # back up the file first
         name, got_new_name = await self.baby.get_todays_name()
         print(str(name).strip() + " = name")
         print(str(got_new_name) + " got new name")
@@ -208,9 +208,19 @@ class OtherCommands(app_commands.Group):
 
 
     @app_commands.command(name="add_a_baby_name", description="fill in a specific name and score")
-    async def add_a_baby_name(self, interaction: discord.Interaction, baby_name: str):
-        return
-        await interaction.followup.send("Score logged")
+    async def add_a_baby_name(self, interaction: discord.Interaction, baby_name: str,
+                              score: app_commands.Range(int, 1, 10)):
+        if helpers.check_user(interaction, ["Vierce", "Naiyvara"]) is False:
+            await interaction.response.send_message("Unauthorized")
+            return
+        print(f"starting name logging for {baby_name}")
+        await interaction.response.defer()  # ensures bot has enough time to answer
+        success = await self.baby.score_specific_name(name=baby_name, score=score, interaction=interaction)
+        if success:
+            await interaction.followup.send(f"Score {score} logged for {baby_name}")
+        else:
+            await interaction.followup.send(f"Name: {baby_name} was not logged, error.")
+
 
 
     @app_commands.command(name="backfill_baby_scores", description="fill in any name scores you missed")
@@ -220,7 +230,7 @@ class OtherCommands(app_commands.Group):
         command_user = helpers.get_user_name(interaction)
         users_real_name = helpers.get_name(command_user)
         # get the used names list as-is. Make a backup first
-        self.baby.backup_used_names()
+        self.baby.backup_names(used_file=True)
         used_names_file = open("used_names.txt", "r").readlines()
         # find all the 0 names for the user
         score_index = 1 if users_real_name == "Ashley" else 2

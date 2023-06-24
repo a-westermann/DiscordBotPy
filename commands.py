@@ -235,9 +235,10 @@ class OtherCommands(app_commands.Group):
         # find all the 0 names for the user
         score_index = 1 if users_real_name == "Ashley" else 2
         rescore_names = []
-        print('rescore: ')
+        print('rescore: ' + str(score_index))
         for line in used_names_file[2:]:
             score = line.split(';')[score_index]
+            print(score)
             if int(score) == 0:
                 rescore_names.append(line.split(';')[0])
                 print(line.split(';')[0])

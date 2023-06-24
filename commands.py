@@ -207,6 +207,11 @@ class OtherCommands(app_commands.Group):
         await interaction.response.send_message(embed=embed, file=chart)
 
 
+    @app_commands.command(name="add_a_baby_name", description="fill in a specific name and score")
+    async def add_a_baby_name(self, interaction: discord.Interaction, baby_name: str):
+        return
+        await interaction.followup.send("Score logged")
+
 
     @app_commands.command(name="backfill_baby_scores", description="fill in any name scores you missed")
     async def backfill_baby_scores(self, interaction: discord.Interaction):
@@ -236,4 +241,7 @@ class OtherCommands(app_commands.Group):
                                             f"\n\nRate the name: {name}", view=view)
             # now I need to have this method wait on the view to trigger a proceed
             break
+
+
+
 

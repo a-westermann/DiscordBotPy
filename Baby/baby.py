@@ -125,6 +125,7 @@ class BabyStuff:
         score_index = 2 if rater == "Ashley" else 4
         print(f'finding {name};')
         char_to_replace = text.find(f'{name};') + len(name) + score_index
+        print(f'chars to replace index = {char_to_replace}')
         next_char = '\n' if rater == "Andrew" else ';'
         text = text[:char_to_replace - 1] + str(score) + next_char + text[char_to_replace + 1:]
         used_names_file = open("/home/andweste/Scripts/used_names.txt", "w").write(text)

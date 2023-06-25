@@ -123,6 +123,7 @@ class BabyStuff:
         text = used_names_file.read()
         # add 2 or 4 depending on who is rating
         score_index = 2 if rater == "Ashley" else 4
+        print(f'finding {name};')
         char_to_replace = text.find(f'{name};') + len(name) + score_index
         next_char = '\n' if rater == "Andrew" else ';'
         text = text[:char_to_replace - 1] + str(score) + next_char + text[char_to_replace + 1:]

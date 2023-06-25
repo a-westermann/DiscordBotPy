@@ -121,6 +121,7 @@ class BabyStuff:
         print("Updating score for name: " + name + " to " + str(score))
         used_names_file = open("/home/andweste/Scripts/used_names.txt", "r")
         text = used_names_file.read()
+        used_names_file.close()
         # add 2 or 4 depending on who is rating
         score_index = 2 if rater == "Ashley" else 4
         print(f'finding {name};')

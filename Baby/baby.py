@@ -108,21 +108,58 @@ class BabyStuff:
             await view.response.send_message("Unable to submit score. Please try again. Or don't, I don't know."\
                                              + "\n" + str(e))
 
-    def backup_used_names(self):
-        used_names_file = open("used_names.txt", "r").readlines()
+    def backup_names(self, used_file: bool):
+        file_to_backup = "used_names.txt" if used_file else "girl_names.txt"
+        used_names_file = open(file_to_backup, "r").readlines()
         date_string = str(datetime.date.today())
-        backup_file = open("used_names_backups/used_names.txt.backup_" + date_string, "w")
+        backup_path = "used_names_backups/used_names.txt.backup_" if used_file else \
+                "girl_names_backups/girl_names.txt.backup_"
+        backup_file = open(backup_path + date_string, "w")
         backup_file.writelines(used_names_file)
 
     async def submit_previous_name_score(self, score: int, name: str, view: discord.Interaction, rater: str):
         print("Updating score for name: " + name + " to " + str(score))
         used_names_file = open("/home/andweste/Scripts/used_names.txt", "r")
         text = used_names_file.read()
+        used_names_file.close()
         # add 2 or 4 depending on who is rating
         score_index = 2 if rater == "Ashley" else 4
-        char_to_replace = text.find(name) + len(name) + score_index
+        print(f'finding {name};')
+        char_to_replace = text.find(f'{name};') + len(name) + score_index
+        print(f'chars to replace index = {char_to_replace}')
         next_char = '\n' if rater == "Andrew" else ';'
         text = text[:char_to_replace - 1] + str(score) + next_char + text[char_to_replace + 1:]
         used_names_file = open("/home/andweste/Scripts/used_names.txt", "w").write(text)
         await view.response.send_message(rater + "'s " + "score submitted for " + name + " : " + str(score))
         await view.message.delete()
+
+    async def score_specific_name(self, name: str, score: int, interaction: discord.Interaction):
+        rater = helpers.get_user_name(interaction)
+        try:
+            self.backup_names(used_file=False)
+            girl_names = open("/home/andweste/Scripts/girl_names.txt", "r")
+            text = girl_names.readlines()
+            girl_names.close()
+            after_edit_lines = []
+            for line in text:
+                if line.strip("\n").lower() != name.lower():
+                    after_edit_lines.append(line)
+            if len(after_edit_lines) == len(text):
+                print(f"Name:{name} was not found on the list.")
+            girl_names = open("/home/andweste/Scripts/girl_names.txt", "w")
+            girl_names.writelines(after_edit_lines)
+            girl_names.close()
+        except:
+            return False
+        # now add the name to used_names
+        try:
+            self.backup_names(used_file=True)
+            used_names_file = open("/home/andweste/Scripts/used_names.txt", "a")  # open in append mode to add name
+            score_texts = f";{score};0\n" if rater == "Naiyvara" else f";0;{score}\n"
+            formatted_name = name.capitalize().strip(' ')
+            used_names_file.write(formatted_name + score_texts)
+            used_names_file.close()
+        except:
+            return False
+        return True
+

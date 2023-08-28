@@ -112,7 +112,8 @@ class LeagueAPI:
         # Totals stats
         kills, deaths, assists = match_rows[0]['kills'], match_rows[0]['deaths'], match_rows[0]['assists']
         deaths = 1 if deaths == 0 else deaths
-        kda = round((float(kills) + float(assists)) / float(deaths), 2)
+        kda = (float(kills) + float(assists))
+        kda = round(kda, 2) if deaths == 0 else round(kda / float(deaths), 2)
         multi_kills = f"DTQP: {match_rows[0]['doubles']} / {match_rows[0]['triples']} / {match_rows[0]['quadras']}" \
                       f" / {match_rows[0]['pentas']}"
         play_rate = str(round((self.psql.percent_played_champ(summoner_name, champ)["play_percent"] * 100), 2))

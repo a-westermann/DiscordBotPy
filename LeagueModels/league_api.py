@@ -126,7 +126,8 @@ class LeagueAPI:
         best_game = self.psql.get_best_match(summoner_name=summoner_name, champion=champ)
         kills, deaths, assists = best_game[0]['kills'], best_game[0]['deaths'], best_game[0]['assists']
         deaths = 1 if deaths == 0 else deaths
-        kda = round((float(kills) + float(assists)) / float(deaths), 2)
+        kda = (float(kills) + float(assists))
+        kda = round(kda, 2) if deaths == 0 else round(kda / float(deaths), 2)
         multi_kills = f"DTQP: {best_game[0]['doubles']} / {best_game[0]['triples']} / {best_game[0]['quadras']}" \
                       f" / {best_game[0]['pentas']}"
         best_game_date = str(best_game[0]['date_created']).split(' ')[0]
